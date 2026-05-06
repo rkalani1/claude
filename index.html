@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Claude - setup and mastery guide</title>
+    <meta name="description" content="A beginner-first, source-backed guide to setting up Claude, using Projects, Artifacts, Skills, connectors, and Claude Code, and becoming a reliable expert user.">
+    <meta name="theme-color" content="#f8fbfa">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Claude home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span>Claude</span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="#start">Start</a>
+        <a href="#checklist">Checklist</a>
+        <a href="#prompts">Prompts</a>
+        <a href="#sources">Sources</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" id="start" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Verified 2026-05-06</p>
+          <h1 id="hero-title">Master Claude by building one real workflow.</h1>
+          <p class="lede">Start from zero, set up Claude safely, create your first Project, copy the starter prompts, then level up into Artifacts, Skills, connectors, Claude Code, and expert review habits.</p>
+          <div class="path-tabs" aria-label="Choose your learning path">
+            <button type="button" class="path-tab" data-path="beginner" aria-pressed="true">Beginner</button>
+            <button type="button" class="path-tab" data-path="professional" aria-pressed="false">Professional</button>
+            <button type="button" class="path-tab" data-path="researcher" aria-pressed="false">Researcher</button>
+            <button type="button" class="path-tab" data-path="developer" aria-pressed="false">Developer</button>
+          </div>
+          <div class="path-output" id="path-output" aria-live="polite">
+            <strong>Beginner path:</strong> finish Day 0, create one Project, run the core prompt loop, and save your best prompt.
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#day-zero">Start Day 0</a>
+            <a class="button" href="#prompts">Copy prompts</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Claude workflow loop">
+          <svg viewBox="0 0 560 420" role="img" aria-labelledby="loop-title loop-desc">
+            <title id="loop-title">Claude workflow loop</title>
+            <desc id="loop-desc">A five step loop: context, ask, inspect, revise, and save.</desc>
+            <rect x="24" y="28" width="512" height="364" rx="24" class="svg-bg" />
+            <path d="M280 86 C360 86 425 151 425 231 C425 311 360 376 280 376 C200 376 135 311 135 231 C135 151 200 86 280 86" class="svg-orbit" />
+            <g class="svg-node"><circle cx="280" cy="76" r="46" /><text x="280" y="70">1</text><text x="280" y="94">Context</text></g>
+            <g class="svg-node"><circle cx="430" cy="181" r="46" /><text x="430" y="175">2</text><text x="430" y="199">Ask</text></g>
+            <g class="svg-node"><circle cx="374" cy="342" r="46" /><text x="374" y="336">3</text><text x="374" y="360">Inspect</text></g>
+            <g class="svg-node"><circle cx="186" cy="342" r="46" /><text x="186" y="336">4</text><text x="186" y="360">Revise</text></g>
+            <g class="svg-node"><circle cx="130" cy="181" r="46" /><text x="130" y="175">5</text><text x="130" y="199">Save</text></g>
+            <g class="svg-center"><circle cx="280" cy="231" r="72" /><text x="280" y="219">Claude</text><text x="280" y="245">workflow</text></g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="section checklist-section" id="checklist" aria-labelledby="checklist-title">
+        <div class="section-head">
+          <p class="eyebrow">Progress tracker</p>
+          <h2 id="checklist-title">The 12-step mastery checklist</h2>
+          <p>Check items as you finish them. Progress is saved locally in this browser only.</p>
+        </div>
+        <div class="progress" aria-label="Checklist progress">
+          <div class="progress-bar"><span id="progress-fill"></span></div>
+          <p id="progress-text">0 of 12 complete</p>
+        </div>
+        <div class="checklist" data-checklist>
+          <label><input type="checkbox" value="account"> Sign in at claude.ai and confirm your plan.</label>
+          <label><input type="checkbox" value="instructions"> Add account-wide Instructions for Claude.</label>
+          <label><input type="checkbox" value="first-chat"> Run one useful beginner prompt and revise it once.</label>
+          <label><input type="checkbox" value="project"> Create one Project for a recurring workflow.</label>
+          <label><input type="checkbox" value="knowledge"> Add only the files Claude needs to that Project.</label>
+          <label><input type="checkbox" value="artifact"> Create one Artifact and ask Claude to improve it.</label>
+          <label><input type="checkbox" value="memory"> Review memory and chat-search settings.</label>
+          <label><input type="checkbox" value="style"> Create or choose a response style for your main use case.</label>
+          <label><input type="checkbox" value="skill"> Package one repeatable workflow as a Skill or saved prompt.</label>
+          <label><input type="checkbox" value="connector"> Connect one trusted data source after reviewing permissions.</label>
+          <label><input type="checkbox" value="eval"> Test Claude with three examples, including one hard edge case.</label>
+          <label><input type="checkbox" value="code"> Optional: set up Claude Code for a real repository.</label>
+        </div>
+        <button type="button" class="button small" id="reset-progress">Reset progress</button>
+      </section>
+
+      <section class="section" id="day-zero" aria-labelledby="day-zero-title">
+        <div class="section-head">
+          <p class="eyebrow">Day 0</p>
+          <h2 id="day-zero-title">Set up Claude safely in 20 minutes</h2>
+          <p>The goal is to make Claude useful, predictable, and safe before you feed it important work.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><span>1</span><h3>Create or confirm your account</h3><p>Go to <a href="https://claude.ai">claude.ai</a>, sign in, and note whether you are on Free, Pro, Max, Team, or Enterprise. Use Anthropic's <a href="https://support.claude.com/en/articles/11049762-choosing-a-claude-ai-plan">current plan chooser</a> before upgrading.</p></article>
+          <article class="step"><span>2</span><h3>Add Instructions for Claude</h3><p>Open settings and fill in durable preferences: role, tone, recurring formats, and what Claude should ask before assuming.</p></article>
+          <article class="step"><span>3</span><h3>Choose normal or incognito chat</h3><p>Use normal chats for work you want in your history or memory settings. Use incognito for temporary work; official docs still describe a default 30-day retention period.</p></article>
+          <article class="step"><span>4</span><h3>Run the first useful prompt</h3><p>Paste the setup interview prompt below. Answer Claude's questions, then ask it to turn the result into your reusable Claude profile.</p></article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="loop-title-section">
+        <div class="section-head">
+          <p class="eyebrow">Core habit</p>
+          <h2 id="loop-title-section">Use the Context - Ask - Inspect - Revise - Save loop</h2>
+          <p>This loop is the beginner version of expert prompting. It works in chat, Projects, Artifacts, Claude Code, and the API.</p>
+        </div>
+        <div class="loop-grid">
+          <div><h3>Context</h3><p>Tell Claude the job, audience, constraints, sources, and definition of success.</p></div>
+          <div><h3>Ask</h3><p>Ask for one concrete output. Use numbered steps when order matters.</p></div>
+          <div><h3>Inspect</h3><p>Check factual claims, missing assumptions, and whether the answer fits the format.</p></div>
+          <div><h3>Revise</h3><p>Ask Claude to improve against a specific weakness, not just "make it better."</p></div>
+          <div><h3>Save</h3><p>Save the working prompt, Project instruction, Skill, or checklist so you do not start over next time.</p></div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="project-title">
+        <div class="section-head">
+          <p class="eyebrow">First system</p>
+          <h2 id="project-title">Create your first Claude Project</h2>
+          <p>Projects are workspaces with chat histories, knowledge bases, and instructions. Anthropic docs currently say Projects are available to all users, with Free users limited to five Projects.</p>
+        </div>
+        <div class="split">
+          <div><h3>Beginner setup</h3><ol><li>Choose one recurring task.</li><li>Create a Project named by outcome, not by tool.</li><li>Add the Project instruction template from this page.</li><li>Upload two or three essential reference files.</li><li>Run one test case and improve the instructions.</li></ol></div>
+          <div><h3>Expert upgrade</h3><ol><li>Write a tiny acceptance test.</li><li>Add one bad example so Claude learns what to avoid.</li><li>Keep standing instructions short.</li><li>Prune outdated files monthly.</li><li>Use one Project for one workflow.</li></ol></div>
+        </div>
+      </section>
+
+      <section class="section" id="feature-map" aria-labelledby="feature-title">
+        <div class="section-head">
+          <p class="eyebrow">Feature map</p>
+          <h2 id="feature-title">What to use when</h2>
+          <p>If a plan or label looks different in your account, trust your account UI and the linked official docs.</p>
+        </div>
+        <div class="table-wrap" tabindex="0" aria-label="Claude feature map">
+          <table>
+            <thead><tr><th>Need</th><th>Use</th><th>Beginner rule</th><th>Source</th></tr></thead>
+            <tbody>
+              <tr><td>Durable preferences</td><td>Instructions for Claude</td><td>Keep it under one screen.</td><td><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Official help</a></td></tr>
+              <tr><td>Repeated workflow with files</td><td>Project</td><td>One Project per recurring outcome.</td><td><a href="https://support.claude.com/en/articles/9517075-what-are-projects">Official help</a></td></tr>
+              <tr><td>Use prior context</td><td>Memory and chat search</td><td>Review what Claude remembers.</td><td><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Official help</a></td></tr>
+              <tr><td>Reusable preview or document</td><td>Artifact</td><td>Ask for something self-contained.</td><td><a href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them">Official help</a></td></tr>
+              <tr><td>Packaged procedure</td><td>Skill</td><td>Turn a prompt into a Skill after it works three times; Skills require code execution to be enabled.</td><td><a href="https://support.claude.com/en/articles/12512176-what-are-skills">Official help</a></td></tr>
+              <tr><td>External apps or data</td><td>Connectors and MCP</td><td>Connect one trusted source at a time.</td><td><a href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities">Official help</a></td></tr>
+              <tr><td>Codebase edits</td><td>Claude Code</td><td>Inspect, plan, edit, test.</td><td><a href="https://code.claude.com/docs/en/overview">Official docs</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section prompts" id="prompts" aria-labelledby="prompts-title">
+        <div class="section-head">
+          <p class="eyebrow">Copy kit</p>
+          <h2 id="prompts-title">Prompts that teach Claude how to help you</h2>
+          <p>Use these as starting points. Copy buttons run locally in your browser.</p>
+        </div>
+        <div class="prompt-grid">
+          <article class="prompt-card"><div class="prompt-head"><h3>Setup interview</h3><button class="button small copy" data-copy-target="setup-template" type="button">Copy</button></div><textarea id="setup-template" aria-label="Setup interview prompt" readonly rows="17">You are helping me become an expert Claude user.
+
+Interview me one question at a time.
+Goal: build my reusable Claude profile and first Project.
+
+Ask about:
+1. My role and recurring work.
+2. The outputs I create most often.
+3. My preferred tone and level of detail.
+4. What Claude should never assume.
+5. What sensitive data I should avoid pasting.
+6. One workflow we can improve today.
+
+After the interview, produce:
+- Account-wide Instructions for Claude.
+- A first Project name.
+- Project instructions.
+- Three starter prompts for that Project.
+- A simple quality checklist.</textarea></article>
+
+          <article class="prompt-card"><div class="prompt-head"><h3>Project instructions</h3><button class="button small copy" data-copy-target="project-template" type="button">Copy</button></div><textarea id="project-template" aria-label="Project instructions prompt" readonly rows="18">You are my assistant for [WORKFLOW].
+
+Role:
+- Act as a careful [ROLE].
+- Be direct, practical, and source-aware.
+
+Context:
+- Audience: [AUDIENCE].
+- My goal: [GOAL].
+- Files in this Project are the source of truth when they conflict with memory or general knowledge.
+
+Output rules:
+- Start with the answer or deliverable.
+- Use the requested format exactly.
+- Flag uncertainty instead of guessing.
+- Ask before making irreversible recommendations.
+
+Quality bar:
+- A strong answer is accurate, concise, actionable, and clear enough for a beginner.
+- Before finalizing, check for missing assumptions, unsupported claims, and next actions.</textarea></article>
+
+          <article class="prompt-card"><div class="prompt-head"><h3>Critique and improve</h3><button class="button small copy" data-copy-target="critique-template" type="button">Copy</button></div><textarea id="critique-template" aria-label="Critique prompt" readonly rows="12">Review your last answer as if accuracy and usability matter.
+
+Find:
+1. Any factual claim that needs a source or caveat.
+2. Any step that would confuse a beginner.
+3. Any missing edge case or risk.
+4. Any place where the output does not match my requested format.
+
+Then produce a revised version that fixes those issues.
+Do not add filler. If you are uncertain, say exactly what needs verification.</textarea></article>
+
+          <article class="prompt-card"><div class="prompt-head"><h3>Turn work into a system</h3><button class="button small copy" data-copy-target="system-template" type="button">Copy</button></div><textarea id="system-template" aria-label="System prompt" readonly rows="15">Turn this workflow into a repeatable Claude system.
+
+Workflow: [DESCRIBE THE TASK]
+
+Produce:
+- The best Claude surface: chat, Project, Artifact, Skill, connector, Claude Code, or API.
+- Setup steps in beginner language.
+- The reusable prompt or Project instructions.
+- Required files or context.
+- What Claude is allowed to do.
+- What Claude must ask me before doing.
+- Three test cases, including one difficult edge case.
+- A maintenance checklist for keeping this workflow accurate over time.</textarea></article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="practice-title">
+        <div class="section-head">
+          <p class="eyebrow">30-day plan</p>
+          <h2 id="practice-title">Practice the moves that create mastery</h2>
+        </div>
+        <div class="timeline">
+          <article><h3>Week 1: Chat fundamentals</h3><p>Practice context, output format, revision, and the accuracy guard.</p></article>
+          <article><h3>Week 2: Projects and files</h3><p>Create one Project and compare answers with and without Project context.</p></article>
+          <article><h3>Week 3: Artifacts, memory, and styles</h3><p>Build one reusable Artifact and review memory settings.</p></article>
+          <article><h3>Week 4: Skills, connectors, and evals</h3><p>Package one workflow, connect one trusted source if needed, and test outputs before relying on them.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="sources" aria-labelledby="sources-title">
+        <div class="section-head">
+          <p class="eyebrow">Sources</p>
+          <h2 id="sources-title">Official documentation used for this page</h2>
+          <p>Verified on 2026-05-06. Recheck before updating plan, model, limit, or privacy claims. This site is independent and is not endorsed by Anthropic.</p>
+        </div>
+        <ul class="source-list">
+          <li><a href="https://support.claude.com/en/articles/11049762-choosing-a-claude-ai-plan">Choosing a Claude plan</a></li>
+          <li><a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan">What is the Pro plan?</a></li>
+          <li><a href="https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work">How do usage and length limits work?</a></li>
+          <li><a href="https://support.claude.com/en/articles/9797557-usage-limit-best-practices">Usage limit best practices</a></li>
+          <li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Understanding Claude's personalization features</a></li>
+          <li><a href="https://support.claude.com/en/articles/9517075-what-are-projects">What are projects?</a></li>
+          <li><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Use Claude's chat search and memory</a></li>
+          <li><a href="https://support.claude.com/en/articles/12260368-using-incognito-chats">Using incognito chats</a></li>
+          <li><a href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them">What are artifacts and how do I use them?</a></li>
+          <li><a href="https://support.claude.com/en/articles/12512176-what-are-skills">What are Skills?</a></li>
+          <li><a href="https://support.claude.com/en/articles/12512180-using-skills-in-claude">Use Skills in Claude</a></li>
+          <li><a href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities">Use connectors to extend Claude's capabilities</a></li>
+          <li><a href="https://code.claude.com/docs/en/overview">Claude Code overview</a></li>
+          <li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Claude prompting best practices</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Claude setup and mastery guide. Independent educational site, not affiliated with or endorsed by Anthropic.</p>
+      <a href="https://rkalani1.github.io/agent-builder-field-guide/">AI Agent Builder Field Guide</a>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
