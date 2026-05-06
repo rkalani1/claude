@@ -2,26 +2,40 @@
   "use strict";
 
   const pathDescriptions = {
-    beginner: "<strong>Beginner path:</strong> finish Day 0, create one Project, run the core prompt loop, and save your best prompt.",
-    professional: "<strong>Professional path:</strong> set account instructions, build a Project for one weekly workflow, add only trusted files, and test the output checklist.",
-    researcher: "<strong>Researcher path:</strong> create a source-grounded Project, upload a small evidence set, use the accuracy guard, and separate confirmed facts from inference.",
-    developer: "<strong>Developer path:</strong> install Claude Code only after the chat workflow is clear, add repository instructions, require a plan before edits, and run tests after changes."
+    starter: "<strong>First hour:</strong> ask Claude to interview you, save your preferences, create one Project, and run one useful task.",
+    office: "<strong>Office path:</strong> use Claude to read first, suggest changes second, and edit Word, PowerPoint, or Excel only after you approve.",
+    creative: "<strong>Design path:</strong> turn a rough idea into an Artifact, then ask Claude to improve layout, clarity, and usefulness.",
+    builder: "<strong>Code path:</strong> describe the change in plain English, ask Claude Code to inspect first, then make the smallest useful edit."
   };
 
-  const storageKey = "claude-site:mastery-progress:v1";
+  const surfaceHints = {
+    chat: "Claude Chat",
+    project: "a Claude Project",
+    artifact: "an Artifact",
+    office: "Word, PowerPoint, or Excel",
+    chrome: "Claude in Chrome",
+    mobile: "Claude on iOS",
+    code: "Claude Code"
+  };
+
+  const storageKey = "claude-site:mastery-progress:v2";
   const tabs = Array.from(document.querySelectorAll(".path-tab"));
   const output = document.getElementById("path-output");
   const checks = Array.from(document.querySelectorAll("[data-checklist] input[type='checkbox']"));
   const progressFill = document.getElementById("progress-fill");
   const progressText = document.getElementById("progress-text");
   const resetButton = document.getElementById("reset-progress");
+  const roughPrompt = document.getElementById("rough-prompt");
+  const optimizedPrompt = document.getElementById("optimized-prompt");
+  const surfaceButtons = Array.from(document.querySelectorAll("[data-surface]"));
+  let selectedSurface = "chat";
 
   function setPath(path) {
     tabs.forEach((tab) => {
       const active = tab.getAttribute("data-path") === path;
       tab.setAttribute("aria-pressed", active ? "true" : "false");
     });
-    if (output) output.innerHTML = pathDescriptions[path] || pathDescriptions.beginner;
+    if (output) output.innerHTML = pathDescriptions[path] || pathDescriptions.starter;
   }
 
   function readProgress() {
@@ -94,8 +108,34 @@
     }, 1400);
   }
 
+  function buildOptimizedPrompt() {
+    if (!optimizedPrompt) return;
+    const task = (roughPrompt && roughPrompt.value.trim()) || "Help me complete this task clearly and well.";
+    const surface = surfaceHints[selectedSurface] || surfaceHints.chat;
+    optimizedPrompt.value = `You are helping me use ${surface} effectively.
+
+Task:
+${task}
+
+Before answering:
+1. Restate the goal in one sentence.
+2. Ask up to three questions only if you truly need more context.
+3. If you have enough context, start the work.
+
+Output rules:
+- Start with the useful answer, not a long explanation.
+- Use plain language.
+- Use headings, bullets, or a table when that makes the result easier to use.
+- Flag uncertainty instead of guessing.
+- Tell me what I should review before I rely on the result.
+
+After the answer:
+- Give me one improved version of this prompt for next time.
+- Suggest the best Claude surface for repeating this workflow.`;
+  }
+
   tabs.forEach((tab) => {
-    tab.addEventListener("click", () => setPath(tab.getAttribute("data-path") || "beginner"));
+    tab.addEventListener("click", () => setPath(tab.getAttribute("data-path") || "starter"));
   });
 
   checks.forEach((item) => {
@@ -112,9 +152,20 @@
     });
   }
 
+  surfaceButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedSurface = button.getAttribute("data-surface") || "chat";
+      surfaceButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+      buildOptimizedPrompt();
+    });
+  });
+
+  if (roughPrompt) roughPrompt.addEventListener("input", buildOptimizedPrompt);
+
   Array.from(document.querySelectorAll(".copy")).forEach((button) => {
     button.addEventListener("click", () => copyTemplate(button.getAttribute("data-copy-target"), button));
   });
 
   loadProgress();
+  buildOptimizedPrompt();
 })();

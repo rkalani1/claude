@@ -1,6 +1,6 @@
 # Claude
 
-A standalone, beginner-first guide for setting up and mastering Claude.
+A standalone, beginner-first guide for quickly mastering Claude across chat, Projects, Artifacts, Office, Chrome, desktop, mobile, and Claude Code.
 
 Live site: <https://rkalani1.github.io/claude/>
 
