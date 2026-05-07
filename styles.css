@@ -308,6 +308,8 @@ input:focus-visible {
 .steps,
 .ladder,
 .method-grid,
+.setup-grid,
+.rung-grid,
 .loop-grid,
 .surface-grid,
 .glossary-grid,
@@ -317,6 +319,7 @@ input:focus-visible {
 .agent-steps,
 .tip-grid,
 .feature-grid,
+.trust-grid,
 .prompt-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
@@ -325,6 +328,8 @@ input:focus-visible {
 
 .step,
 .ladder-step,
+.setup-card,
+.rung,
 .method-card,
 .loop-grid > div,
 .surface-card,
@@ -337,6 +342,8 @@ input:focus-visible {
 .tip-card,
 .feature-post,
 .feature-maintenance,
+.trust-rubric,
+.trust-grid > div,
 .task-tool,
 .prompt-lab,
 .prompt-card,
@@ -349,6 +356,8 @@ input:focus-visible {
 
 .step,
 .ladder-step,
+.setup-card,
+.rung,
 .method-card,
 .loop-grid > div,
 .surface-card,
@@ -360,6 +369,8 @@ input:focus-visible {
 .tip-card,
 .feature-post,
 .feature-maintenance,
+.trust-rubric,
+.trust-grid > div,
 .split > div {
   padding: 1rem;
 }
@@ -380,6 +391,59 @@ input:focus-visible {
 
 .method-grid {
   grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.setup-grid,
+.rung-grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.setup-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+}
+
+.rung-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.setup-card,
+.rung {
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.setup-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.setup-card p,
+.rung p {
+  margin: 0;
+}
+
+.card-links,
+.rung-jump {
+  margin-top: auto;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 850;
+}
+
+.rung {
+  border-left: 4px solid var(--teal);
+}
+
+.rung-num {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--accent);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
 }
 
 .method-card {
@@ -404,6 +468,8 @@ input:focus-visible {
 
 .step p,
 .ladder-step p,
+.setup-card p,
+.rung p,
 .method-card p,
 .loop-grid p,
 .surface-card p,
@@ -415,6 +481,7 @@ input:focus-visible {
 .tip-card p,
 .feature-post p,
 .feature-maintenance p,
+.trust-rubric p,
 .split li {
   color: var(--muted);
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -423,6 +490,8 @@ input:focus-visible {
 
 .step,
 .ladder-step,
+.setup-card,
+.rung,
 .method-card,
 .loop-grid > div,
 .surface-card,
@@ -434,6 +503,7 @@ input:focus-visible {
 .tip-card,
 .feature-post,
 .feature-maintenance,
+.trust-rubric,
 .prompt-lab,
 .prompt-card,
 .task-tool,
@@ -444,6 +514,8 @@ input:focus-visible {
 .surface-card,
 .glossary-card,
 .example-card,
+.setup-card,
+.rung,
 .method-card,
 .power-card,
 .agent-card,
@@ -456,6 +528,8 @@ input:focus-visible {
 .surface-card:hover,
 .glossary-card:hover,
 .example-card:hover,
+.setup-card:hover,
+.rung:hover,
 .method-card:hover,
 .power-card:hover,
 .agent-card:hover,
@@ -747,6 +821,20 @@ input:focus-visible {
   margin-top: 0.85rem;
 }
 
+.worked-examples {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.worked-examples textarea,
+.setup-card textarea {
+  min-height: 11rem;
+}
+
+.compact-head {
+  margin: 0.35rem -1rem 0;
+  padding: 0.75rem 1rem;
+}
+
 .universal-prompt {
   margin-bottom: 0;
 }
@@ -783,6 +871,32 @@ input:focus-visible {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 0.85rem;
   font-weight: 900;
+}
+
+.power-card .setup-link {
+  margin-top: auto;
+}
+
+.trust-rubric {
+  margin-top: 0.85rem;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.trust-rubric h4 {
+  margin: 0;
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 850;
+}
+
+.trust-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 0.85rem;
+}
+
+.trust-grid p {
+  margin: 0.45rem 0 0;
 }
 
 .agent-lanes {
@@ -1066,6 +1180,8 @@ textarea {
   .example-grid,
   .power-grid,
   .agent-lanes,
+  .rung-grid,
+  .trust-grid,
   .template-row {
     grid-template-columns: 1fr;
   }
@@ -1082,6 +1198,25 @@ textarea {
   .ladder,
   .method-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .surface-grid,
+  .rung-grid {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(16rem, 82vw);
+    grid-template-columns: none;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding-bottom: 0.65rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .surface-card,
+  .rung {
+    scroll-snap-align: start;
   }
 }
 
