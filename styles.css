@@ -20,7 +20,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 9rem;
 }
 
 body {
@@ -306,7 +306,7 @@ input:focus-visible {
 }
 
 .section {
-  scroll-margin-top: 5.5rem;
+  scroll-margin-top: 9rem;
   width: min(1180px, calc(100vw - 2rem));
   margin: 0 auto;
   padding: clamp(2.5rem, 6vw, 5rem) 0;
@@ -949,11 +949,11 @@ textarea {
 
 @media (max-width: 840px) {
   html {
-    scroll-padding-top: 8rem;
+    scroll-padding-top: 10rem;
   }
 
   .section {
-    scroll-margin-top: 8rem;
+    scroll-margin-top: 10rem;
   }
 
   .site-header {
