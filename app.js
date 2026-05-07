@@ -1,15 +1,6 @@
 (function () {
   "use strict";
 
-  const pathDescriptions = {
-    starter: "<strong>First step:</strong> ask Claude to interview you, save your preferences, create one Project, and run one useful task.",
-    office: "<strong>Office path:</strong> use Claude to read first, suggest changes second, and edit Word, PowerPoint, or Excel only after you approve.",
-    creative: "<strong>Design path:</strong> turn a rough idea into Claude Design or an Artifact, then ask Claude to improve layout, clarity, and usefulness.",
-    cowork: "<strong>Cowork path:</strong> choose a low-risk desktop task, give Claude the files or folder, review its approach, and monitor the handoff.",
-    builder: "<strong>Code path:</strong> describe the change in plain English, ask Claude Code to inspect first, then make the smallest useful edit.",
-    agent: "<strong>Agent path:</strong> define the repeatable job, the allowed actions, the safety checks, and the handoff before building anything."
-  };
-
   const surfaceHints = {
     chat: "Claude Chat",
     project: "a Claude Project",
@@ -395,8 +386,6 @@ Give me one polished version and one shorter version.`
     }
   };
 
-  const tabs = Array.from(document.querySelectorAll(".path-tab"));
-  const output = document.getElementById("path-output");
   const roughPrompt = document.getElementById("rough-prompt");
   const optimizedPrompt = document.getElementById("optimized-prompt");
   const surfaceButtons = Array.from(document.querySelectorAll("[data-surface]"));
@@ -412,14 +401,6 @@ Give me one polished version and one shorter version.`
   const fixPrompt = document.getElementById("fix-prompt");
   let selectedSurface = "chat";
   let selectedOutput = "useful";
-
-  function setPath(path) {
-    tabs.forEach((tab) => {
-      const active = tab.getAttribute("data-path") === path;
-      tab.setAttribute("aria-pressed", active ? "true" : "false");
-    });
-    if (output) output.innerHTML = pathDescriptions[path] || pathDescriptions.starter;
-  }
 
   function setActiveChoice(buttons, attribute, value) {
     buttons.forEach((button) => {
@@ -504,10 +485,6 @@ After the answer:
     if (fixNext) fixNext.innerHTML = `<strong>Use when:</strong> ${detail.next}`;
     if (fixPrompt) fixPrompt.value = detail.prompt;
   }
-
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => setPath(tab.getAttribute("data-path") || "starter"));
-  });
 
   surfaceButtons.forEach((button) => {
     button.addEventListener("click", () => {

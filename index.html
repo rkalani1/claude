@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Learn Claude</title>
-    <meta name="description" content="A beginner-first guide for mastering Claude across chat, Projects, Artifacts, Claude Design, Cowork, Claude Code, Office, Chrome, desktop, and iOS without jargon.">
+    <meta name="description" content="A beginner-first guide for using Claude across chat, Projects, Artifacts, Claude Design, Cowork, Claude Code, Office, Chrome, desktop, and iOS without jargon.">
     <meta name="theme-color" content="#f8fbfa">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=2026-05-07-utility-pass">
+    <link rel="stylesheet" href="styles.css?v=2026-05-07-simplified">
   </head>
   <body>
     <header class="site-header">
@@ -17,195 +17,108 @@
       </a>
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="#start">Start</a>
-        <a href="#mission">Today</a>
-        <a href="#leverage">Leverage</a>
-        <a href="#context-engineering">Context</a>
+        <a href="#prompt-lab">Prompt</a>
         <a href="#surfaces">Surfaces</a>
-        <a href="#prompt-lab">Prompt Lab</a>
         <a href="#fix-answer">Fix</a>
         <a href="#agents">Agents</a>
-        <a href="#features">Features</a>
+        <a href="#features">Updates</a>
         <a href="#sources">Sources</a>
       </nav>
     </header>
 
     <main id="top">
-      <section class="hero" id="start" aria-labelledby="hero-title">
+      <section class="hero hero-workbench" id="start" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow">Verified 2026-05-07</p>
+          <p class="eyebrow">Verified May 7, 2026</p>
           <h1 id="hero-title">Learn Claude</h1>
+          <p class="lede">A practical command center for getting real work done with Claude: pick a task, copy a strong prompt, choose the right surface, and improve the result.</p>
           <div class="official-links" aria-label="Official Claude links">
             <a class="button primary" href="https://claude.ai/">Open Claude</a>
             <a class="button" href="https://claude.ai/downloads">Download Claude</a>
           </div>
-          <div class="path-tabs" aria-label="Choose your starting path">
-            <button type="button" class="path-tab" data-path="starter" aria-pressed="true">First step</button>
-            <button type="button" class="path-tab" data-path="office" aria-pressed="false">Office</button>
-            <button type="button" class="path-tab" data-path="creative" aria-pressed="false">Design</button>
-            <button type="button" class="path-tab" data-path="cowork" aria-pressed="false">Cowork</button>
-            <button type="button" class="path-tab" data-path="builder" aria-pressed="false">Code</button>
-            <button type="button" class="path-tab" data-path="agent" aria-pressed="false">Agents</button>
-          </div>
-          <div class="path-output" id="path-output" aria-live="polite">
-            <strong>First step:</strong> ask Claude to interview you, save your preferences, create one Project, and run one useful task.
-          </div>
-          <div class="hero-actions">
-            <a class="button primary" href="#mission">Pick my task</a>
-            <a class="button" href="#prompt-lab">Build a prompt</a>
-          </div>
-        </div>
-        <div class="hero-visual" aria-label="Claude surfaces">
-          <svg viewBox="0 0 560 420" role="img" aria-labelledby="surface-title surface-desc">
-            <title id="surface-title">Claude surfaces</title>
-            <desc id="surface-desc">One prompt can move across chat, projects, artifacts, Claude Design, Cowork, Office, Chrome, mobile, desktop, and code.</desc>
-            <rect x="24" y="28" width="512" height="364" rx="24" class="svg-bg" />
-            <g class="svg-center"><circle cx="280" cy="210" r="70" /><text x="280" y="202">One clear</text><text x="280" y="230">prompt</text></g>
-            <g class="svg-node"><circle cx="280" cy="72" r="38" /><text x="280" y="68">Chat</text></g>
-            <g class="svg-node"><circle cx="430" cy="134" r="38" /><text x="430" y="130">Project</text></g>
-            <g class="svg-node svg-node-small"><circle cx="478" cy="72" r="34" /><text x="478" y="68">Cowork</text></g>
-            <g class="svg-node"><circle cx="454" cy="284" r="38" /><text x="454" y="280">Office</text></g>
-            <g class="svg-node"><circle cx="280" cy="348" r="38" /><text x="280" y="344">Mobile</text></g>
-            <g class="svg-node"><circle cx="106" cy="284" r="38" /><text x="106" y="280">Code</text></g>
-            <g class="svg-node"><circle cx="130" cy="134" r="38" /><text x="130" y="130">Design</text></g>
-            <path d="M280 111 L280 140 M394 153 L339 175 M418 269 L350 238 M280 310 L280 280 M141 268 L211 237 M166 154 L220 176 M342 178 L448 92" class="svg-orbit" />
-          </svg>
-        </div>
-      </section>
 
-      <section class="section mission-section" id="mission" aria-labelledby="mission-title">
-        <div class="section-head">
-          <p class="eyebrow">Today</p>
-          <h2 id="mission-title">Pick the task in front of you</h2>
-          <p>Choose what you need done. The site will tell you where to use Claude, what to do next, and what prompt to copy.</p>
+          <div class="quick-strip" aria-label="How to use this page">
+            <div><strong>1. Pick</strong><span>Choose the task in front of you.</span></div>
+            <div><strong>2. Prompt</strong><span>Copy the strongest starter.</span></div>
+            <div><strong>3. Check</strong><span>Fix weak or uncertain answers.</span></div>
+            <div><strong>4. Save</strong><span>Turn repeated work into a system.</span></div>
+          </div>
+
         </div>
-        <div class="task-tool" aria-label="Claude task picker">
-          <div class="task-options">
-            <p class="tool-label">What are you trying to do?</p>
-            <div class="task-grid">
-              <button type="button" class="choice is-active" data-mission="email">Email or message</button>
-              <button type="button" class="choice" data-mission="document">Document</button>
-              <button type="button" class="choice" data-mission="slides">Slides</button>
-              <button type="button" class="choice" data-mission="spreadsheet">Spreadsheet</button>
-              <button type="button" class="choice" data-mission="design">Design</button>
-              <button type="button" class="choice" data-mission="research">Research</button>
-              <button type="button" class="choice" data-mission="browser">Website task</button>
-              <button type="button" class="choice" data-mission="cowork">Cowork task</button>
-              <button type="button" class="choice" data-mission="meeting">Meeting prep</button>
-              <button type="button" class="choice" data-mission="code">Code help</button>
-              <button type="button" class="choice" data-mission="agent">Agent workflow</button>
+
+        <div class="hero-task-panel" aria-label="Claude task picker">
+          <h2 class="sr-only">Pick a Claude task</h2>
+          <div class="task-tool hero-task-tool">
+            <div class="task-options">
+              <p class="tool-label">What do you need done?</p>
+              <div class="task-grid compact">
+                <button type="button" class="choice is-active" data-mission="email">Email</button>
+                <button type="button" class="choice" data-mission="document">Document</button>
+                <button type="button" class="choice" data-mission="slides">Slides</button>
+                <button type="button" class="choice" data-mission="spreadsheet">Sheet</button>
+                <button type="button" class="choice" data-mission="design">Design</button>
+                <button type="button" class="choice" data-mission="research">Research</button>
+                <button type="button" class="choice" data-mission="browser">Website</button>
+                <button type="button" class="choice" data-mission="cowork">Cowork</button>
+                <button type="button" class="choice" data-mission="meeting">Meeting</button>
+                <button type="button" class="choice" data-mission="code">Code</button>
+                <button type="button" class="choice" data-mission="agent">Agent</button>
+              </div>
+            </div>
+            <div class="task-result" aria-live="polite">
+              <div class="prompt-head">
+                <h3 id="mission-output-title">Email</h3>
+                <button class="button small copy" data-copy-target="mission-prompt" type="button">Copy</button>
+              </div>
+              <div class="result-copy">
+                <p id="mission-surface"><strong>Best Claude surface:</strong> Chat, mobile, or Word if the message comes from a document.</p>
+                <p id="mission-next"><strong>Next move:</strong> paste your messy thought, name the recipient, and ask for two versions.</p>
+              </div>
+              <textarea id="mission-prompt" aria-label="Prompt for selected task" readonly rows="11"></textarea>
             </div>
           </div>
-          <div class="task-result" aria-live="polite">
-            <div class="prompt-head">
-              <h3 id="mission-output-title">Email or message</h3>
-              <button class="button small copy" data-copy-target="mission-prompt" type="button">Copy</button>
-            </div>
-            <div class="result-copy">
-              <p id="mission-surface"><strong>Best Claude surface:</strong> Chat, mobile, or Word if the message comes from a document.</p>
-              <p id="mission-next"><strong>Next move:</strong> paste your messy thought, name the recipient, and ask for two versions.</p>
-            </div>
-            <textarea id="mission-prompt" aria-label="Prompt for selected task" readonly rows="13"></textarea>
-          </div>
         </div>
       </section>
 
-      <section class="section" id="leverage" aria-labelledby="leverage-title">
+      <section class="section compact-section" id="method" aria-labelledby="method-title">
         <div class="section-head">
-          <p class="eyebrow">Leverage</p>
-          <h2 id="leverage-title">Make Claude more useful with the same effort</h2>
-          <p>Leverage means one clear request becomes a better output, a reusable workflow, and a faster way to do the next similar task.</p>
+          <p class="eyebrow">Method</p>
+          <h2 id="method-title">Use one loop everywhere</h2>
+          <p>Claude gets easier when every request follows the same pattern: context, ask, check, improve, save.</p>
         </div>
-        <div class="ladder">
-          <article class="ladder-step"><span>1</span><h3>Give useful context</h3><p>Say the goal, audience, source material, constraints, and what a good answer should look like.</p><p><strong>Leverage signal:</strong> Claude needs fewer follow-up corrections.</p></article>
-          <article class="ladder-step"><span>2</span><h3>Ask for a usable output</h3><p>Request the exact shape you need: email, checklist, table, slide outline, design draft, code review, or workflow brief.</p><p><strong>Leverage signal:</strong> you can copy, edit, or act on the first version.</p></article>
-          <article class="ladder-step"><span>3</span><h3>Improve and verify</h3><p>Ask Claude to critique assumptions, separate facts from inference, and rewrite the weakest part for the real audience.</p><p><strong>Leverage signal:</strong> the second version is clearly stronger than the first.</p></article>
-          <article class="ladder-step"><span>4</span><h3>Save the workflow</h3><p>Turn anything repeated into a Project, saved prompt, checklist, Artifact, Cowork task, or Claude Code workflow.</p><p><strong>Leverage signal:</strong> you stop rebuilding the same instructions.</p></article>
+        <div class="method-grid">
+          <article class="method-card"><span>1</span><h3>Context</h3><p>Goal, audience, source material, examples, rules.</p></article>
+          <article class="method-card"><span>2</span><h3>Ask</h3><p>Request the exact output: email, table, slide outline, draft, design, or workflow.</p></article>
+          <article class="method-card"><span>3</span><h3>Check</h3><p>Look for missing facts, assumptions, weak wording, and wrong format.</p></article>
+          <article class="method-card"><span>4</span><h3>Improve</h3><p>Fix one weakness at a time instead of restarting.</p></article>
+          <article class="method-card"><span>5</span><h3>Save</h3><p>Turn repeated work into a Project, template, Artifact, or agentic workflow.</p></article>
         </div>
-      </section>
 
-      <section class="section" id="quick-start" aria-labelledby="quick-start-title">
-        <div class="section-head">
-          <p class="eyebrow">First step</p>
-          <h2 id="quick-start-title">Start with one real thing you need done</h2>
-          <p>Do not learn Claude by touring menus. Learn it by improving a task you already have.</p>
-        </div>
-        <div class="steps">
-          <article class="step"><span>1</span><h3>Open Claude</h3><p>Use Claude in your browser, desktop app, or mobile app. Paste the setup interview prompt and answer one question at a time.</p></article>
-          <article class="step"><span>2</span><h3>Save your preferences</h3><p>Ask Claude to turn your answers into short Instructions: how you work, preferred tone, formats you like, and what Claude should ask before assuming.</p></article>
-          <article class="step"><span>3</span><h3>Create one Project</h3><p>Pick one repeated workflow, such as meeting prep, document review, slide creation, coding help, or personal planning. Keep the Project focused.</p></article>
-          <article class="step"><span>4</span><h3>Improve once</h3><p>After Claude answers, ask it to critique the result and produce a better version. That repeat loop is the fastest path to mastery.</p></article>
-        </div>
-      </section>
+        <div class="template-row">
+          <article class="prompt-card universal-prompt">
+            <div class="prompt-head"><h3>Universal task prompt</h3><button class="button small copy" data-copy-target="universal-template" type="button">Copy</button></div>
+            <textarea id="universal-template" aria-label="Universal task prompt" readonly rows="10">I am creating a [FORMAT] for [AUDIENCE].
 
-      <section class="section" id="starter-examples" aria-labelledby="starter-examples-title">
-        <div class="section-head">
-          <p class="eyebrow">Blank canvas fix</p>
-          <h2 id="starter-examples-title">Start from a messy thought</h2>
-          <p>Beginners do not need perfect wording. Give Claude the job, audience, background, and the shape you want back.</p>
-        </div>
-        <article class="prompt-card universal-prompt">
-          <div class="prompt-head"><h3>Universal task prompt</h3><button class="button small copy" data-copy-target="universal-template" type="button">Copy</button></div>
-          <textarea id="universal-template" aria-label="Universal task prompt" readonly rows="12">I am creating a [FORMAT] for [AUDIENCE].
+Goal:
+[OUTCOME]
 
-The goal is to [OUTCOME].
-
-Here is the background:
-[PASTE CONTEXT, NOTES, FILE SUMMARY, OR THREAD]
+Context:
+[PASTE NOTES, FILE SUMMARY, THREAD, OR SOURCE MATERIAL]
 
 Please give me a draft that is [TONE OR CONSTRAINT].
 
-Before finalizing, tell me what is unclear, what might be missing, and what I should verify.</textarea>
-        </article>
-        <div class="example-grid">
-          <article class="example-card"><h3>Difficult email</h3><p><strong>Messy thought:</strong> I need to push back without sounding rude.</p><p><strong>Better ask:</strong> Draft a firm but warm email to a client explaining why Friday is not realistic, offering two next steps, and keeping the relationship positive.</p></article>
-          <article class="example-card"><h3>Long report</h3><p><strong>Messy thought:</strong> I have a huge PDF and need the point.</p><p><strong>Better ask:</strong> Summarize this report for a busy executive. Start with the main finding, then give five takeaways, risks, and questions I should verify.</p></article>
-          <article class="example-card"><h3>Slides from notes</h3><p><strong>Messy thought:</strong> Make these notes into slides.</p><p><strong>Better ask:</strong> Turn these notes into a six-slide storyline for a mixed audience. For each slide, give the title, one message, suggested visual, and speaker note.</p></article>
-        </div>
-      </section>
+Before finalizing, tell me what is unclear, missing, or important to verify.</textarea>
+          </article>
 
-      <section class="section" aria-labelledby="loop-title-section">
-        <div class="section-head">
-          <p class="eyebrow">Core habit</p>
-          <h2 id="loop-title-section">Use the Context - Ask - Check - Improve - Save loop</h2>
-          <p>This is the beginner version of expert prompting. It works everywhere Claude works.</p>
-        </div>
-        <div class="loop-grid">
-          <div><h3>Context</h3><p>Tell Claude the goal, audience, files, constraints, and what good looks like.</p></div>
-          <div><h3>Ask</h3><p>Ask for one concrete output: draft, table, slide outline, code change, summary, or checklist.</p></div>
-          <div><h3>Check</h3><p>Look for missing facts, vague wording, risky assumptions, and wrong format.</p></div>
-          <div><h3>Improve</h3><p>Ask Claude to fix one weakness at a time, then compare versions.</p></div>
-          <div><h3>Save</h3><p>Save the best prompt, Project instruction, Artifact, Office instruction, or code workflow.</p></div>
-        </div>
-      </section>
-
-      <section class="section" id="context-engineering" aria-labelledby="context-title">
-        <div class="section-head">
-          <p class="eyebrow">Context engineering</p>
-          <h2 id="context-title">Give Claude the right working material</h2>
-          <p>Context engineering is not technical. It means packaging the goal, source of truth, examples, rules, and review checks so Claude has less to guess.</p>
-        </div>
-        <div class="loop-grid">
-          <div><h3>Goal</h3><p>Tell Claude what success looks like and who the output is for.</p></div>
-          <div><h3>Source of truth</h3><p>Name the file, note, webpage, message, screenshot, folder, or open app Claude should rely on most.</p></div>
-          <div><h3>Examples</h3><p>Show one good example, one bad example, or a previous version you want improved.</p></div>
-          <div><h3>Rules</h3><p>Say what Claude may change, what it should preserve, and when it must ask first.</p></div>
-          <div><h3>Review checks</h3><p>Ask Claude to flag uncertainty, missing facts, risky assumptions, and anything you should verify.</p></div>
-        </div>
-        <article class="prompt-card trust-prompt">
-          <div class="prompt-head"><h3>Context package</h3><button class="button small copy" data-copy-target="context-template" type="button">Copy</button></div>
-          <textarea id="context-template" aria-label="Context engineering prompt" readonly rows="17">Use this context package before you answer.
+          <article class="prompt-card trust-prompt">
+            <div class="prompt-head"><h3>Context package</h3><button class="button small copy" data-copy-target="context-template" type="button">Copy</button></div>
+            <textarea id="context-template" aria-label="Context engineering prompt" readonly rows="10">Use this context package before you answer.
 
 Goal:
 [WHAT I WANT DONE]
 
-Audience:
-[WHO THIS IS FOR]
-
 Source of truth:
 [FILE, NOTE, WEBPAGE, MESSAGE, SCREENSHOT, FOLDER, OR APP]
-
-Helpful examples:
-[OPTIONAL EXAMPLES OR PREVIOUS VERSION]
 
 Rules:
 - Preserve: [WHAT SHOULD NOT CHANGE]
@@ -213,73 +126,22 @@ Rules:
 - Avoid: [WHAT I DO NOT WANT]
 
 Before finalizing, list anything uncertain, missing, or important for me to verify.</textarea>
-        </article>
-      </section>
-
-      <section class="section" id="surfaces" aria-labelledby="surfaces-title">
-        <div class="section-head">
-          <p class="eyebrow">Surface map</p>
-          <h2 id="surfaces-title">Where to use Claude</h2>
-          <p>Pick the surface that matches the work. You do not need to use every surface on day one.</p>
-        </div>
-        <div class="surface-grid">
-          <article class="surface-card"><span class="surface-badge">Chat</span><h3>Quick thinking and drafting</h3><p>Use for questions, writing, brainstorming, summaries, explanations, and first drafts.</p><p><strong>First move:</strong> paste the universal task prompt.</p><a class="setup-link" href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Chat docs</a></article>
-          <article class="surface-card"><span class="surface-badge">Projects</span><h3>Repeated work with context</h3><p>Use for recurring work that needs the same instructions, examples, and files.</p><p><strong>First move:</strong> create one Project for one outcome.</p><a class="setup-link" href="https://support.claude.com/en/articles/9517075-what-are-projects">Project docs</a></article>
-          <article class="surface-card"><span class="surface-badge">Artifacts</span><h3>Documents, designs, charts, and apps</h3><p>Use when you want Claude to create something you can edit, preview, copy, or download.</p><p><strong>First move:</strong> ask for a one-page artifact and revise it twice.</p><a class="setup-link" href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them">Artifact docs</a></article>
-          <article class="surface-card"><span class="surface-badge">Claude Design</span><h3>Polished visual work</h3><p>Use for one-pagers, prototypes, pages, slide-like drafts, and visual work that should follow a design system.</p><p><strong>First move:</strong> ask for the simplest visual draft, then improve clarity before polish.</p><a class="setup-link" href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Design guide</a></article>
-          <article class="surface-card"><span class="surface-badge">Word</span><h3>Review and improve documents</h3><p>Use Claude for Word to ask document questions, edit selected text, fill templates, and work with comments.</p><p><strong>First move:</strong> ask for a plain-English review before editing.</p><a class="setup-link" href="https://support.claude.com/en/articles/14465370-use-claude-for-word">Word guide</a></article>
-          <article class="surface-card"><span class="surface-badge">PowerPoint</span><h3>Build and refine decks</h3><p>Use Claude for PowerPoint to create slide structures, edit slides, turn bullets into visuals, and respect templates.</p><p><strong>First move:</strong> start from your template and ask for a slide-by-slide outline.</p><a class="setup-link" href="https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint">PowerPoint guide</a></article>
-          <article class="surface-card"><span class="surface-badge">Excel</span><h3>Understand and improve workbooks</h3><p>Use Claude for Excel to explain formulas, inspect tables, create analyses, and connect workbook findings to other Office files.</p><p><strong>First move:</strong> ask Claude to explain the workbook before changing it.</p><a class="setup-link" href="https://support.claude.com/en/articles/12650343-using-claude-in-excel">Excel guide</a></article>
-          <article class="surface-card"><span class="surface-badge">Chrome</span><h3>Work alongside websites</h3><p>Use Claude in Chrome when you want Claude to read, click, and navigate with you in the browser.</p><p><strong>First move:</strong> try a low-risk research or comparison task.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome">Set up Chrome</a></div></article>
-          <article class="surface-card"><span class="surface-badge">Desktop</span><h3>Use Claude without breaking focus</h3><p>Use the desktop app for daily work. On Mac, quick entry can capture screenshots, share windows, and use dictation.</p><p><strong>First move:</strong> ask about the app or window you are already using.</p><div class="surface-actions"><a class="button small primary" href="https://claude.ai/downloads">Download app</a><a class="button small" href="https://support.claude.com/en/articles/10065433-installing-claude-for-desktop">Desktop guide</a></div></article>
-          <article class="surface-card"><span class="surface-badge">Claude Cowork</span><h3>Longer desktop tasks</h3><p>Use Cowork for desktop work that needs selected files, folders, apps, progress visibility, and a clear handoff.</p><p><strong>First move:</strong> start with a read-only review and ask Claude to explain before acting.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Cowork guide</a></div></article>
-          <article class="surface-card"><span class="surface-badge">iOS</span><h3>Voice and everyday apps</h3><p>Use Claude on iPhone for dictation, messages, email drafts, calendar help, reminders, maps, and quick questions while moving.</p><p><strong>First move:</strong> dictate a messy thought and ask Claude to make it usable.</p><a class="setup-link" href="https://support.claude.com/en/articles/11869619-using-claude-with-ios-apps">iOS guide</a></article>
-          <article class="surface-card"><span class="surface-badge">Claude Code</span><h3>Codebase help in plain English</h3><p>Use Claude Code for repository questions, small changes, tests, and reviews. You do not need to speak like a developer.</p><p><strong>First move:</strong> ask it to inspect first, explain simply, then make the smallest useful change.</p><a class="setup-link" href="https://code.claude.com/docs/en/overview">Code overview</a></article>
-        </div>
-        <div class="decision-strip" aria-label="Chat versus Project guidance">
-          <div><h3>Chat or Project?</h3><p><strong>Use Chat</strong> for a one-time task. <strong>Use a Project</strong> when you will repeat the same kind of work, need the same instructions, or want Claude to use several specific documents across conversations.</p></div>
-          <div><h3>Quick test</h3><p>If you would paste the same background again next week, make a Project. If the task ends today, stay in Chat.</p></div>
-          <div><h3>Artifact, Design, or Cowork?</h3><p><strong>Use an Artifact</strong> for an editable output. <strong>Use Claude Design</strong> for polished visual work. <strong>Use Cowork</strong> when Claude needs desktop files, folders, apps, or a longer task session.</p></div>
-        </div>
-      </section>
-
-      <section class="section" id="glossary" aria-labelledby="glossary-title">
-        <div class="section-head">
-          <p class="eyebrow">Plain English</p>
-          <h2 id="glossary-title">Claude terms without jargon</h2>
-          <p>Use these short definitions when a menu, announcement, or tutorial uses a term you have not seen before.</p>
-        </div>
-        <div class="glossary-grid">
-          <article class="glossary-card"><h3>Chat</h3><p>The normal conversation window. Best for quick questions, drafts, summaries, and thinking through a task.</p></article>
-          <article class="glossary-card"><h3>Instructions</h3><p>Your saved preferences for how Claude should respond: tone, detail level, format, and when to ask questions.</p></article>
-          <article class="glossary-card"><h3>Project</h3><p>A focused workspace for repeated work that needs the same files, examples, and instructions.</p></article>
-          <article class="glossary-card"><h3>Artifact</h3><p>A separate editable output Claude can create, such as a document, chart, webpage, prototype, or small app.</p></article>
-          <article class="glossary-card"><h3>Claude Design</h3><p>A visual creation workflow for pages, prototypes, presentation-style drafts, and polished visual artifacts.</p></article>
-          <article class="glossary-card"><h3>Claude Cowork</h3><p>A desktop task workspace where Claude can work with chosen files, folders, apps, and longer jobs you can monitor.</p></article>
-          <article class="glossary-card"><h3>Claude Code</h3><p>A coding helper that can inspect a repository, explain files, make focused edits, and run checks.</p></article>
-          <article class="glossary-card"><h3>Connector</h3><p>A way for Claude to work with another app or service when that connection is enabled.</p></article>
-          <article class="glossary-card"><h3>Skill</h3><p>A reusable set of instructions or files that helps Claude perform a specific kind of work more consistently.</p></article>
-          <article class="glossary-card"><h3>Quick entry</h3><p>A Mac desktop shortcut for asking Claude about what you are seeing or doing without breaking focus.</p></article>
-          <article class="glossary-card"><h3>Source of truth</h3><p>The file, note, webpage, or message Claude should treat as the main reference when answers must stay grounded.</p></article>
-          <article class="glossary-card"><h3>Context engineering</h3><p>The habit of giving Claude the goal, source material, examples, rules, and review checks before asking it to work.</p></article>
-          <article class="glossary-card"><h3>Agentic workflow</h3><p>A repeatable Claude workflow that can gather context, follow steps, use tools, check its work, and hand you a result.</p></article>
-          <article class="glossary-card"><h3>MCP</h3><p>A standard way to connect Claude Code or agents to tools and data sources with controlled access.</p></article>
-          <article class="glossary-card"><h3>Hook</h3><p>A command that can run before or after a Claude Code action, often used for checks, formatting, or notifications.</p></article>
-          <article class="glossary-card"><h3>Agent SDK</h3><p>A developer toolkit for building hosted Claude agents that run inside an app or service.</p></article>
+          </article>
         </div>
       </section>
 
       <section class="section prompt-lab-section" id="prompt-lab" aria-labelledby="prompt-lab-title">
         <div class="section-head">
           <p class="eyebrow">Prompt lab</p>
-          <h2 id="prompt-lab-title">Turn a rough request into a strong Claude prompt</h2>
-          <p>Write what you need in normal language. The prompt builder wraps it with context, quality checks, and next-step instructions.</p>
+          <h2 id="prompt-lab-title">Turn a rough request into a strong prompt</h2>
+          <p>Write normally. The builder adds context, output shape, and quality checks.</p>
         </div>
         <div class="prompt-lab">
           <div class="field">
             <label for="rough-prompt">What do you want Claude to help you do?</label>
-            <textarea id="rough-prompt" rows="5">Help me turn my notes into a clear, useful output.</textarea>
+            <textarea id="rough-prompt" rows="4">Help me turn my notes into a clear, useful output.</textarea>
           </div>
+          <div class="choice-label">Choose the Claude surface</div>
           <div class="choice-grid" aria-label="Choose a Claude surface">
             <button type="button" class="choice is-active" data-surface="chat">Chat</button>
             <button type="button" class="choice" data-surface="project">Project</button>
@@ -290,7 +152,7 @@ Before finalizing, list anything uncertain, missing, or important for me to veri
             <button type="button" class="choice" data-surface="mobile">Mobile</button>
             <button type="button" class="choice" data-surface="code">Code</button>
           </div>
-          <div class="choice-label">Choose the output you want</div>
+          <div class="choice-label">Choose the output</div>
           <div class="choice-grid" aria-label="Choose output type">
             <button type="button" class="choice is-active" data-output="useful">Useful answer</button>
             <button type="button" class="choice" data-output="email">Email</button>
@@ -306,32 +168,56 @@ Before finalizing, list anything uncertain, missing, or important for me to veri
             <h3>Optimized prompt</h3>
             <button class="button small copy" data-copy-target="optimized-prompt" type="button">Copy</button>
           </div>
-          <textarea id="optimized-prompt" aria-label="Optimized prompt" readonly rows="18"></textarea>
+          <textarea id="optimized-prompt" aria-label="Optimized prompt" readonly rows="15"></textarea>
         </div>
       </section>
 
-      <section class="section" id="tips" aria-labelledby="tips-title">
+      <section class="section" id="surfaces" aria-labelledby="surfaces-title">
         <div class="section-head">
-          <p class="eyebrow">Tips and tricks</p>
-          <h2 id="tips-title">Small phrases that make Claude much better</h2>
-          <p>These are the fastest beginner upgrades. Add one phrase when Claude's answer is close but not good enough.</p>
+          <p class="eyebrow">Surface map</p>
+          <h2 id="surfaces-title">Use the right Claude surface</h2>
+          <p>Start with the simplest surface that matches the job. Move up only when the task needs files, apps, repeated context, or code.</p>
         </div>
-        <div class="tip-grid">
-          <article class="tip-card"><h3>When the answer is vague</h3><p>"Make this specific enough that I can act on it today."</p></article>
-          <article class="tip-card"><h3>When you need quality</h3><p>"Review your answer against accuracy, clarity, usefulness, and missing assumptions."</p></article>
-          <article class="tip-card"><h3>When you feel stuck</h3><p>"Ask me the three questions that would most improve your answer."</p></article>
-          <article class="tip-card"><h3>When the output is too long</h3><p>"Give me the shortest useful version, then a fuller version if needed."</p></article>
-          <article class="tip-card"><h3>When you need options</h3><p>"Show me three versions: safe, bold, and balanced."</p></article>
-          <article class="tip-card"><h3>When you want a system</h3><p>"Turn this into a reusable prompt, checklist, and Project instruction."</p></article>
-          <article class="tip-card"><h3>When facts matter</h3><p>"Separate confirmed facts, reasonable inference, and what needs checking."</p></article>
+        <div class="surface-grid compact-surfaces">
+          <article class="surface-card"><span class="surface-badge">Chat</span><h3>Fast drafts and thinking</h3><p>Best for quick questions, summaries, emails, decisions, and first drafts.</p><a class="setup-link" href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Chat docs</a></article>
+          <article class="surface-card"><span class="surface-badge">Projects</span><h3>Repeated work</h3><p>Use when the same instructions, examples, or documents matter across conversations.</p><a class="setup-link" href="https://support.claude.com/en/articles/9517075-what-are-projects">Project docs</a></article>
+          <article class="surface-card"><span class="surface-badge">Artifacts</span><h3>Editable outputs</h3><p>Use for documents, charts, prototypes, small apps, and anything you want to preview or revise.</p><a class="setup-link" href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them">Artifact docs</a></article>
+          <article class="surface-card"><span class="surface-badge">Claude Design</span><h3>Visual work</h3><p>Create one-pagers, prototypes, presentation drafts, and design-system-aware visuals.</p><a class="setup-link" href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Design guide</a></article>
+          <article class="surface-card"><span class="surface-badge">Word</span><h3>Document review</h3><p>Ask for a plain-English review, then improve selected text and preserve structure.</p><a class="setup-link" href="https://support.claude.com/en/articles/14465370-use-claude-for-word">Word guide</a></article>
+          <article class="surface-card"><span class="surface-badge">PowerPoint</span><h3>Deck building</h3><p>Start from the storyline, then turn dense slides into clearer messages and visuals.</p><a class="setup-link" href="https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint">PowerPoint guide</a></article>
+          <article class="surface-card"><span class="surface-badge">Excel</span><h3>Workbook help</h3><p>Explain formulas, inspect tables, create analyses, and move findings into docs or decks.</p><a class="setup-link" href="https://support.claude.com/en/articles/12650343-using-claude-in-excel">Excel guide</a></article>
+          <article class="surface-card"><span class="surface-badge">Chrome</span><h3>Website tasks</h3><p>Use for reading, comparing, navigating, and low-risk browser workflows with review.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome">Set up Chrome</a></div></article>
+          <article class="surface-card"><span class="surface-badge">Desktop</span><h3>Daily work</h3><p>Use quick entry, screenshots, windows, and dictation without breaking focus.</p><div class="surface-actions"><a class="button small primary" href="https://claude.ai/downloads">Download app</a><a class="button small" href="https://support.claude.com/en/articles/10065433-installing-claude-for-desktop">Guide</a></div></article>
+          <article class="surface-card"><span class="surface-badge">Claude Cowork</span><h3>Longer desktop jobs</h3><p>Use for selected files, folders, apps, progress visibility, and a clear handoff.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Cowork guide</a></div></article>
+          <article class="surface-card"><span class="surface-badge">iOS</span><h3>Voice and mobile apps</h3><p>Dictate rough thoughts, draft messages, review notes, and create quick visuals on the move.</p><a class="setup-link" href="https://support.claude.com/en/articles/11869619-using-claude-with-ios-apps">iOS guide</a></article>
+          <article class="surface-card"><span class="surface-badge">Claude Code</span><h3>Repository work</h3><p>Ask in plain English. Have Claude inspect first, make the smallest useful edit, then run checks.</p><a class="setup-link" href="https://code.claude.com/docs/en/overview">Code overview</a></article>
         </div>
+        <div class="decision-strip" aria-label="Claude surface decision rules">
+          <div><h3>Chat or Project?</h3><p><strong>Chat</strong> for one-time work. <strong>Project</strong> when you would reuse the same background, files, or instructions.</p></div>
+          <div><h3>Artifact or Design?</h3><p><strong>Artifact</strong> for an editable output. <strong>Design</strong> when the visual result itself needs polish.</p></div>
+          <div><h3>Cowork or Code?</h3><p><strong>Cowork</strong> for desktop files and apps. <strong>Code</strong> for repositories, tests, reviews, and pull requests.</p></div>
+        </div>
+
+        <details class="terms-panel">
+          <summary>Claude terms in plain English</summary>
+          <div class="glossary-grid">
+            <article class="glossary-card"><h3>Instructions</h3><p>Saved preferences for tone, detail, format, and when Claude should ask first.</p></article>
+            <article class="glossary-card"><h3>Project</h3><p>A focused workspace for repeated work with the same files and instructions.</p></article>
+            <article class="glossary-card"><h3>Artifact</h3><p>An editable output such as a page, chart, document, prototype, or small app.</p></article>
+            <article class="glossary-card"><h3>Context engineering</h3><p>Giving Claude the goal, source material, examples, rules, and checks before it works.</p></article>
+            <article class="glossary-card"><h3>Connector</h3><p>A controlled connection between Claude and another app or service.</p></article>
+            <article class="glossary-card"><h3>Agentic workflow</h3><p>A repeatable job with inputs, allowed actions, checks, and a handoff.</p></article>
+            <article class="glossary-card"><h3>MCP</h3><p>A standard way to connect Claude Code or agents to tools and data sources.</p></article>
+            <article class="glossary-card"><h3>Hook</h3><p>A command that can run before or after a Claude Code action, often for checks.</p></article>
+          </div>
+        </details>
       </section>
 
       <section class="section fixer-section" id="fix-answer" aria-labelledby="fix-answer-title">
         <div class="section-head">
-          <p class="eyebrow">Answer rescue</p>
-          <h2 id="fix-answer-title">Fix Claude when the answer is not good enough</h2>
-          <p>Do not start over. Pick the problem, copy the recovery prompt, and make Claude repair the answer in the same conversation.</p>
+          <p class="eyebrow">Fix and trust</p>
+          <h2 id="fix-answer-title">Repair weak answers instead of starting over</h2>
+          <p>Pick what went wrong. Claude should make the answer shorter, clearer, safer, or more actionable in the same conversation.</p>
         </div>
         <div class="task-tool fixer-tool" aria-label="Claude answer fixer">
           <div class="task-options">
@@ -356,26 +242,15 @@ Before finalizing, list anything uncertain, missing, or important for me to veri
             <div class="result-copy">
               <p id="fix-next"><strong>Use when:</strong> Claude sounds reasonable but you still cannot act on the answer.</p>
             </div>
-            <textarea id="fix-prompt" aria-label="Recovery prompt for Claude's answer" readonly rows="12"></textarea>
+            <textarea id="fix-prompt" aria-label="Recovery prompt for Claude's answer" readonly rows="10"></textarea>
           </div>
         </div>
-      </section>
 
-      <section class="section trust-section" id="trust-check" aria-labelledby="trust-check-title">
-        <div class="section-head">
-          <p class="eyebrow">Trust check</p>
-          <h2 id="trust-check-title">Before you rely on an answer</h2>
-          <p>Use this when accuracy matters. Claude is strongest when you make it show what is known, what is inferred, and what still needs review.</p>
-        </div>
-        <div class="loop-grid">
-          <div><h3>Ground it</h3><p>Name the file, note, webpage, or message Claude should treat as the source of truth.</p></div>
-          <div><h3>Separate claims</h3><p>Ask Claude to label confirmed facts, reasonable inferences, and items that need checking.</p></div>
-          <div><h3>Check specifics</h3><p>Review names, dates, numbers, formulas, quotes, links, and anything that could affect a decision.</p></div>
-          <div><h3>Ask what changes it</h3><p>Make Claude say what new information would change the answer or recommendation.</p></div>
-        </div>
-        <article class="prompt-card trust-prompt">
-          <div class="prompt-head"><h3>Reliability check prompt</h3><button class="button small copy" data-copy-target="trust-template" type="button">Copy</button></div>
-          <textarea id="trust-template" aria-label="Reliability check prompt" readonly rows="14">Review your last answer before I rely on it.
+        <div class="template-row">
+          <article class="tip-card"><h3>Power phrases</h3><p>"Make this specific enough to act on today."</p><p>"Separate confirmed facts, reasonable inference, and what needs checking."</p><p>"Ask me the three questions that would most improve this."</p></article>
+          <article class="prompt-card trust-prompt">
+            <div class="prompt-head"><h3>Reliability check</h3><button class="button small copy" data-copy-target="trust-template" type="button">Copy</button></div>
+            <textarea id="trust-template" aria-label="Reliability check prompt" readonly rows="11">Review your last answer before I rely on it.
 
 Source of truth:
 [PASTE OR NAME THE FILE, NOTE, WEBPAGE, OR MESSAGE]
@@ -385,35 +260,32 @@ For each important claim, label it as:
 - Reasonable inference.
 - Needs checking.
 
-Then:
-1. Check names, dates, numbers, links, formulas, and quotes.
-2. List any missing context that could change the answer.
-3. Correct the answer if needed.
-4. Give me a short checklist of what I should review before using it.</textarea>
-        </article>
+Then correct the answer if needed and give me a short review checklist.</textarea>
+          </article>
+        </div>
       </section>
 
       <section class="section power-section" id="power-moves" aria-labelledby="power-moves-title">
         <div class="section-head">
-          <p class="eyebrow">Power moves</p>
-          <h2 id="power-moves-title">Use advanced patterns without jargon</h2>
-          <p>These are the moves that make Claude feel like a working partner instead of a question box.</p>
+          <p class="eyebrow">Leverage</p>
+          <h2 id="power-moves-title">Advanced use without jargon</h2>
+          <p>These three patterns turn Claude from a question box into a working partner.</p>
         </div>
         <div class="power-grid">
-          <article class="power-card"><span>1</span><h3>Artifact iteration</h3><p>After Claude creates an Artifact, ask for changes like adding a filter, turning a memo into a page, adding a toggle, or converting a static draft into an interactive dashboard.</p><p><strong>Try:</strong> "Keep the same content, but make this easier to scan and add one interactive control."</p></article>
-          <article class="power-card"><span>2</span><h3>Prompt chaining</h3><p>Ask Claude to do several steps in order: extract, sort, compare, flag issues, then create the final output. This reduces back-and-forth.</p><p><strong>Try:</strong> "First extract dates. Second put them in a table. Third flag conflicts. Fourth write the summary."</p></article>
-          <article class="power-card"><span>3</span><h3>Meta-prompting</h3><p>When the task is unclear, ask Claude to interview you before writing the final prompt. This is often faster than guessing what to say.</p><p><strong>Try:</strong> "Ask me the five questions needed to write the best prompt for this task."</p></article>
+          <article class="power-card"><span>1</span><h3>Artifact iteration</h3><p>Ask Claude to revise the output itself: add a filter, simplify a page, make a dashboard, or add a toggle.</p><p><strong>Try:</strong> "Keep the content, make it easier to scan, and add one useful control."</p></article>
+          <article class="power-card"><span>2</span><h3>Prompt chaining</h3><p>Give Claude ordered steps: extract, sort, compare, flag issues, then write the final answer.</p><p><strong>Try:</strong> "First extract dates. Second make a table. Third flag conflicts. Fourth summarize."</p></article>
+          <article class="power-card"><span>3</span><h3>Meta-prompting</h3><p>When the task is fuzzy, ask Claude to interview you before writing the final prompt.</p><p><strong>Try:</strong> "Ask me the five questions needed to write the best prompt for this task."</p></article>
         </div>
         <article class="prompt-card trust-prompt">
           <div class="prompt-head"><h3>Prompt architect</h3><button class="button small copy" data-copy-target="architect-template" type="button">Copy</button></div>
-          <textarea id="architect-template" aria-label="Prompt architect template" readonly rows="12">I want Claude to help me with this task:
+          <textarea id="architect-template" aria-label="Prompt architect template" readonly rows="10">I want Claude to help me with this task:
 [DESCRIBE THE TASK]
 
-Do not answer the task yet.
+Do not answer yet.
 
 First, ask me the five questions that would help you write the strongest prompt.
 After I answer, create:
-1. A clear prompt I can reuse.
+1. A clear reusable prompt.
 2. A shorter quick-use version.
 3. The best Claude surface for this workflow.
 4. A checklist for judging the result.</textarea>
@@ -423,24 +295,25 @@ After I answer, create:
       <section class="section agents-section" id="agents" aria-labelledby="agents-title">
         <div class="section-head">
           <p class="eyebrow">Agents</p>
-          <h2 id="agents-title">Develop and deploy agents with Claude</h2>
-          <p>An agentic workflow is a repeatable job with a goal, inputs, allowed actions, safety checks, and a handoff. Start simple, then automate only after the manual version works.</p>
+          <h2 id="agents-title">Build agentic workflows safely</h2>
+          <p>An agentic workflow is just a repeatable job with a goal, inputs, allowed actions, checks, and a handoff. Start manually; automate only after the workflow is stable.</p>
         </div>
         <div class="agent-lanes">
-          <article class="agent-card"><span class="surface-badge">Beginner</span><h3>Personal workflow agent</h3><p>Use a Project, saved prompt, source files, and a checklist. This is best for meeting prep, document review, inbox drafting, research synthesis, and recurring Office work.</p><p><strong>Deploy by saving:</strong> Project instructions, starter files, a copyable prompt, and a review checklist.</p></article>
-          <article class="agent-card"><span class="surface-badge">Builder</span><h3>Repository agent</h3><p>Use Claude Code when the workflow needs files, tests, command-line checks, or pull requests. Add project rules, custom commands, subagents, hooks, and MCP tools only when they solve a real repeatable problem.</p><p><strong>Deploy with:</strong> Claude Code, GitHub Actions, or a repo workflow that runs when a task is assigned.</p></article>
-          <article class="agent-card"><span class="surface-badge">Developer</span><h3>Hosted product agent</h3><p>Use the Claude Agent SDK when the agent needs to run inside an app or service. Keep it sandboxed, give it narrow tools, log what it does, and require review before high-impact actions.</p><p><strong>Deploy with:</strong> a hosted service, container isolation, monitoring, and a clear rollback path.</p></article>
+          <article class="agent-card"><span class="surface-badge">Beginner</span><h3>Personal workflow</h3><p>Use a Project, saved prompt, source files, and a review checklist.</p><p><strong>Good for:</strong> meeting prep, document review, inbox drafting, research synthesis, Office work.</p></article>
+          <article class="agent-card"><span class="surface-badge">Builder</span><h3>Repository workflow</h3><p>Use Claude Code when files, tests, command-line checks, or pull requests matter.</p><p><strong>Add later:</strong> custom commands, subagents, hooks, and MCP tools when they solve a repeated problem.</p></article>
+          <article class="agent-card"><span class="surface-badge">Developer</span><h3>Hosted agent</h3><p>Use the Agent SDK when the agent must run inside an app or service.</p><p><strong>Require:</strong> narrow tools, logging, monitoring, and review before high-impact actions.</p></article>
         </div>
         <div class="agent-steps">
-          <article><span>1</span><h3>Name the job</h3><p>Write one sentence: "This agent helps with..." If the job is vague, it is too early to automate.</p></article>
-          <article><span>2</span><h3>Define the trigger</h3><p>Say when the workflow starts: a pasted message, a file drop, an issue comment, a daily review, or a manual request.</p></article>
-          <article><span>3</span><h3>List inputs</h3><p>Name the files, notes, websites, issues, messages, or databases the agent may use.</p></article>
-          <article><span>4</span><h3>Set allowed actions</h3><p>Separate what it may draft, read, edit, click, run, or open from what requires your approval.</p></article>
-          <article><span>5</span><h3>Add checks</h3><p>Require source labels, error checks, tests, or a short review checklist before the output is trusted.</p></article>
-          <article><span>6</span><h3>Ship the smallest version</h3><p>Try it manually in Chat or a Project, then move to Claude Code, GitHub Actions, or the Agent SDK when the workflow is stable.</p></article>
+          <article><span>1</span><h3>Job</h3><p>What the agent helps with.</p></article>
+          <article><span>2</span><h3>Trigger</h3><p>When the workflow starts.</p></article>
+          <article><span>3</span><h3>Inputs</h3><p>Files, notes, sites, issues, or messages.</p></article>
+          <article><span>4</span><h3>Actions</h3><p>What it may do and what needs approval.</p></article>
+          <article><span>5</span><h3>Checks</h3><p>Facts, tests, errors, and review points.</p></article>
+          <article><span>6</span><h3>Handoff</h3><p>What you review before trusting it.</p></article>
         </div>
-        <div class="prompt-grid">
-          <article class="prompt-card"><div class="prompt-head"><h3>Agent workflow brief</h3><button class="button small copy" data-copy-target="agent-brief-template" type="button">Copy</button></div><textarea id="agent-brief-template" aria-label="Agent workflow brief prompt" readonly rows="16">Help me design an agentic workflow with Claude.
+        <article class="prompt-card trust-prompt">
+          <div class="prompt-head"><h3>Agent workflow brief</h3><button class="button small copy" data-copy-target="agent-brief-template" type="button">Copy</button></div>
+          <textarea id="agent-brief-template" aria-label="Agent workflow brief prompt" readonly rows="14">Help me design an agentic workflow with Claude.
 
 Workflow goal:
 [WHAT THE AGENT SHOULD HELP WITH]
@@ -457,161 +330,92 @@ Allowed actions:
 Actions that need my approval:
 [WHAT IT MUST ASK BEFORE DOING]
 
-Success looks like:
-[WHAT A GOOD RESULT MEANS]
-
-Return the simplest version, the safety checks, the handoff, and what would require Claude Code, GitHub Actions, or the Agent SDK later.</textarea></article>
-
-          <article class="prompt-card"><div class="prompt-head"><h3>Deploy review</h3><button class="button small copy" data-copy-target="deploy-template" type="button">Copy</button></div><textarea id="deploy-template" aria-label="Agent deploy review prompt" readonly rows="16">Review this agentic workflow before I deploy it.
-
-Workflow:
-[PASTE THE WORKFLOW]
-
-Check:
-1. Is the job narrow enough?
-2. Are the inputs clear?
-3. Are allowed actions and approval points clear?
-4. What could go wrong?
-5. What should be logged or reviewed?
-6. What is the smallest safe first release?
-
-Return:
-- Go / revise / do not deploy.
-- The main risk.
-- The exact change that would make it safer.
-- A final review checklist.</textarea></article>
-        </div>
+Return the simplest version, the safety checks, the handoff, and what would require Claude Code, GitHub Actions, or the Agent SDK later.</textarea>
+        </article>
         <div class="resource-row" aria-label="Official agent development resources">
-          <a href="https://docs.claude.com/en/docs/claude-code/sdk/sdk-overview">Agent SDK overview</a>
-          <a href="https://docs.claude.com/en/docs/agent-sdk/hosting">Hosting Agent SDK</a>
-          <a href="https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview">Tool use docs</a>
-          <a href="https://docs.claude.com/en/docs/claude-code/mcp">Claude Code MCP</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/sdk/sdk-overview">Agent SDK</a>
+          <a href="https://docs.claude.com/en/docs/agent-sdk/hosting">Hosting</a>
+          <a href="https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview">Tool use</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/mcp">MCP</a>
           <a href="https://docs.claude.com/en/docs/claude-code/github-actions">GitHub Actions</a>
         </div>
       </section>
 
       <section class="section prompts" id="prompts" aria-labelledby="prompts-title">
         <div class="section-head">
-          <p class="eyebrow">Master prompts</p>
-          <h2 id="prompts-title">Copy these when you want speed</h2>
-          <p>These prompts are meant for beginners. They tell Claude how to help without requiring technical vocabulary.</p>
+          <p class="eyebrow">Templates</p>
+          <h2 id="prompts-title">Copy only what you need</h2>
+          <p>The task picker and prompt lab cover most work. Use these when you want a reusable setup or workflow.</p>
         </div>
-        <div class="prompt-grid">
-          <article class="prompt-card"><div class="prompt-head"><h3>Setup interview</h3><button class="button small copy" data-copy-target="setup-template" type="button">Copy</button></div><textarea id="setup-template" aria-label="Setup interview prompt" readonly rows="16">You are helping me become excellent at using Claude.
+        <div class="template-list">
+          <details class="template-details" open>
+            <summary>Setup interview</summary>
+            <article class="prompt-card"><div class="prompt-head"><h3>Setup interview</h3><button class="button small copy" data-copy-target="setup-template" type="button">Copy</button></div><textarea id="setup-template" aria-label="Setup interview prompt" readonly rows="12">You are helping me become excellent at using Claude.
 
 Interview me one question at a time.
 Goal: build my reusable Claude profile and my first useful workflow.
 
 Ask about:
-1. What I do most often.
-2. The outputs I need: emails, documents, slides, spreadsheets, designs, code, research, or decisions.
-3. My preferred tone and level of detail.
-4. What I find confusing about AI tools.
-5. What Claude should ask before assuming.
-6. One task we can improve right now.
+1. The work I do most often.
+2. The outputs I need.
+3. My preferred tone and detail level.
+4. What Claude should ask before assuming.
+5. One task we can improve right now.
 
-After the interview, produce:
-- Short Instructions for Claude.
-- One recommended Project.
-- Three starter prompts.
-- A checklist for judging whether Claude helped.</textarea></article>
+After the interview, produce short Instructions, one recommended Project, three starter prompts, and a checklist for judging the result.</textarea></article>
+          </details>
 
-          <article class="prompt-card"><div class="prompt-head"><h3>Prompt improver</h3><button class="button small copy" data-copy-target="improve-template" type="button">Copy</button></div><textarea id="improve-template" aria-label="Prompt improver template" readonly rows="14">Improve this prompt so Claude gives a better answer.
-
-My rough prompt:
-[PASTE PROMPT]
-
-Make it:
-- Clearer.
-- More specific.
-- Easier for a beginner to use.
-- Stronger about output format.
-- Safer about uncertainty and assumptions.
-
-Return:
-1. The improved prompt.
-2. Why it is better.
-3. One shorter version for quick use.</textarea></article>
-
-          <article class="prompt-card"><div class="prompt-head"><h3>Claude Design or Artifact</h3><button class="button small copy" data-copy-target="artifact-template" type="button">Copy</button></div><textarea id="artifact-template" aria-label="Artifact design prompt" readonly rows="15">Create a Claude Design draft or Artifact for this:
-[DESCRIBE WHAT YOU WANT]
-
-Audience:
-[WHO WILL USE IT]
-
-Make it:
-- Clear at first glance.
-- Easy to edit.
-- Useful without extra explanation.
-- Professional and simple.
-
-Before finalizing, check:
-- Does the layout make sense?
-- Is anything confusing?
-- What should be improved first?</textarea></article>
-
-          <article class="prompt-card"><div class="prompt-head"><h3>Office workflow</h3><button class="button small copy" data-copy-target="office-template" type="button">Copy</button></div><textarea id="office-template" aria-label="Office workflow prompt" readonly rows="16">Help me with this Office file.
+          <details class="template-details">
+            <summary>Office workflow</summary>
+            <article class="prompt-card"><div class="prompt-head"><h3>Office workflow</h3><button class="button small copy" data-copy-target="office-template" type="button">Copy</button></div><textarea id="office-template" aria-label="Office workflow prompt" readonly rows="11">Help me with this Office file.
 
 App: Word / PowerPoint / Excel
 Goal: [WHAT I NEED]
 Audience: [WHO THIS IS FOR]
 
-First:
-- Explain what you see in plain language.
-- Ask before making major changes.
-- Preserve formatting and structure where possible.
+First, explain what you see in plain language.
+Ask before making major changes.
+Preserve formatting and structure where possible.
+Then suggest the best changes and tell me what to review before I share it.</textarea></article>
+          </details>
 
-Then:
-- Suggest the best changes.
-- Make only the changes I approve.
-- Tell me what to review before I share it.</textarea></article>
-
-          <article class="prompt-card"><div class="prompt-head"><h3>Chrome assistant</h3><button class="button small copy" data-copy-target="chrome-template" type="button">Copy</button></div><textarea id="chrome-template" aria-label="Chrome assistant prompt" readonly rows="13">Help me use this website safely.
-
-Goal: [WHAT I AM TRYING TO DO]
-
-Rules:
-- Explain what you see before acting.
-- Ask before clicking anything that submits, buys, deletes, posts, sends, or changes settings.
-- Do not enter sensitive information unless I explicitly provide it for this task.
-- Summarize the result in plain English.
-
-Start by telling me the safest next step.</textarea></article>
-
-          <article class="prompt-card"><div class="prompt-head"><h3>Claude Cowork</h3><button class="button small copy" data-copy-target="cowork-template" type="button">Copy</button></div><textarea id="cowork-template" aria-label="Claude Cowork prompt" readonly rows="16">Help me run this Claude Cowork task safely.
+          <details class="template-details">
+            <summary>Chrome or Cowork safety</summary>
+            <article class="prompt-card"><div class="prompt-head"><h3>Browser and desktop task</h3><button class="button small copy" data-copy-target="cowork-template" type="button">Copy</button></div><textarea id="cowork-template" aria-label="Claude Cowork prompt" readonly rows="12">Help me run this task safely.
 
 Goal:
 [WHAT I WANT DONE]
 
 Material Claude may use:
-[FILES, FOLDERS, APPS, OR CONNECTORS]
+[FILES, FOLDERS, APPS, WEBSITES, OR CONNECTORS]
 
 Rules:
 - Explain your approach before acting.
 - Ask before changing, sending, deleting, posting, sharing, or opening sensitive material.
-- Keep a short progress log.
 - Stop if access, uncertainty, or risk is unclear.
 
-Start by telling me the safest first action and what you need from me.</textarea></article>
+Start by telling me the safest first action.</textarea></article>
+          </details>
 
-          <article class="prompt-card"><div class="prompt-head"><h3>Claude Code</h3><button class="button small copy" data-copy-target="code-template" type="button">Copy</button></div><textarea id="code-template" aria-label="Claude Code prompt" readonly rows="15">Help me with this codebase in plain English.
+          <details class="template-details">
+            <summary>Claude Code</summary>
+            <article class="prompt-card"><div class="prompt-head"><h3>Claude Code</h3><button class="button small copy" data-copy-target="code-template" type="button">Copy</button></div><textarea id="code-template" aria-label="Claude Code prompt" readonly rows="12">Help me with this codebase in plain English.
 
 Task:
 [DESCRIBE THE CHANGE]
 
 Before editing:
-- Explain what the project does.
+- Explain the relevant part of the project.
 - Identify the files likely involved.
 - Tell me the smallest useful change.
 
-While editing:
-- Avoid unrelated cleanup.
-- Keep changes easy to review.
-- Run the relevant check if one exists.
+While editing, avoid unrelated cleanup and run the relevant check if one exists.
+Afterward, summarize what changed and what I should test.</textarea></article>
+          </details>
 
-After editing, summarize what changed and what I should test.</textarea></article>
-
-          <article class="prompt-card"><div class="prompt-head"><h3>What's new digest</h3><button class="button small copy" data-copy-target="features-template" type="button">Copy</button></div><textarea id="features-template" aria-label="What's new digest prompt" readonly rows="15">I want to keep up with Claude without getting overwhelmed.
+          <details class="template-details">
+            <summary>What's new digest</summary>
+            <article class="prompt-card"><div class="prompt-head"><h3>What's new digest</h3><button class="button small copy" data-copy-target="features-template" type="button">Copy</button></div><textarea id="features-template" aria-label="What's new digest prompt" readonly rows="10">I want to keep up with Claude without getting overwhelmed.
 
 I will paste notes from official Claude release notes, documentation, or announcements.
 
@@ -620,91 +424,68 @@ For each change, tell me:
 2. Which everyday workflow it helps.
 3. Whether a beginner should try it now, save it for later, or ignore it.
 4. One safe test task I can use to learn it.
-5. One prompt I should save if it works.
 
 Focus only on practical use.</textarea></article>
-        </div>
-      </section>
-
-      <section class="section" id="office" aria-labelledby="office-title">
-        <div class="section-head">
-          <p class="eyebrow">Office mastery</p>
-          <h2 id="office-title">Use Claude in Word, PowerPoint, and Excel</h2>
-          <p>Use the Office add-ins where they appear in your Office apps. Keep files open, ask Claude to explain first, and review every change before sharing.</p>
-        </div>
-        <div class="split">
-          <div><h3>Word</h3><ol><li>Ask for a plain-English summary.</li><li>Ask Claude to find unclear sections.</li><li>Edit selected text instead of the whole document.</li><li>Use tracked changes when the edit matters.</li><li>Ask for a final review checklist.</li></ol></div>
-          <div><h3>PowerPoint</h3><ol><li>Start from your template.</li><li>Ask for the storyline before slide creation.</li><li>Turn dense bullets into visuals.</li><li>Make focused edits to specific slides.</li><li>Check brand, formatting, and accuracy before sending.</li></ol></div>
-          <div><h3>Excel</h3><ol><li>Ask Claude to explain the workbook.</li><li>Ask what each important formula does.</li><li>Request a clean table, chart, or analysis.</li><li>Ask for checks that could catch errors.</li><li>Use results in a memo or deck after review.</li></ol></div>
-          <div><h3>Across Office</h3><ol><li>Keep the files open.</li><li>Tell Claude which file is the source of truth.</li><li>Move Excel findings into Word or PowerPoint.</li><li>Summarize Word content into slides.</li><li>Review changes in each app before saving.</li></ol></div>
+          </details>
         </div>
       </section>
 
       <section class="section feature-section" id="features" aria-labelledby="features-title">
         <div class="section-head">
           <p class="eyebrow">New features / capabilities</p>
-          <h2 id="features-title">What changed, why it matters, what to try</h2>
-          <p>Short posts translate official Claude updates into plain-language actions. This section is scheduled for refresh every Sunday and Wednesday at 11:00 PM Pacific.</p>
+          <h2 id="features-title">What changed and what to try</h2>
+          <p>This section filters official Claude updates for practical learning value. Scheduled review: Sunday and Wednesday at 11:00 PM Pacific.</p>
         </div>
         <div class="feature-grid">
-          <article class="feature-post"><span class="surface-badge">Apr 17, 2026</span><h3>Claude Design creates polished visual work</h3><p><strong>What changed:</strong> Claude Design helps create designs, prototypes, slides, one-pagers, and other visual drafts.</p><p><strong>Try it:</strong> ask for a one-page visual summary of a topic you already understand, then ask Claude to improve the layout for clarity.</p><a href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Open Design guide</a></article>
-          <article class="feature-post"><span class="surface-badge">Apr 16, 2026</span><h3>Opus 4.7 improves complex work</h3><p><strong>What changed:</strong> Claude Opus 4.7 improves software engineering, long-running coding tasks, and high-resolution image understanding.</p><p><strong>Try it:</strong> use Claude Code for a careful review of a small change, then ask for the smallest useful fix.</p><a href="https://www.anthropic.com/news/claude-opus-4-7">Read launch note</a></article>
-          <article class="feature-post"><span class="surface-badge">Apr 9, 2026</span><h3>Claude Cowork expands desktop help</h3><p><strong>What changed:</strong> Claude Cowork runs in the desktop app, works with selected files and folders, and can help with app-based tasks through computer use.</p><p><strong>Try it:</strong> start with a read-only folder review, ask Claude to explain what it will do, and approve changes only after you understand them.</p><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Open Cowork guide</a></article>
-          <article class="feature-post"><span class="surface-badge">Mar 25, 2026</span><h3>Interactive apps work on mobile</h3><p><strong>What changed:</strong> Claude mobile can work with interactive apps, including visual assets such as charts and diagrams inside a conversation.</p><p><strong>Try it:</strong> dictate a messy idea on your phone and ask Claude to turn it into a small visual checklist.</p><a href="https://support.claude.com/en/articles/12138966-release-notes">Open release notes</a></article>
-          <article class="feature-post"><span class="surface-badge">Mar 12, 2026</span><h3>Claude can create custom visuals in chat</h3><p><strong>What changed:</strong> Claude can generate custom charts, diagrams, and visualizations directly in chat.</p><p><strong>Try it:</strong> paste a short table and ask Claude to make the clearest chart plus a one-sentence takeaway.</p><a href="https://support.claude.com/en/articles/12138966-release-notes">Open release notes</a></article>
-          <article class="feature-post"><span class="surface-badge">Mar 11, 2026</span><h3>Office work can move across apps</h3><p><strong>What changed:</strong> Claude for Excel, PowerPoint, and Word can coordinate context across Office files for smoother document, slide, and workbook work.</p><p><strong>Try it:</strong> ask Claude to explain an Excel finding, then turn that finding into one PowerPoint slide and one Word paragraph.</p><a href="https://support.claude.com/en/articles/13892150-work-across-excel-powerpoint-and-word">Open Office guide</a></article>
-        </div>
-        <div class="feature-maintenance">
-          <h3>Refresh rhythm</h3>
-          <p>The site now has a scheduled review every Sunday and Wednesday at 11:00 PM Pacific. Each refresh should check official Claude release notes, Anthropic news, Claude Code changes, model docs, Cowork docs, Design docs, prompting docs, and agent-development docs, then update these posts only when a beginner would benefit from knowing what changed.</p>
+          <article class="feature-post"><span class="surface-badge">Apr 28, 2026</span><h3>Creative work connects to more tools</h3><p><strong>What changed:</strong> Anthropic announced creative connectors and workflows for design, 3D, audio, and production tasks.</p><p><strong>Try it:</strong> ask Claude to explain an unfamiliar creative tool feature, then turn the explanation into a small repeatable workflow.</p><a href="https://www.anthropic.com/news/claude-for-creative-work">Read announcement</a></article>
+          <article class="feature-post"><span class="surface-badge">Apr 17, 2026</span><h3>Claude Design creates polished visual work</h3><p><strong>What changed:</strong> Claude Design helps create designs, prototypes, slides, one-pagers, and other visual drafts.</p><p><strong>Try it:</strong> ask for a one-page visual summary, then ask Claude to improve clarity before polish.</p><a href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Open Design guide</a></article>
+          <article class="feature-post"><span class="surface-badge">Apr 16, 2026</span><h3>Opus 4.7 improves complex work</h3><p><strong>What changed:</strong> Opus 4.7 improves software engineering, long-running coding tasks, vision, and multi-step work.</p><p><strong>Try it:</strong> use Claude Code for a careful review of a small change, then ask for the smallest useful fix.</p><a href="https://www.anthropic.com/news/claude-opus-4-7">Read launch note</a></article>
+          <article class="feature-post"><span class="surface-badge">Apr 9, 2026</span><h3>Claude Cowork expands desktop help</h3><p><strong>What changed:</strong> Cowork can work with selected files, folders, apps, and computer-use workflows in the desktop app.</p><p><strong>Try it:</strong> start with a read-only folder review and approve changes only after Claude explains them.</p><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Open Cowork guide</a></article>
         </div>
       </section>
 
       <section class="section" id="sources" aria-labelledby="sources-title">
         <div class="section-head">
           <p class="eyebrow">Sources</p>
-          <h2 id="sources-title">Official documentation used for this page</h2>
-          <p>Verified on 2026-05-07. Product labels and availability can change, so recheck these official docs when a button or menu looks different.</p>
+          <h2 id="sources-title">Official documentation</h2>
+          <p>Product labels and availability can change. These official sources were checked while updating this page.</p>
         </div>
-        <ul class="source-list">
-          <li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Personalization and Instructions</a></li>
-          <li><a href="https://support.claude.com/en/articles/9517075-what-are-projects">Projects</a></li>
-          <li><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Chat search and memory</a></li>
-          <li><a href="https://support.claude.com/en/articles/12260368-using-incognito-chats">Incognito chats</a></li>
-          <li><a href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them">Artifacts</a></li>
-          <li><a href="https://support.claude.com/en/articles/12512176-what-are-skills">Skills</a></li>
-          <li><a href="https://support.claude.com/en/articles/12512180-using-skills-in-claude">Use Skills in Claude</a></li>
-          <li><a href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities">Connectors</a></li>
-          <li><a href="https://support.claude.com/en/articles/10065433-installing-claude-for-desktop">Install Claude Desktop</a></li>
-          <li><a href="https://support.claude.com/en/articles/12626668-use-quick-entry-with-claude-desktop-on-mac">Quick entry on Mac</a></li>
-          <li><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Claude Cowork guide</a></li>
-          <li><a href="https://support.claude.com/en/articles/14128542-let-claude-use-your-computer-in-cowork">Computer use in Cowork</a></li>
-          <li><a href="https://support.claude.com/en/articles/13947068-assign-tasks-from-anywhere-in-claude-cowork">Assign tasks from anywhere in Cowork</a></li>
-          <li><a href="https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome">Claude in Chrome</a></li>
-          <li><a href="https://support.claude.com/en/articles/14465370-use-claude-for-word">Claude for Word</a></li>
-          <li><a href="https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint">Claude for PowerPoint</a></li>
-          <li><a href="https://support.claude.com/en/articles/12650343-using-claude-in-excel">Claude for Excel</a></li>
-          <li><a href="https://support.claude.com/en/articles/13892150-work-across-excel-powerpoint-and-word">Work across Excel, PowerPoint, and Word</a></li>
-          <li><a href="https://support.claude.com/en/articles/11869619-using-claude-with-ios-apps">Claude with iOS apps</a></li>
-          <li><a href="https://support.claude.com/en/articles/10065434-using-dictation-on-the-claude-mobile-apps">Dictation on Claude Mobile</a></li>
-          <li><a href="https://support.claude.com/en/articles/12138966-release-notes">Claude release notes</a></li>
-          <li><a href="https://www.anthropic.com/news">Anthropic newsroom</a></li>
-          <li><a href="https://www.anthropic.com/news/claude-opus-4-7">Claude Opus 4.7 launch</a></li>
-          <li><a href="https://docs.claude.com/en/docs/about-claude/models/all-models">Claude model overview</a></li>
-          <li><a href="https://code.claude.com/docs/en/changelog">Claude Code changelog</a></li>
-          <li><a href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Claude Design guide</a></li>
-          <li><a href="https://code.claude.com/docs/en/overview">Claude Code overview</a></li>
-          <li><a href="https://docs.claude.com/en/docs/claude-code/sdk/sdk-overview">Claude Agent SDK overview</a></li>
-          <li><a href="https://docs.claude.com/en/docs/agent-sdk/hosting">Hosting the Agent SDK</a></li>
-          <li><a href="https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview">Tool use with Claude</a></li>
-          <li><a href="https://docs.claude.com/en/docs/claude-code/mcp">Claude Code MCP</a></li>
-          <li><a href="https://docs.claude.com/en/docs/claude-code/hooks">Claude Code hooks</a></li>
-          <li><a href="https://docs.claude.com/en/docs/claude-code/github-actions">Claude Code GitHub Actions</a></li>
-          <li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Prompting best practices</a></li>
-          <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a></li>
-          <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/be-clear-and-direct">Clear, direct prompting</a></li>
-          <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/long-context-tips">Long context prompting tips</a></li>
-        </ul>
+        <details class="source-panel">
+          <summary>Show source links</summary>
+          <ul class="source-list">
+            <li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Personalization and Instructions</a></li>
+            <li><a href="https://support.claude.com/en/articles/9517075-what-are-projects">Projects</a></li>
+            <li><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Chat search and memory</a></li>
+            <li><a href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them">Artifacts</a></li>
+            <li><a href="https://support.claude.com/en/articles/12512176-what-are-skills">Skills</a></li>
+            <li><a href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities">Connectors</a></li>
+            <li><a href="https://support.claude.com/en/articles/10065433-installing-claude-for-desktop">Install Claude Desktop</a></li>
+            <li><a href="https://support.claude.com/en/articles/12626668-use-quick-entry-with-claude-desktop-on-mac">Quick entry on Mac</a></li>
+            <li><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Claude Cowork guide</a></li>
+            <li><a href="https://support.claude.com/en/articles/14128542-let-claude-use-your-computer-in-cowork">Computer use in Cowork</a></li>
+            <li><a href="https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome">Claude in Chrome</a></li>
+            <li><a href="https://support.claude.com/en/articles/14465370-use-claude-for-word">Claude for Word</a></li>
+            <li><a href="https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint">Claude for PowerPoint</a></li>
+            <li><a href="https://support.claude.com/en/articles/12650343-using-claude-in-excel">Claude for Excel</a></li>
+            <li><a href="https://support.claude.com/en/articles/13892150-work-across-excel-powerpoint-and-word">Work across Excel, PowerPoint, and Word</a></li>
+            <li><a href="https://support.claude.com/en/articles/11869619-using-claude-with-ios-apps">Claude with iOS apps</a></li>
+            <li><a href="https://support.claude.com/en/articles/12138966-release-notes">Claude release notes</a></li>
+            <li><a href="https://www.anthropic.com/news">Anthropic newsroom</a></li>
+            <li><a href="https://www.anthropic.com/news/claude-for-creative-work">Claude for Creative Work</a></li>
+            <li><a href="https://www.anthropic.com/news/claude-opus-4-7">Claude Opus 4.7 launch</a></li>
+            <li><a href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Claude Design guide</a></li>
+            <li><a href="https://code.claude.com/docs/en/overview">Claude Code overview</a></li>
+            <li><a href="https://docs.claude.com/en/docs/claude-code/sdk/sdk-overview">Claude Agent SDK overview</a></li>
+            <li><a href="https://docs.claude.com/en/docs/agent-sdk/hosting">Hosting the Agent SDK</a></li>
+            <li><a href="https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview">Tool use with Claude</a></li>
+            <li><a href="https://docs.claude.com/en/docs/claude-code/mcp">Claude Code MCP</a></li>
+            <li><a href="https://docs.claude.com/en/docs/claude-code/hooks">Claude Code hooks</a></li>
+            <li><a href="https://docs.claude.com/en/docs/claude-code/github-actions">Claude Code GitHub Actions</a></li>
+            <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a></li>
+            <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/be-clear-and-direct">Clear, direct prompting</a></li>
+            <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/long-context-tips">Long context prompting tips</a></li>
+          </ul>
+        </details>
       </section>
     </main>
 
@@ -713,6 +494,6 @@ Focus only on practical use.</textarea></article>
       <a href="https://rkalani1.github.io/agent-builder-field-guide/">AI Agent Builder Field Guide</a>
     </footer>
 
-    <script src="app.js?v=2026-05-07-context-cowork"></script>
+    <script src="app.js?v=2026-05-07-simplified"></script>
   </body>
 </html>
