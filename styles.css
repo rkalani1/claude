@@ -360,8 +360,11 @@ input:focus-visible {
 
 .checklist,
 .steps,
+.ladder,
 .loop-grid,
 .surface-grid,
+.tip-grid,
+.update-grid,
 .prompt-grid,
 .timeline {
   display: grid;
@@ -371,8 +374,11 @@ input:focus-visible {
 
 .checklist label,
 .step,
+.ladder-step,
 .loop-grid > div,
 .surface-card,
+.tip-card,
+.update-card,
 .prompt-lab,
 .prompt-card,
 .timeline > article,
@@ -398,8 +404,11 @@ input:focus-visible {
 }
 
 .step,
+.ladder-step,
 .loop-grid > div,
 .surface-card,
+.tip-card,
+.update-card,
 .timeline > article,
 .split > div {
   padding: 1rem;
@@ -420,13 +429,68 @@ input:focus-visible {
 }
 
 .step p,
+.ladder-step p,
 .loop-grid p,
 .surface-card p,
+.tip-card p,
+.update-card p,
 .timeline p,
 .split li {
   color: var(--muted);
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 0.94rem;
+}
+
+.ladder {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ladder-step {
+  position: relative;
+}
+
+.ladder-step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.65rem;
+  border-radius: 7px;
+  background: var(--accent);
+  color: #fff;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 900;
+}
+
+.ladder-step p,
+.tip-card p,
+.update-card p {
+  margin: 0.55rem 0 0;
+}
+
+.tip-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+
+.tip-card {
+  background: var(--panel);
+}
+
+.update-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+
+.update-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.update-card a {
+  margin-top: auto;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 800;
 }
 
 .surface-grid {
@@ -521,11 +585,27 @@ td {
   font-weight: 850;
 }
 
+.field textarea {
+  min-height: 8rem;
+}
+
+#optimized-prompt {
+  min-height: 18rem;
+}
+
 .choice-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   padding: 0 1rem 1rem;
+}
+
+.choice-label {
+  padding: 0 1rem 0.5rem;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 850;
 }
 
 .choice {
@@ -655,6 +735,10 @@ textarea {
   }
 
   .split {
+    grid-template-columns: 1fr;
+  }
+
+  .ladder {
     grid-template-columns: 1fr;
   }
 

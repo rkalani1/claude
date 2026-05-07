@@ -17,8 +17,9 @@
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="#start">Start</a>
         <a href="#surfaces">Surfaces</a>
-        <a href="#prompts">Prompts</a>
-        <a href="#sprint">Sprint</a>
+        <a href="#prompt-lab">Prompt Lab</a>
+        <a href="#level-up">Level Up</a>
+        <a href="#updates">Updates</a>
         <a href="#sources">Sources</a>
       </nav>
     </header>
@@ -85,6 +86,20 @@
           <label><input type="checkbox" value="code"> Use Claude Code only after describing the change plainly.</label>
         </div>
         <button type="button" class="button small" id="reset-progress">Reset progress</button>
+      </section>
+
+      <section class="section" id="level-up" aria-labelledby="level-up-title">
+        <div class="section-head">
+          <p class="eyebrow">Level up</p>
+          <h2 id="level-up-title">Move from beginner to power user in four steps</h2>
+          <p>Each step gives you a new way to get more value from Claude without needing technical language.</p>
+        </div>
+        <div class="ladder">
+          <article class="ladder-step"><span>1</span><h3>Ask clearly</h3><p>Use Claude for one task at a time. Say the goal, audience, source material, and what the finished answer should look like.</p><p><strong>Proof you leveled up:</strong> you can get a useful first draft in one prompt.</p></article>
+          <article class="ladder-step"><span>2</span><h3>Improve deliberately</h3><p>Ask Claude to critique its own answer, identify weak assumptions, and rewrite for your exact audience.</p><p><strong>Proof you leveled up:</strong> your second version is clearly better than the first.</p></article>
+          <article class="ladder-step"><span>3</span><h3>Make it repeatable</h3><p>Turn any task you do twice into a Project, saved prompt, checklist, or Artifact.</p><p><strong>Proof you leveled up:</strong> you stop rewriting the same instructions.</p></article>
+          <article class="ladder-step"><span>4</span><h3>Use the right surface</h3><p>Move the same workflow into Office, Chrome, mobile, desktop, or Claude Code when that is where the work actually happens.</p><p><strong>Proof you leveled up:</strong> Claude fits your workflow instead of becoming another tab to manage.</p></article>
+        </div>
       </section>
 
       <section class="section" id="quick-start" aria-labelledby="quick-start-title">
@@ -156,11 +171,40 @@
             <button type="button" class="choice" data-surface="mobile">Mobile</button>
             <button type="button" class="choice" data-surface="code">Code</button>
           </div>
+          <div class="choice-label">Choose the output you want</div>
+          <div class="choice-grid" aria-label="Choose output type">
+            <button type="button" class="choice is-active" data-output="useful">Useful answer</button>
+            <button type="button" class="choice" data-output="email">Email</button>
+            <button type="button" class="choice" data-output="document">Document</button>
+            <button type="button" class="choice" data-output="slides">Slides</button>
+            <button type="button" class="choice" data-output="spreadsheet">Spreadsheet</button>
+            <button type="button" class="choice" data-output="design">Design</button>
+            <button type="button" class="choice" data-output="decision">Decision</button>
+            <button type="button" class="choice" data-output="code">Code change</button>
+          </div>
           <div class="prompt-head lab-output-head">
             <h3>Optimized prompt</h3>
             <button class="button small copy" data-copy-target="optimized-prompt" type="button">Copy</button>
           </div>
           <textarea id="optimized-prompt" aria-label="Optimized prompt" readonly rows="18"></textarea>
+        </div>
+      </section>
+
+      <section class="section" id="tips" aria-labelledby="tips-title">
+        <div class="section-head">
+          <p class="eyebrow">Tips and tricks</p>
+          <h2 id="tips-title">Small phrases that make Claude much better</h2>
+          <p>These are the fastest beginner upgrades. Add one phrase when Claude's answer is close but not good enough.</p>
+        </div>
+        <div class="tip-grid">
+          <article class="tip-card"><h3>When the answer is vague</h3><p>"Make this specific enough that I can act on it today."</p></article>
+          <article class="tip-card"><h3>When you need quality</h3><p>"Review your answer against accuracy, clarity, usefulness, and missing assumptions."</p></article>
+          <article class="tip-card"><h3>When you feel stuck</h3><p>"Ask me the three questions that would most improve your answer."</p></article>
+          <article class="tip-card"><h3>When the output is too long</h3><p>"Give me the shortest useful version, then a fuller version if needed."</p></article>
+          <article class="tip-card"><h3>When you need options</h3><p>"Show me three versions: safe, bold, and balanced."</p></article>
+          <article class="tip-card"><h3>When you want a system</h3><p>"Turn this into a reusable prompt, checklist, and Project instruction."</p></article>
+          <article class="tip-card"><h3>When facts matter</h3><p>"Separate confirmed facts, reasonable inference, and what needs checking."</p></article>
+          <article class="tip-card"><h3>When sharing matters</h3><p>"Rewrite this for a beginner, an executive, and a skeptical reviewer."</p></article>
         </div>
       </section>
 
@@ -268,6 +312,19 @@ While editing:
 - Run the relevant check if one exists.
 
 After editing, summarize what changed and what I should test.</textarea></article>
+
+          <article class="prompt-card"><div class="prompt-head"><h3>What's new digest</h3><button class="button small copy" data-copy-target="updates-template" type="button">Copy</button></div><textarea id="updates-template" aria-label="What's new digest prompt" readonly rows="15">I want to keep up with Claude without getting overwhelmed.
+
+I will paste notes from official Claude release notes, documentation, or announcements.
+
+For each change, tell me:
+1. What changed in plain English.
+2. Which everyday workflow it helps.
+3. Whether a beginner should try it now, save it for later, or ignore it.
+4. One safe test task I can use to learn it.
+5. One prompt I should save if it works.
+
+Do not discuss account tiers or billing. Focus only on practical use.</textarea></article>
         </div>
       </section>
 
@@ -299,6 +356,22 @@ After editing, summarize what changed and what I should test.</textarea></articl
         </div>
       </section>
 
+      <section class="section" id="updates" aria-labelledby="updates-title">
+        <div class="section-head">
+          <p class="eyebrow">Stay current</p>
+          <h2 id="updates-title">Keep up with new Claude features without chasing noise</h2>
+          <p>Check official sources, translate changes into plain language, and test only what helps your real work.</p>
+        </div>
+        <div class="update-grid">
+          <article class="update-card"><span class="surface-badge">Weekly</span><h3>Claude app release notes</h3><p>Use this for new app features, mobile changes, Office add-ins, Chrome, Projects, Artifacts, and Claude Design.</p><a href="https://support.claude.com/en/articles/12138966-release-notes">Open release notes</a></article>
+          <article class="update-card"><span class="surface-badge">Major launches</span><h3>Anthropic newsroom</h3><p>Use this for model launches, design launches, safety work, and bigger product announcements.</p><a href="https://www.anthropic.com/news">Open newsroom</a></article>
+          <article class="update-card"><span class="surface-badge">Models</span><h3>Model overview</h3><p>Use this to understand which Claude models exist and what each is best at, without memorizing names.</p><a href="https://docs.claude.com/en/docs/about-claude/models/all-models">Open model overview</a></article>
+          <article class="update-card"><span class="surface-badge">Coding</span><h3>Claude Code changelog</h3><p>Use this if you use Claude Code and want to know what changed in the command-line tool.</p><a href="https://code.claude.com/docs/en/changelog">Open Code changelog</a></article>
+          <article class="update-card"><span class="surface-badge">Design</span><h3>Claude Design guide</h3><p>Use this when visual creation, prototypes, presentations, or one-pagers matter.</p><a href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Open Design guide</a></article>
+          <article class="update-card"><span class="surface-badge">Routine</span><h3>Five-minute update habit</h3><p>Read only the headline, ask what it helps you do, test one safe task, save the prompt if useful, and ignore the rest.</p></article>
+        </div>
+      </section>
+
       <section class="section" id="sources" aria-labelledby="sources-title">
         <div class="section-head">
           <p class="eyebrow">Sources</p>
@@ -323,6 +396,11 @@ After editing, summarize what changed and what I should test.</textarea></articl
           <li><a href="https://support.claude.com/en/articles/13892150-work-across-excel-and-powerpoint">Work across Excel, PowerPoint, and Word</a></li>
           <li><a href="https://support.claude.com/en/articles/11869619-using-claude-with-ios-apps">Claude with iOS apps</a></li>
           <li><a href="https://support.claude.com/en/articles/10065434-using-dictation-on-the-claude-mobile-apps">Dictation on Claude Mobile</a></li>
+          <li><a href="https://support.claude.com/en/articles/12138966-release-notes">Claude release notes</a></li>
+          <li><a href="https://www.anthropic.com/news">Anthropic newsroom</a></li>
+          <li><a href="https://docs.claude.com/en/docs/about-claude/models/all-models">Claude model overview</a></li>
+          <li><a href="https://code.claude.com/docs/en/changelog">Claude Code changelog</a></li>
+          <li><a href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Claude Design guide</a></li>
           <li><a href="https://code.claude.com/docs/en/overview">Claude Code overview</a></li>
           <li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Prompting best practices</a></li>
         </ul>

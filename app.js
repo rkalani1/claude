@@ -18,6 +18,17 @@
     code: "Claude Code"
   };
 
+  const outputHints = {
+    useful: "a useful answer with a clear next step",
+    email: "an email draft with subject line, body, and optional shorter version",
+    document: "a structured document with headings, bullets, and a review checklist",
+    slides: "a slide-by-slide outline with title, key point, and speaker note for each slide",
+    spreadsheet: "a spreadsheet-friendly table, formula explanation, or analysis checklist",
+    design: "a design brief or Artifact with layout, audience, and usability checks",
+    decision: "a decision memo with options, tradeoffs, recommendation, and risks",
+    code: "a small code change path with files to inspect, edit steps, and tests to run"
+  };
+
   const storageKey = "claude-site:mastery-progress:v2";
   const tabs = Array.from(document.querySelectorAll(".path-tab"));
   const output = document.getElementById("path-output");
@@ -28,7 +39,9 @@
   const roughPrompt = document.getElementById("rough-prompt");
   const optimizedPrompt = document.getElementById("optimized-prompt");
   const surfaceButtons = Array.from(document.querySelectorAll("[data-surface]"));
+  const outputButtons = Array.from(document.querySelectorAll("[data-output]"));
   let selectedSurface = "chat";
+  let selectedOutput = "useful";
 
   function setPath(path) {
     tabs.forEach((tab) => {
@@ -112,10 +125,14 @@
     if (!optimizedPrompt) return;
     const task = (roughPrompt && roughPrompt.value.trim()) || "Help me complete this task clearly and well.";
     const surface = surfaceHints[selectedSurface] || surfaceHints.chat;
+    const outputType = outputHints[selectedOutput] || outputHints.useful;
     optimizedPrompt.value = `You are helping me use ${surface} effectively.
 
 Task:
 ${task}
+
+Preferred output:
+${outputType}
 
 Before answering:
 1. Restate the goal in one sentence.
@@ -156,6 +173,14 @@ After the answer:
     button.addEventListener("click", () => {
       selectedSurface = button.getAttribute("data-surface") || "chat";
       surfaceButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+      buildOptimizedPrompt();
+    });
+  });
+
+  outputButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedOutput = button.getAttribute("data-output") || "useful";
+      outputButtons.forEach((item) => item.classList.toggle("is-active", item === button));
       buildOptimizedPrompt();
     });
   });
