@@ -175,6 +175,13 @@ h3 {
   font-size: clamp(1.06rem, 2.1vw, 1.38rem);
 }
 
+.official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.2rem 0 1.35rem;
+}
+
 .path-tabs,
 .hero-actions {
   display: flex;
