@@ -7,7 +7,7 @@
     <meta name="description" content="A beginner-first guide for using Claude across chat, uploads, Research, Projects, Artifacts, Design, Cowork, Code, Office, Chrome, Mac, Windows, iOS, Android, connectors, skills, and plugins without jargon.">
     <meta name="theme-color" content="#f8fbfa">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=2026-05-07-curriculum">
+    <link rel="stylesheet" href="styles.css?v=2026-05-07-optimizer">
   </head>
   <body>
     <a class="skip-link" href="#top">Skip to content</a>
@@ -238,8 +238,23 @@ After editing:
           </div>
           <div class="prompt-head lab-output-head">
             <h3>Optimized prompt</h3>
-            <button class="button small copy" data-copy-target="optimized-prompt" type="button">Copy</button>
+            <div class="prompt-actions">
+              <button class="button small copy" data-copy-target="optimized-prompt" type="button">Copy</button>
+              <button class="button small" id="open-claude-with-prompt" type="button">Copy and open Claude</button>
+            </div>
           </div>
+          <p id="prompt-status" class="sr-only" aria-live="polite"></p>
+          <aside class="model-fit" aria-labelledby="model-fit-title">
+            <div>
+              <h3 id="model-fit-title">Model fit</h3>
+              <p id="model-fit-copy">Use Sonnet 4.6 for most everyday work. Switch only when the task clearly needs a different fit.</p>
+            </div>
+            <div class="model-links" aria-label="Official model sources">
+              <a href="https://www.anthropic.com/news/claude-haiku-4-5">Haiku 4.5</a>
+              <a href="https://www.anthropic.com/news/claude-sonnet-4-6">Sonnet 4.6</a>
+              <a href="https://www.anthropic.com/news/claude-opus-4-7">Opus 4.7</a>
+            </div>
+          </aside>
           <textarea id="optimized-prompt" aria-label="Optimized prompt" readonly rows="15"></textarea>
         </div>
       </section>
@@ -272,6 +287,7 @@ After editing:
           <div><h3>Search or Research?</h3><p><strong>Search</strong> for one fact. <strong>Research</strong> when Claude needs several sources, citations, and synthesis.</p></div>
           <div><h3>Artifact or Design?</h3><p><strong>Artifact</strong> for an editable output. <strong>Design</strong> when the visual result itself needs polish.</p></div>
           <div><h3>Connector or Plugin?</h3><p><strong>Connector</strong> adds one trusted app. <strong>Plugin</strong> bundles a Cowork workflow with tools and skills.</p></div>
+          <div><h3>Answer or thinking?</h3><p><strong>Answer</strong> for simple work. <strong>Thinking</strong> when reasoning, math, code, or tradeoffs need a careful path and final check.</p></div>
           <div><h3>Desktop or Mobile?</h3><p><strong>Desktop</strong> for longer work with files and apps. <strong>Mobile</strong> for voice, capture, messages, and quick review.</p></div>
           <div><h3>Cowork or Code?</h3><p><strong>Cowork</strong> for desktop files and apps. <strong>Code</strong> for repositories, tests, reviews, and pull requests.</p></div>
         </div>
@@ -284,6 +300,8 @@ After editing:
             <article class="glossary-card"><h3>Artifact</h3><p>An editable output such as a page, chart, document, prototype, or small app.</p></article>
             <article class="glossary-card"><h3>Research</h3><p>A deeper mode where Claude searches across sources and returns citations you can check.</p></article>
             <article class="glossary-card"><h3>Context engineering</h3><p>Giving Claude the goal, source material, examples, rules, and checks before it works.</p></article>
+            <article class="glossary-card"><h3>Extended thinking</h3><p>A deeper reasoning mode for hard problems. Use it when the answer needs a careful path, not just a quick draft.</p></article>
+            <article class="glossary-card"><h3>Long context</h3><p>Giving Claude a lot of source material at once. Ask it to map the sources before answering.</p></article>
             <article class="glossary-card"><h3>Connector</h3><p>A controlled connection between Claude and another app or service.</p></article>
             <article class="glossary-card"><h3>Plugin</h3><p>A Cowork package that can include skills, connectors, and subagents for a role or workflow.</p></article>
             <article class="glossary-card"><h3>Agentic workflow</h3><p>A repeatable job with inputs, allowed actions, checks, and a handoff.</p></article>
@@ -446,10 +464,13 @@ Return the simplest version, the safety checks, the handoff, and what would requ
       </section>
 
       <section class="section prompts" id="prompts" aria-labelledby="prompts-title">
-        <div class="section-head">
-          <p class="eyebrow">Templates</p>
-          <h2 id="prompts-title">Copy only what you need</h2>
-          <p>The task picker and prompt lab cover most work. Use these when you want a reusable setup or workflow.</p>
+        <div class="section-head section-head-action">
+          <div>
+            <p class="eyebrow">Templates</p>
+            <h2 id="prompts-title">Copy only what you need</h2>
+            <p>The task picker and prompt lab cover most work. Use these when you want a reusable setup or workflow.</p>
+          </div>
+          <button class="button" id="export-prompts" type="button">Export Markdown</button>
         </div>
         <div class="template-list">
           <details class="template-details" open>
@@ -573,6 +594,8 @@ Focus only on practical use.</textarea></article>
             <li><a href="https://support.claude.com/en/articles/11869619-using-claude-with-ios-apps">Claude with iOS apps</a></li>
             <li><a href="https://support.claude.com/en/articles/11869629-using-claude-with-android-apps">Claude with Android apps</a></li>
             <li><a href="https://support.claude.com/en/articles/10065434-using-dictation-on-claude-mobile">Dictation on Claude Mobile</a></li>
+            <li><a href="https://www.anthropic.com/news/claude-haiku-4-5">Claude Haiku 4.5 launch</a></li>
+            <li><a href="https://www.anthropic.com/news/claude-sonnet-4-6">Claude Sonnet 4.6 launch</a></li>
             <li><a href="https://support.claude.com/en/articles/12138966-release-notes">Claude release notes</a></li>
             <li><a href="https://www.anthropic.com/news">Anthropic newsroom</a></li>
             <li><a href="https://www.anthropic.com/news/claude-for-creative-work">Claude for Creative Work</a></li>
@@ -597,6 +620,8 @@ Focus only on practical use.</textarea></article>
       <p>Claude practical mastery guide. Independent educational site, not affiliated with or endorsed by Anthropic.</p>
     </footer>
 
-    <script src="app.js?v=2026-05-07-curriculum"></script>
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="app.js?v=2026-05-07-optimizer"></script>
   </body>
 </html>

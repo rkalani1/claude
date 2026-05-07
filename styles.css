@@ -299,6 +299,18 @@ input:focus-visible {
   margin-bottom: 1.2rem;
 }
 
+.section-head-action {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: none;
+}
+
+.section-head-action > div {
+  max-width: 58rem;
+}
+
 .section-head p:not(.eyebrow) {
   margin: 0.7rem 0 0;
   color: var(--muted);
@@ -1068,6 +1080,13 @@ td {
   border-top: 1px solid var(--line);
 }
 
+.prompt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
 .prompt-head {
   display: flex;
   justify-content: space-between;
@@ -1076,6 +1095,44 @@ td {
   padding: 0.9rem;
   border-bottom: 1px solid var(--line);
   background: var(--panel-2);
+}
+
+.model-fit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.model-fit p {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.92rem;
+}
+
+.model-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.model-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.34rem 0.58rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  font-size: 0.82rem;
+  font-weight: 850;
+  text-decoration: none;
 }
 
 textarea {
@@ -1121,6 +1178,31 @@ textarea {
 
 .site-footer p {
   margin: 0;
+}
+
+.toast {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 30;
+  max-width: min(24rem, calc(100vw - 2rem));
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(7, 95, 91, 0.3);
+  border-radius: 8px;
+  background: #17211f;
+  color: #ffffff;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.5rem);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -1182,8 +1264,14 @@ textarea {
   .agent-lanes,
   .rung-grid,
   .trust-grid,
-  .template-row {
+  .template-row,
+  .section-head-action {
     grid-template-columns: 1fr;
+  }
+
+  .section-head-action {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .task-tool {
@@ -1234,6 +1322,22 @@ textarea {
   .prompt-head {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .prompt-actions,
+  .model-fit {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .prompt-actions,
+  .model-links {
+    justify-content: stretch;
+  }
+
+  .model-links a {
+    flex: 1 1 min(100%, 8rem);
+    justify-content: center;
   }
 
   .prompt-head .button {

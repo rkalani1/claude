@@ -15,6 +15,21 @@
     code: "Claude Code"
   };
 
+  const modelFitHints = {
+    default: "Use Sonnet 4.6 for most everyday work. Use Haiku 4.5 for quick, simple, repeated drafts. Use Opus 4.7 for complex reasoning, code, dense images, or high-stakes review.",
+    chat: "Use Sonnet 4.6 for everyday chat. Use Haiku 4.5 for quick rewrites or simple summaries. Use Opus 4.7 when the answer affects a serious decision.",
+    project: "Use Sonnet 4.6 for most Project work. Use Opus 4.7 when the Project has many files, conflicting context, or a high-stakes review.",
+    artifact: "Use Sonnet 4.6 for most Artifacts. Use Opus 4.7 for complex dashboards, dense visual inputs, or multi-step revisions.",
+    research: "Use Sonnet 4.6 for ordinary synthesis. Use Opus 4.7 when the question has many sources, dense documents, or a decision you will publish.",
+    office: "Use Sonnet 4.6 for most Word, PowerPoint, and Excel work. Use Opus 4.7 for dense decks, complex workbooks, or source-heavy document review.",
+    chrome: "Use Sonnet 4.6 for most browser help. Use Haiku 4.5 for quick page summaries and Opus 4.7 for careful comparisons or risky workflows.",
+    cowork: "Use Sonnet 4.6 for routine Cowork sessions. Use Opus 4.7 for longer desktop jobs, many files, or work that needs careful handoff.",
+    connectors: "Use Sonnet 4.6 for connected-app work. Use Opus 4.7 when Claude must reconcile several sources or produce a decision-ready answer.",
+    plugins: "Use Sonnet 4.6 while testing a plugin. Use Opus 4.7 when the workflow spans several tools, files, or review steps.",
+    mobile: "Use Haiku 4.5 or Sonnet 4.6 for quick mobile capture and drafts. Use Opus 4.7 later if the task needs deeper review.",
+    code: "Use Sonnet 4.6 for routine repo work. Use Opus 4.7 for architecture, difficult bugs, long-running code work, or vision-heavy debugging."
+  };
+
   const outputHints = {
     useful: "a useful answer with a clear next step",
     email: "an email draft with subject line, body, and optional shorter version",
@@ -436,8 +451,92 @@ Give me one polished version and one shorter version.`
   const fixTitle = document.getElementById("fix-output-title");
   const fixNext = document.getElementById("fix-next");
   const fixPrompt = document.getElementById("fix-prompt");
-  let selectedSurface = "chat";
-  let selectedOutput = "useful";
+  const modelFitCopy = document.getElementById("model-fit-copy");
+  const promptStatus = document.getElementById("prompt-status");
+  const toast = document.getElementById("toast");
+  const exportPromptsButton = document.getElementById("export-prompts");
+  const openClaudeButton = document.getElementById("open-claude-with-prompt");
+  const urlParams = new URLSearchParams(window.location.search);
+  const storagePrefix = "learnClaude:";
+  const stateKeys = {
+    mission: "mission",
+    surface: "surface",
+    output: "output",
+    fix: "fix",
+    rough: "roughPrompt"
+  };
+  const storage = {
+    get(key) {
+      try {
+        return window.localStorage.getItem(storagePrefix + key);
+      } catch {
+        return null;
+      }
+    },
+    set(key, value) {
+      try {
+        window.localStorage.setItem(storagePrefix + key, value);
+      } catch {
+        // Some privacy modes block localStorage. The page still works without persistence.
+      }
+    }
+  };
+
+  let selectedSurface = readChoice(stateKeys.surface, surfaceButtons, "data-surface", "chat");
+  let selectedOutput = readChoice(stateKeys.output, outputButtons, "data-output", "useful");
+  let selectedMission = readChoice(stateKeys.mission, missionButtons, "data-mission", "email");
+  let selectedFix = readChoice(stateKeys.fix, fixButtons, "data-fix", "vague");
+
+  if (roughPrompt) {
+    const savedRoughPrompt = storage.get(stateKeys.rough);
+    if (savedRoughPrompt) roughPrompt.value = savedRoughPrompt;
+  }
+
+  function hasChoice(buttons, attribute, value) {
+    return buttons.some((button) => button.getAttribute(attribute) === value);
+  }
+
+  function readChoice(key, buttons, attribute, fallback) {
+    const fromUrl = urlParams.get(key);
+    if (fromUrl && hasChoice(buttons, attribute, fromUrl)) return fromUrl;
+    const fromStorage = storage.get(key);
+    if (fromStorage && hasChoice(buttons, attribute, fromStorage)) return fromStorage;
+    return fallback;
+  }
+
+  function updateStateUrl() {
+    if (!window.history || !window.history.replaceState) return;
+    const params = new URLSearchParams(window.location.search);
+    params.set(stateKeys.mission, selectedMission);
+    params.set(stateKeys.surface, selectedSurface);
+    params.set(stateKeys.output, selectedOutput);
+    params.set(stateKeys.fix, selectedFix);
+    const query = params.toString();
+    const nextUrl = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
+    try {
+      window.history.replaceState(null, "", nextUrl);
+    } catch {
+      // Deep links are a convenience. If the browser blocks history changes, keep the UI usable.
+    }
+  }
+
+  function persistState() {
+    storage.set(stateKeys.mission, selectedMission);
+    storage.set(stateKeys.surface, selectedSurface);
+    storage.set(stateKeys.output, selectedOutput);
+    storage.set(stateKeys.fix, selectedFix);
+    updateStateUrl();
+  }
+
+  function showToast(message) {
+    if (!toast) return;
+    window.clearTimeout(showToast.timeoutId);
+    toast.textContent = message;
+    toast.classList.add("is-visible");
+    showToast.timeoutId = window.setTimeout(() => {
+      toast.classList.remove("is-visible");
+    }, 1800);
+  }
 
   function setActiveChoice(buttons, attribute, value) {
     buttons.forEach((button) => {
@@ -447,33 +546,59 @@ Give me one polished version and one shorter version.`
     });
   }
 
-  function copyTemplate(targetId, button) {
-    if (!targetId) return;
-    const target = document.getElementById(targetId);
-    if (!target) return;
-    const original = button.textContent;
+  function copyTextFallback(text, target) {
     const textarea = document.createElement("textarea");
-    textarea.value = target.value || target.textContent || "";
+    textarea.value = text;
     textarea.setAttribute("readonly", "true");
     textarea.style.position = "absolute";
     textarea.style.left = "-9999px";
     document.body.appendChild(textarea);
     textarea.select();
+    const copied = document.execCommand("copy");
+    document.body.removeChild(textarea);
+    if (!copied && target && typeof target.select === "function") {
+      target.focus();
+      target.select();
+    }
+    return copied;
+  }
+
+  async function copyText(text, target) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    return copyTextFallback(text, target);
+  }
+
+  async function copyTemplate(targetId, button, successMessage) {
+    if (!targetId) return;
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    const original = button.textContent;
+    const text = target.value || target.textContent || "";
 
     try {
-      document.execCommand("copy");
-      button.textContent = "Copied";
+      const copied = await copyText(text, target);
+      button.textContent = copied ? "Copied" : "Selected";
+      showToast(copied ? (successMessage || "Copied.") : "Copy blocked. Text selected.");
     } catch {
       target.focus();
       target.select();
       button.textContent = "Selected";
-    } finally {
-      document.body.removeChild(textarea);
+      showToast("Copy blocked. Text selected.");
     }
 
     window.setTimeout(() => {
       button.textContent = original;
     }, 1400);
+  }
+
+  function getModelFit() {
+    if (selectedOutput === "code" || selectedOutput === "agent") return modelFitHints.code;
+    if (selectedOutput === "design") return modelFitHints.artifact;
+    if (selectedSurface === "office" && selectedOutput === "spreadsheet") return modelFitHints.office;
+    return modelFitHints[selectedSurface] || modelFitHints.default;
   }
 
   function buildOptimizedPrompt() {
@@ -483,6 +608,7 @@ Give me one polished version and one shorter version.`
       ? (officeAppsByOutput[selectedOutput] || surfaceHints.office)
       : (surfaceHints[selectedSurface] || surfaceHints.chat);
     const outputType = outputHints[selectedOutput] || outputHints.useful;
+    const modelFit = getModelFit();
     const officeRules = selectedSurface === "office" ? `
 
 Office rules:
@@ -522,7 +648,12 @@ Mobile rules:
 - Make the first step voice-friendly.
 - If this involves another app, tell me what to review before sending or saving.` : "";
     const surfaceRules = officeRules || researchRules || connectorRules || pluginRules || mobileRules;
+    if (modelFitCopy) modelFitCopy.textContent = modelFit;
+    if (promptStatus) promptStatus.textContent = `Optimized prompt updated for ${surface} and ${outputType}.`;
     optimizedPrompt.value = `You are helping me use ${surface} effectively.
+
+Model note for me before sending:
+${modelFit}
 
 Task:
 ${task}
@@ -547,21 +678,25 @@ After the answer:
 - Suggest the best Claude surface for repeating this workflow.`;
   }
 
-  function setMission(mission) {
+  function setMission(mission, options = {}) {
     const detail = missionData[mission] || missionData.email;
+    selectedMission = missionData[mission] ? mission : "email";
     setActiveChoice(missionButtons, "data-mission", mission);
     if (missionTitle) missionTitle.textContent = detail.title;
     if (missionSurface) missionSurface.innerHTML = `<strong>Best Claude surface:</strong> ${detail.surface}`;
     if (missionNext) missionNext.innerHTML = `<strong>Next move:</strong> ${detail.next}`;
     if (missionPrompt) missionPrompt.value = detail.prompt;
+    if (options.persist !== false) persistState();
   }
 
-  function setFix(fix) {
+  function setFix(fix, options = {}) {
     const detail = fixData[fix] || fixData.vague;
+    selectedFix = fixData[fix] ? fix : "vague";
     setActiveChoice(fixButtons, "data-fix", fix);
     if (fixTitle) fixTitle.textContent = detail.title;
     if (fixNext) fixNext.innerHTML = `<strong>Use when:</strong> ${detail.next}`;
     if (fixPrompt) fixPrompt.value = detail.prompt;
+    if (options.persist !== false) persistState();
   }
 
   surfaceButtons.forEach((button) => {
@@ -569,6 +704,7 @@ After the answer:
       selectedSurface = button.getAttribute("data-surface") || "chat";
       setActiveChoice(surfaceButtons, "data-surface", selectedSurface);
       buildOptimizedPrompt();
+      persistState();
     });
   });
 
@@ -577,6 +713,7 @@ After the answer:
       selectedOutput = button.getAttribute("data-output") || "useful";
       setActiveChoice(outputButtons, "data-output", selectedOutput);
       buildOptimizedPrompt();
+      persistState();
     });
   });
 
@@ -588,15 +725,54 @@ After the answer:
     button.addEventListener("click", () => setFix(button.getAttribute("data-fix") || "vague"));
   });
 
-  if (roughPrompt) roughPrompt.addEventListener("input", buildOptimizedPrompt);
+  if (roughPrompt) {
+    roughPrompt.addEventListener("input", () => {
+      storage.set(stateKeys.rough, roughPrompt.value);
+      buildOptimizedPrompt();
+    });
+  }
 
   Array.from(document.querySelectorAll(".copy")).forEach((button) => {
     button.addEventListener("click", () => copyTemplate(button.getAttribute("data-copy-target"), button));
   });
 
+  if (openClaudeButton) {
+    openClaudeButton.addEventListener("click", async () => {
+      await copyTemplate("optimized-prompt", openClaudeButton, "Prompt copied. Opening Claude.");
+      const opened = window.open("https://claude.ai/", "_blank", "noopener");
+      if (!opened) showToast("Prompt copied. Open Claude from the top button.");
+    });
+  }
+
+  if (exportPromptsButton) {
+    exportPromptsButton.addEventListener("click", exportPrompts);
+  }
+
+  function exportPrompts() {
+    const excludedIds = new Set(["mission-prompt", "optimized-prompt", "fix-prompt"]);
+    const templates = Array.from(document.querySelectorAll("textarea[readonly]"))
+      .filter((textarea) => textarea.id && !excludedIds.has(textarea.id) && textarea.value.trim());
+    const sections = templates.map((textarea) => {
+      const card = textarea.closest("article, li");
+      const heading = card ? card.querySelector("h3") : null;
+      const title = heading ? heading.textContent.trim() : textarea.getAttribute("aria-label") || textarea.id;
+      return `## ${title}\n\n\`\`\`text\n${textarea.value.trim()}\n\`\`\``;
+    });
+    const markdown = `# Learn Claude Prompt Pack\n\nGenerated from the Learn Claude site.\n\n${sections.join("\n\n")}\n`;
+    const blob = new Blob([markdown], { type: "text/markdown" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "learn-claude-prompts.md";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.setTimeout(() => URL.revokeObjectURL(link.href), 0);
+    showToast("Prompt pack exported.");
+  }
+
   setActiveChoice(surfaceButtons, "data-surface", selectedSurface);
   setActiveChoice(outputButtons, "data-output", selectedOutput);
+  setMission(selectedMission, { persist: false });
+  setFix(selectedFix, { persist: false });
   buildOptimizedPrompt();
-  setMission("email");
-  setFix("vague");
 })();
