@@ -416,6 +416,10 @@ input:focus-visible {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
 }
 
+.milestone-track {
+  padding-top: clamp(1.25rem, 3vw, 2rem);
+}
+
 .rung-grid {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
