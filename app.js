@@ -5,9 +5,12 @@
     chat: "Claude Chat",
     project: "a Claude Project",
     artifact: "an Artifact",
+    research: "Claude Research",
     office: "Word, PowerPoint, or Excel",
     chrome: "Claude in Chrome",
     cowork: "Claude Cowork",
+    connectors: "Claude with connectors",
+    plugins: "Claude Cowork with plugins",
     mobile: "Claude on iOS",
     code: "Claude Code"
   };
@@ -141,9 +144,9 @@ Before finalizing, critique the layout and improve the weakest part.`
     },
     research: {
       title: "Research",
-      surface: "Chat for a quick answer, a Project for repeated research, or Chrome when the answer depends on a live webpage.",
-      next: "Ask Claude to separate facts, interpretation, and what still needs checking.",
-      prompt: `Help me research this topic.
+      surface: "Claude Research when the question needs several sources, citations, or connected app context.",
+      next: "Turn on Research, name the sources to prioritize, and ask for a short answer first.",
+      prompt: `Use Research for this question.
 
 Question:
 [WHAT I NEED TO UNDERSTAND]
@@ -152,16 +155,44 @@ Context:
 [WHY I NEED IT]
 
 Sources I have:
-[PASTE LINKS, NOTES, OR TEXT IF AVAILABLE]
+[PASTE LINKS, NOTES, CONNECTED SOURCES, OR TEXT IF AVAILABLE]
 
 Return:
 1. The short answer.
-2. Key facts.
-3. What is uncertain or needs checking.
+2. Citations I can check.
+3. Confirmed facts, reasonable inferences, and what still needs checking.
 4. A beginner-friendly explanation.
-5. A practical next step.
+5. The safest practical next step.
 
 Do not make unsupported claims. Tell me what evidence would change the answer.`
+    },
+    connect: {
+      title: "Connect apps",
+      surface: "Claude or Desktop Customize for connectors; Cowork Customize for plugins.",
+      next: "Start with one trusted service, review permissions, then test on non-sensitive material.",
+      prompt: `Help me decide what to connect to Claude.
+
+Workflow:
+[WHAT I WANT CLAUDE TO HELP WITH]
+
+Apps or services I use:
+[DRIVE, EMAIL, CALENDAR, SLACK, LINEAR, DOCS, OR OTHER]
+
+Information Claude may use:
+[WHAT IT CAN READ OR SEARCH]
+
+Actions Claude may take:
+[WHAT IT CAN DO]
+
+Actions that need my approval:
+[WHAT CLAUDE MUST ASK BEFORE DOING]
+
+Return:
+1. The first connector or plugin to set up.
+2. Why it helps this workflow.
+3. The permissions I should review.
+4. A safe first test.
+5. A reusable prompt for after setup.`
     },
     browser: {
       title: "Website task",
@@ -452,7 +483,7 @@ Give me one polished version and one shorter version.`
       ? (officeAppsByOutput[selectedOutput] || surfaceHints.office)
       : (surfaceHints[selectedSurface] || surfaceHints.chat);
     const outputType = outputHints[selectedOutput] || outputHints.useful;
-    const surfaceRules = selectedSurface === "office" ? `
+    const officeRules = selectedSurface === "office" ? `
 
 Office rules:
 - Work in ${surface}.
@@ -460,6 +491,30 @@ Office rules:
 - Ask before making major changes.
 - Preserve formatting and structure where possible.
 - End with what I should review before sharing.` : "";
+    const researchRules = selectedSurface === "research" ? `
+
+Research rules:
+- Use Research when the question needs multiple sources or citations.
+- Prioritize the sources I name.
+- Separate confirmed facts from reasonable inferences.
+- Cite sources I can check.
+- Say what still needs verification.` : "";
+    const connectorRules = selectedSurface === "connectors" ? `
+
+Connector rules:
+- Use only connected services relevant to the task.
+- Tell me which source you used.
+- Ask before changing, sending, deleting, or creating anything.
+- Respect my existing access in each service.
+- Say when a connector is unavailable or not connected.` : "";
+    const pluginRules = selectedSurface === "plugins" ? `
+
+Plugin rules:
+- Recommend a plugin only if it saves repeated setup.
+- Explain the skills, connectors, or subagents it would add in plain language.
+- Start with a safe test task before real work.
+- Ask before adding or changing access.` : "";
+    const surfaceRules = officeRules || researchRules || connectorRules || pluginRules;
     optimizedPrompt.value = `You are helping me use ${surface} effectively.
 
 Task:

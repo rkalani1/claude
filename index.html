@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Learn Claude</title>
-    <meta name="description" content="A beginner-first guide for using Claude across chat, Projects, Artifacts, Claude Design, Cowork, Claude Code, Office, Chrome, desktop, and iOS without jargon.">
+    <meta name="description" content="A beginner-first guide for using Claude across chat, Research, Projects, Artifacts, Design, Cowork, Code, Office, Chrome, desktop, iOS, connectors, and plugins without jargon.">
     <meta name="theme-color" content="#f8fbfa">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=2026-05-07-alignment-pass">
+    <link rel="stylesheet" href="styles.css?v=2026-05-07-research-connectors">
   </head>
   <body>
     <a class="skip-link" href="#top">Skip to content</a>
@@ -51,6 +51,7 @@
                 <button type="button" class="choice" data-mission="spreadsheet">Sheet</button>
                 <button type="button" class="choice" data-mission="design">Design</button>
                 <button type="button" class="choice" data-mission="research">Research</button>
+                <button type="button" class="choice" data-mission="connect">Connect</button>
                 <button type="button" class="choice" data-mission="browser">Website</button>
                 <button type="button" class="choice" data-mission="cowork">Cowork</button>
                 <button type="button" class="choice" data-mission="meeting">Meeting</button>
@@ -124,9 +125,12 @@ Before finalizing, list anything uncertain, missing, or important for me to veri
             <button type="button" class="choice is-active" data-surface="chat">Chat</button>
             <button type="button" class="choice" data-surface="project">Project</button>
             <button type="button" class="choice" data-surface="artifact">Artifact</button>
+            <button type="button" class="choice" data-surface="research">Research</button>
             <button type="button" class="choice" data-surface="office">Office</button>
             <button type="button" class="choice" data-surface="chrome">Chrome</button>
             <button type="button" class="choice" data-surface="cowork">Cowork</button>
+            <button type="button" class="choice" data-surface="connectors">Connectors</button>
+            <button type="button" class="choice" data-surface="plugins">Plugins</button>
             <button type="button" class="choice" data-surface="mobile">Mobile</button>
             <button type="button" class="choice" data-surface="code">Code</button>
           </div>
@@ -158,6 +162,7 @@ Before finalizing, list anything uncertain, missing, or important for me to veri
         </div>
         <div class="surface-grid compact-surfaces">
           <article class="surface-card"><span class="surface-badge">Chat</span><h3>Fast drafts and thinking</h3><p>Best for quick questions, summaries, emails, decisions, and first drafts.</p><a class="setup-link" href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Chat docs</a></article>
+          <article class="surface-card"><span class="surface-badge">Research</span><h3>Multi-source answers</h3><p>Use when a question needs several searches, connected app context, and citations you can check.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/11088861-using-research-on-claude">Use Research</a><a class="button small" href="https://support.claude.com/en/articles/11095361-when-should-i-use-web-search-extended-thinking-and-research">When to use</a></div></article>
           <article class="surface-card"><span class="surface-badge">Projects</span><h3>Repeated work</h3><p>Use when the same instructions, examples, or documents matter across conversations.</p><a class="setup-link" href="https://support.claude.com/en/articles/9517075-what-are-projects">Project docs</a></article>
           <article class="surface-card"><span class="surface-badge">Artifacts</span><h3>Editable outputs</h3><p>Use for documents, charts, prototypes, small apps, and anything you want to preview or revise.</p><a class="setup-link" href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them">Artifact docs</a></article>
           <article class="surface-card"><span class="surface-badge">Claude Design</span><h3>Visual work</h3><p>Create one-pagers, prototypes, presentation drafts, and design-system-aware visuals.</p><a class="setup-link" href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Design guide</a></article>
@@ -165,14 +170,18 @@ Before finalizing, list anything uncertain, missing, or important for me to veri
           <article class="surface-card"><span class="surface-badge">PowerPoint</span><h3>Deck building</h3><p>Start from the storyline, then turn dense slides into clearer messages and visuals.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint">Set up in PowerPoint</a><a class="button small" href="https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint">Guide</a></div></article>
           <article class="surface-card"><span class="surface-badge">Excel</span><h3>Workbook help</h3><p>Explain formulas, inspect tables, create analyses, and move findings into docs or decks.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/12650343-using-claude-in-excel">Set up in Excel</a><a class="button small" href="https://support.claude.com/en/articles/12650343-using-claude-in-excel">Guide</a></div></article>
           <article class="surface-card"><span class="surface-badge">Chrome</span><h3>Website tasks</h3><p>Use for reading, comparing, navigating, and low-risk browser workflows with review.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome">Set up Chrome</a></div></article>
+          <article class="surface-card"><span class="surface-badge">Connectors</span><h3>Your apps and files</h3><p>Connect trusted services so Claude can search or act with the access you already have.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities">Set up connectors</a><a class="button small" href="https://support.claude.com/en/articles/14328846-browse-skills-connectors-and-plugins-in-one-directory">Directory</a></div></article>
           <article class="surface-card"><span class="surface-badge">Desktop</span><h3>Daily work</h3><p>Use quick entry, screenshots, windows, and dictation without breaking focus.</p><div class="surface-actions"><a class="button small primary" href="https://claude.ai/downloads">Download app</a><a class="button small" href="https://support.claude.com/en/articles/10065433-installing-claude-for-desktop">Guide</a></div></article>
           <article class="surface-card"><span class="surface-badge">Claude Cowork</span><h3>Longer desktop jobs</h3><p>Use for selected files, folders, apps, progress visibility, and a clear handoff.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Cowork guide</a></div></article>
+          <article class="surface-card"><span class="surface-badge">Plugins</span><h3>Ready-made Cowork setups</h3><p>Use a plugin when a role or workflow needs skills, connectors, and subagents together.</p><div class="surface-actions"><a class="button small primary" href="https://support.claude.com/en/articles/13837440-use-plugins-in-claude-cowork">Set up plugins</a><a class="button small" href="https://support.claude.com/en/articles/14328846-browse-skills-connectors-and-plugins-in-one-directory">Directory</a></div></article>
           <article class="surface-card"><span class="surface-badge">iOS</span><h3>Voice and mobile apps</h3><p>Dictate rough thoughts, draft messages, review notes, and create quick visuals on the move.</p><a class="setup-link" href="https://support.claude.com/en/articles/11869619-using-claude-with-ios-apps">iOS guide</a></article>
           <article class="surface-card"><span class="surface-badge">Claude Code</span><h3>Repository work</h3><p>Ask in plain English. Have Claude inspect first, make the smallest useful edit, then run checks.</p><div class="surface-actions"><a class="button small primary" href="https://code.claude.com/docs/en/overview">Open Claude Code</a><a class="button small" href="https://code.claude.com/docs/en/overview">Guide</a></div></article>
         </div>
         <div class="decision-strip" aria-label="Claude surface decision rules">
           <div><h3>Chat or Project?</h3><p><strong>Chat</strong> for one-time work. <strong>Project</strong> when you would reuse the same background, files, or instructions.</p></div>
+          <div><h3>Search or Research?</h3><p><strong>Search</strong> for one fact. <strong>Research</strong> when Claude needs several sources, citations, and synthesis.</p></div>
           <div><h3>Artifact or Design?</h3><p><strong>Artifact</strong> for an editable output. <strong>Design</strong> when the visual result itself needs polish.</p></div>
+          <div><h3>Connector or Plugin?</h3><p><strong>Connector</strong> adds one trusted app. <strong>Plugin</strong> bundles a Cowork workflow with tools and skills.</p></div>
           <div><h3>Cowork or Code?</h3><p><strong>Cowork</strong> for desktop files and apps. <strong>Code</strong> for repositories, tests, reviews, and pull requests.</p></div>
         </div>
 
@@ -182,8 +191,10 @@ Before finalizing, list anything uncertain, missing, or important for me to veri
             <article class="glossary-card"><h3>Instructions</h3><p>Saved preferences for tone, detail, format, and when Claude should ask first.</p></article>
             <article class="glossary-card"><h3>Project</h3><p>A focused workspace for repeated work with the same files and instructions.</p></article>
             <article class="glossary-card"><h3>Artifact</h3><p>An editable output such as a page, chart, document, prototype, or small app.</p></article>
+            <article class="glossary-card"><h3>Research</h3><p>A deeper mode where Claude searches across sources and returns citations you can check.</p></article>
             <article class="glossary-card"><h3>Context engineering</h3><p>Giving Claude the goal, source material, examples, rules, and checks before it works.</p></article>
             <article class="glossary-card"><h3>Connector</h3><p>A controlled connection between Claude and another app or service.</p></article>
+            <article class="glossary-card"><h3>Plugin</h3><p>A Cowork package that can include skills, connectors, and subagents for a role or workflow.</p></article>
             <article class="glossary-card"><h3>Agentic workflow</h3><p>A repeatable job with inputs, allowed actions, checks, and a handoff.</p></article>
             <article class="glossary-card"><h3>MCP</h3><p>A standard way to connect Claude Code or agents to tools and data sources.</p></article>
             <article class="glossary-card"><h3>Hook</h3><p>A command that can run before or after a Claude Code action, often for checks.</p></article>
@@ -327,6 +338,27 @@ Return the simplest version, the safety checks, the handoff, and what would requ
         </div>
         <div class="template-list">
           <details class="template-details" open>
+            <summary>Research and connected apps</summary>
+            <article class="prompt-card"><div class="prompt-head"><h3>Research and connected apps</h3><button class="button small copy" data-copy-target="connected-template" type="button">Copy</button></div><textarea id="connected-template" aria-label="Research and connected apps setup prompt" readonly rows="13">Help me set up Claude for this workflow.
+
+Workflow:
+[WHAT I WANT TO DO REPEATEDLY]
+
+Sources or apps involved:
+[FILES, DRIVE, EMAIL, CALENDAR, SLACK, LINEAR, DOCS, OR OTHER]
+
+Research needed:
+[WHAT CLAUDE MAY NEED TO INVESTIGATE]
+
+Recommend:
+1. Whether to use Chat, Project, Research, a connector, or a Cowork plugin.
+2. The first connector or plugin to set up, if any.
+3. The permissions I should review before connecting it.
+4. A safe first test using non-sensitive material.
+5. The exact prompt to use after setup.</textarea></article>
+          </details>
+
+          <details class="template-details">
             <summary>Chrome or Cowork safety</summary>
             <article class="prompt-card"><div class="prompt-head"><h3>Browser and desktop task</h3><button class="button small copy" data-copy-target="cowork-template" type="button">Copy</button></div><textarea id="cowork-template" aria-label="Claude Cowork prompt" readonly rows="12">Help me run this task safely.
 
@@ -404,9 +436,13 @@ Focus only on practical use.</textarea></article>
             <li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Personalization and Instructions</a></li>
             <li><a href="https://support.claude.com/en/articles/9517075-what-are-projects">Projects</a></li>
             <li><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">Chat search and memory</a></li>
+            <li><a href="https://support.claude.com/en/articles/11088861-using-research-on-claude">Using Research on Claude</a></li>
+            <li><a href="https://support.claude.com/en/articles/11095361-when-should-i-use-web-search-extended-thinking-and-research">Web search, thinking, and Research</a></li>
             <li><a href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them">Artifacts</a></li>
             <li><a href="https://support.claude.com/en/articles/12512176-what-are-skills">Skills</a></li>
             <li><a href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities">Connectors</a></li>
+            <li><a href="https://support.claude.com/en/articles/14328846-browse-skills-connectors-and-plugins-in-one-directory">Skills, connectors, and plugins directory</a></li>
+            <li><a href="https://support.claude.com/en/articles/13837440-use-plugins-in-claude-cowork">Plugins in Claude Cowork</a></li>
             <li><a href="https://support.claude.com/en/articles/10065433-installing-claude-for-desktop">Install Claude Desktop</a></li>
             <li><a href="https://support.claude.com/en/articles/12626668-use-quick-entry-with-claude-desktop-on-mac">Quick entry on Mac</a></li>
             <li><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Claude Cowork guide</a></li>
@@ -441,6 +477,6 @@ Focus only on practical use.</textarea></article>
       <p>Claude practical mastery guide. Independent educational site, not affiliated with or endorsed by Anthropic.</p>
     </footer>
 
-    <script src="app.js?v=2026-05-07-alignment-pass"></script>
+    <script src="app.js?v=2026-05-07-research-connectors"></script>
   </body>
 </html>
