@@ -1,6 +1,6 @@
 # Claude
 
-A standalone, beginner-first guide for quickly mastering Claude across chat, Projects, Artifacts, Office, Chrome, desktop, mobile, Claude Code, prompt optimization, and official feature updates.
+A standalone, beginner-first guide for quickly mastering Claude across chat, Projects, Artifacts, Office, Chrome, desktop, mobile, Claude Code, prompt optimization, agentic workflows, and official feature updates.
 
 Live site: <https://rkalani1.github.io/claude/>
 
@@ -16,7 +16,7 @@ python3 -m http.server 8129
 
 - Check source links in the Sources section.
 - Run a browser accessibility pass on desktop and mobile.
-- Confirm path picker, task picker, answer fixer, reliability prompt, progress checklist, and prompt copy buttons work.
+- Confirm path picker, task picker, answer fixer, reliability prompt, agent workflow prompts, progress checklist, and prompt copy buttons work.
 
 ## License
 

@@ -20,6 +20,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
@@ -305,6 +306,7 @@ input:focus-visible {
 }
 
 .section {
+  scroll-margin-top: 5.5rem;
   width: min(1180px, calc(100vw - 2rem));
   margin: 0 auto;
   padding: clamp(2.5rem, 6vw, 5rem) 0;
@@ -358,12 +360,38 @@ input:focus-visible {
   font-size: 0.9rem;
 }
 
+.roadmap-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 0.55rem 1rem;
+  margin: 0 0 1rem;
+  padding: 1rem 1rem 1rem 2.2rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-2);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.roadmap-list li {
+  padding-right: 0.4rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.roadmap-list strong {
+  color: var(--ink);
+}
+
 .checklist,
 .steps,
 .ladder,
 .loop-grid,
 .surface-grid,
 .glossary-grid,
+.example-grid,
+.power-grid,
+.agent-lanes,
+.agent-steps,
 .tip-grid,
 .update-grid,
 .prompt-grid,
@@ -379,6 +407,11 @@ input:focus-visible {
 .loop-grid > div,
 .surface-card,
 .glossary-card,
+.example-card,
+.power-card,
+.agent-card,
+.agent-steps > article,
+.decision-strip,
 .tip-card,
 .update-card,
 .task-tool,
@@ -411,6 +444,10 @@ input:focus-visible {
 .loop-grid > div,
 .surface-card,
 .glossary-card,
+.example-card,
+.power-card,
+.agent-card,
+.agent-steps > article,
 .tip-card,
 .update-card,
 .timeline > article,
@@ -437,6 +474,10 @@ input:focus-visible {
 .loop-grid p,
 .surface-card p,
 .glossary-card p,
+.example-card p,
+.power-card p,
+.agent-card p,
+.agent-steps p,
 .tip-card p,
 .update-card p,
 .timeline p,
@@ -573,8 +614,34 @@ input:focus-visible {
   gap: 0.55rem;
 }
 
-.surface-card p {
+.surface-card p,
+.example-card p,
+.power-card p,
+.agent-card p {
   margin: 0;
+}
+
+.setup-link {
+  margin-top: auto;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 850;
+}
+
+.decision-strip {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr;
+  gap: 1rem;
+  margin-top: 0.85rem;
+  padding: 1rem;
+  background: var(--panel);
+}
+
+.decision-strip p {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.94rem;
 }
 
 .glossary-grid {
@@ -589,6 +656,84 @@ input:focus-visible {
 
 .glossary-card p {
   margin: 0;
+}
+
+.example-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 0.85rem;
+}
+
+.universal-prompt {
+  margin-bottom: 0;
+}
+
+.power-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.example-card,
+.power-card,
+.agent-steps > article {
+  position: relative;
+}
+
+.example-card,
+.power-card,
+.agent-steps > article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.power-card span,
+.agent-steps span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  margin-bottom: 0.65rem;
+  border-radius: 7px;
+  background: var(--teal);
+  color: #fff;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 900;
+}
+
+.agent-lanes {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.agent-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.agent-steps {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  margin-top: 0.85rem;
+}
+
+.resource-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.resource-row a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.2rem;
+  padding: 0.42rem 0.68rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  font-size: 0.86rem;
+  font-weight: 850;
 }
 
 .surface-badge {
@@ -803,6 +948,14 @@ textarea {
 }
 
 @media (max-width: 840px) {
+  html {
+    scroll-padding-top: 8rem;
+  }
+
+  .section {
+    scroll-margin-top: 8rem;
+  }
+
   .site-header {
     align-items: flex-start;
     flex-direction: column;
@@ -824,6 +977,13 @@ textarea {
   }
 
   .split {
+    grid-template-columns: 1fr;
+  }
+
+  .decision-strip,
+  .example-grid,
+  .power-grid,
+  .agent-lanes {
     grid-template-columns: 1fr;
   }
 

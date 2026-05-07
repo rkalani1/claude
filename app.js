@@ -5,7 +5,8 @@
     starter: "<strong>First hour:</strong> ask Claude to interview you, save your preferences, create one Project, and run one useful task.",
     office: "<strong>Office path:</strong> use Claude to read first, suggest changes second, and edit Word, PowerPoint, or Excel only after you approve.",
     creative: "<strong>Design path:</strong> turn a rough idea into an Artifact, then ask Claude to improve layout, clarity, and usefulness.",
-    builder: "<strong>Code path:</strong> describe the change in plain English, ask Claude Code to inspect first, then make the smallest useful edit."
+    builder: "<strong>Code path:</strong> describe the change in plain English, ask Claude Code to inspect first, then make the smallest useful edit.",
+    agent: "<strong>Agent path:</strong> define the repeatable job, the allowed actions, the safety checks, and the handoff before building anything."
   };
 
   const surfaceHints = {
@@ -26,7 +27,8 @@
     spreadsheet: "a spreadsheet-friendly table, formula explanation, or analysis checklist",
     design: "a design brief or Artifact with layout, audience, and usability checks",
     decision: "a decision memo with options, tradeoffs, recommendation, and risks",
-    code: "a small code change path with files to inspect, edit steps, and tests to run"
+    code: "a small code change path with files to inspect, edit steps, and tests to run",
+    agent: "an agent workflow brief with trigger, context, steps, allowed actions, checks, and handoff"
   };
 
   const missionData = {
@@ -223,6 +225,36 @@ While working:
 - Run the relevant check if one exists.
 
 Afterward, summarize what changed and what I should test.`
+    },
+    agent: {
+      title: "Agent workflow",
+      surface: "A Project for a repeatable personal workflow, Claude Code for repository automation, or the Agent SDK for a hosted agent.",
+      next: "Describe the job, the trigger, allowed actions, review points, and what success looks like.",
+      prompt: `Help me design an agentic workflow with Claude.
+
+Workflow goal:
+[WHAT THE AGENT SHOULD HELP WITH]
+
+Trigger:
+[WHEN IT SHOULD RUN OR WHEN I SHOULD START IT]
+
+Inputs:
+[FILES, WEBSITES, NOTES, ISSUES, OR MESSAGES IT CAN USE]
+
+Allowed actions:
+[WHAT IT MAY DO]
+
+Actions that need my approval:
+[WHAT IT MUST ASK BEFORE DOING]
+
+Success looks like:
+[WHAT A GOOD RESULT MEANS]
+
+Return:
+1. The simplest version I can try in Claude Chat or a Project.
+2. The checks that prevent mistakes.
+3. The handoff I should review.
+4. What would need Claude Code, GitHub Actions, or the Agent SDK later.`
     }
   };
 
