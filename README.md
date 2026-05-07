@@ -1,6 +1,6 @@
 # Learn Claude
 
-Learn Claude - a beginner-first guide for using Claude across chat, uploads, Research, Projects, Artifacts, Design, Cowork, Code, Office, Chrome, Mac, Windows, iOS, Android, connectors, skills, plugins, and model fit without jargon.
+Learn Claude - a beginner-first guide for using Claude across chat, uploads, Research, Projects, Artifacts, Design, Cowork, Code, Office, Chrome, connectors, skills, plugins, and model fit without jargon.
 
 Live site: <https://rkalani1.github.io/claude/>
 
