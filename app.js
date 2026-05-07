@@ -11,7 +11,7 @@
     cowork: "Claude Cowork",
     connectors: "Claude with connectors",
     plugins: "Claude Cowork with plugins",
-    mobile: "Claude on iOS",
+    mobile: "Claude on iOS or Android",
     code: "Claude Code"
   };
 
@@ -36,7 +36,7 @@
   const missionData = {
     email: {
       title: "Email or message",
-      surface: "Chat, mobile, or Word if the message comes from a document.",
+      surface: "Chat, iOS or Android, or Word if the message comes from a document.",
       next: "Paste your messy thought, name the recipient, and ask for two versions.",
       prompt: `I need to write an email or message.
 
@@ -514,7 +514,14 @@ Plugin rules:
 - Explain the skills, connectors, or subagents it would add in plain language.
 - Start with a safe test task before real work.
 - Ask before adding or changing access.` : "";
-    const surfaceRules = officeRules || researchRules || connectorRules || pluginRules;
+    const mobileRules = selectedSurface === "mobile" ? `
+
+Mobile rules:
+- Assume I may be on iOS or Android.
+- Keep the output short enough to review on a phone.
+- Make the first step voice-friendly.
+- If this involves another app, tell me what to review before sending or saving.` : "";
+    const surfaceRules = officeRules || researchRules || connectorRules || pluginRules || mobileRules;
     optimizedPrompt.value = `You are helping me use ${surface} effectively.
 
 Task:
