@@ -2,7 +2,7 @@
   "use strict";
 
   const pathDescriptions = {
-    starter: "<strong>First hour:</strong> ask Claude to interview you, save your preferences, create one Project, and run one useful task.",
+    starter: "<strong>First step:</strong> ask Claude to interview you, save your preferences, create one Project, and run one useful task.",
     office: "<strong>Office path:</strong> use Claude to read first, suggest changes second, and edit Word, PowerPoint, or Excel only after you approve.",
     creative: "<strong>Design path:</strong> turn a rough idea into an Artifact, then ask Claude to improve layout, clarity, and usefulness.",
     builder: "<strong>Code path:</strong> describe the change in plain English, ask Claude Code to inspect first, then make the smallest useful edit.",
