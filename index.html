@@ -16,8 +16,10 @@
       </a>
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="#start">Start</a>
+        <a href="#mission">Today</a>
         <a href="#surfaces">Surfaces</a>
         <a href="#prompt-lab">Prompt Lab</a>
+        <a href="#fix-answer">Fix</a>
         <a href="#level-up">Level Up</a>
         <a href="#updates">Updates</a>
         <a href="#sources">Sources</a>
@@ -27,7 +29,7 @@
     <main id="top">
       <section class="hero" id="start" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow">Verified 2026-05-06</p>
+          <p class="eyebrow">Verified 2026-05-07</p>
           <h1 id="hero-title">Learn Claude fast. Use it everywhere.</h1>
           <p class="lede">A practical, nontechnical path for using Claude in chat, Projects, Artifacts, Claude Code, Microsoft Office, Chrome, the Mac desktop app, and the iOS mobile app. Start with one real task, then turn it into a reusable system.</p>
           <div class="path-tabs" aria-label="Choose your starting path">
@@ -40,7 +42,7 @@
             <strong>First hour:</strong> ask Claude to interview you, save your preferences, create one Project, and run one useful task.
           </div>
           <div class="hero-actions">
-            <a class="button primary" href="#quick-start">Start now</a>
+            <a class="button primary" href="#mission">Pick my task</a>
             <a class="button" href="#prompt-lab">Build a prompt</a>
           </div>
         </div>
@@ -58,6 +60,41 @@
             <g class="svg-node"><circle cx="130" cy="134" r="38" /><text x="130" y="130">Design</text></g>
             <path d="M280 111 L280 140 M394 153 L339 175 M418 269 L350 238 M280 310 L280 280 M141 268 L211 237 M166 154 L220 176" class="svg-orbit" />
           </svg>
+        </div>
+      </section>
+
+      <section class="section mission-section" id="mission" aria-labelledby="mission-title">
+        <div class="section-head">
+          <p class="eyebrow">Today</p>
+          <h2 id="mission-title">Pick the task in front of you</h2>
+          <p>Choose what you need done. The site will tell you where to use Claude, what to do next, and what prompt to copy.</p>
+        </div>
+        <div class="task-tool" aria-label="Claude task picker">
+          <div class="task-options">
+            <p class="tool-label">What are you trying to do?</p>
+            <div class="task-grid">
+              <button type="button" class="choice is-active" data-mission="email">Email or message</button>
+              <button type="button" class="choice" data-mission="document">Document</button>
+              <button type="button" class="choice" data-mission="slides">Slides</button>
+              <button type="button" class="choice" data-mission="spreadsheet">Spreadsheet</button>
+              <button type="button" class="choice" data-mission="design">Design</button>
+              <button type="button" class="choice" data-mission="research">Research</button>
+              <button type="button" class="choice" data-mission="browser">Website task</button>
+              <button type="button" class="choice" data-mission="meeting">Meeting prep</button>
+              <button type="button" class="choice" data-mission="code">Code help</button>
+            </div>
+          </div>
+          <div class="task-result" aria-live="polite">
+            <div class="prompt-head">
+              <h3 id="mission-output-title">Email or message</h3>
+              <button class="button small copy" data-copy-target="mission-prompt" type="button">Copy</button>
+            </div>
+            <div class="result-copy">
+              <p id="mission-surface"><strong>Best Claude surface:</strong> Chat, mobile, or Word if the message comes from a document.</p>
+              <p id="mission-next"><strong>Next move:</strong> paste your messy thought, name the recipient, and ask for two versions.</p>
+            </div>
+            <textarea id="mission-prompt" aria-label="Prompt for selected task" readonly rows="13"></textarea>
+          </div>
         </div>
       </section>
 
@@ -151,6 +188,26 @@
         </div>
       </section>
 
+      <section class="section" id="glossary" aria-labelledby="glossary-title">
+        <div class="section-head">
+          <p class="eyebrow">Plain English</p>
+          <h2 id="glossary-title">Claude terms without jargon</h2>
+          <p>Use these short definitions when a menu, announcement, or tutorial uses a term you have not seen before.</p>
+        </div>
+        <div class="glossary-grid">
+          <article class="glossary-card"><h3>Chat</h3><p>The normal conversation window. Best for quick questions, drafts, summaries, and thinking through a task.</p></article>
+          <article class="glossary-card"><h3>Instructions</h3><p>Your saved preferences for how Claude should respond: tone, detail level, format, and when to ask questions.</p></article>
+          <article class="glossary-card"><h3>Project</h3><p>A focused workspace for repeated work that needs the same files, examples, and instructions.</p></article>
+          <article class="glossary-card"><h3>Artifact</h3><p>A separate editable output Claude can create, such as a document, chart, webpage, prototype, or small app.</p></article>
+          <article class="glossary-card"><h3>Claude Design</h3><p>A visual creation workflow for pages, prototypes, presentation-style drafts, and polished visual artifacts.</p></article>
+          <article class="glossary-card"><h3>Claude Code</h3><p>A coding helper that can inspect a repository, explain files, make focused edits, and run checks.</p></article>
+          <article class="glossary-card"><h3>Connector</h3><p>A way for Claude to work with another app or service when that connection is enabled.</p></article>
+          <article class="glossary-card"><h3>Skill</h3><p>A reusable set of instructions or files that helps Claude perform a specific kind of work more consistently.</p></article>
+          <article class="glossary-card"><h3>Quick entry</h3><p>A Mac desktop shortcut for asking Claude about what you are seeing or doing without breaking focus.</p></article>
+          <article class="glossary-card"><h3>Source of truth</h3><p>The file, note, webpage, or message Claude should treat as the main reference when answers must stay grounded.</p></article>
+        </div>
+      </section>
+
       <section class="section prompt-lab-section" id="prompt-lab" aria-labelledby="prompt-lab-title">
         <div class="section-head">
           <p class="eyebrow">Prompt lab</p>
@@ -206,6 +263,72 @@
           <article class="tip-card"><h3>When facts matter</h3><p>"Separate confirmed facts, reasonable inference, and what needs checking."</p></article>
           <article class="tip-card"><h3>When sharing matters</h3><p>"Rewrite this for a beginner, an executive, and a skeptical reviewer."</p></article>
         </div>
+      </section>
+
+      <section class="section fixer-section" id="fix-answer" aria-labelledby="fix-answer-title">
+        <div class="section-head">
+          <p class="eyebrow">Answer rescue</p>
+          <h2 id="fix-answer-title">Fix Claude when the answer is not good enough</h2>
+          <p>Do not start over. Pick the problem, copy the recovery prompt, and make Claude repair the answer in the same conversation.</p>
+        </div>
+        <div class="task-tool fixer-tool" aria-label="Claude answer fixer">
+          <div class="task-options">
+            <p class="tool-label">What went wrong?</p>
+            <div class="task-grid compact">
+              <button type="button" class="choice is-active" data-fix="vague">Too vague</button>
+              <button type="button" class="choice" data-fix="wrong">Possibly wrong</button>
+              <button type="button" class="choice" data-fix="long">Too long</button>
+              <button type="button" class="choice" data-fix="technical">Too technical</button>
+              <button type="button" class="choice" data-fix="format">Wrong format</button>
+              <button type="button" class="choice" data-fix="stuck">Needs questions</button>
+              <button type="button" class="choice" data-fix="evidence">Weak evidence</button>
+              <button type="button" class="choice" data-fix="action">Not actionable</button>
+              <button type="button" class="choice" data-fix="tone">Tone is off</button>
+            </div>
+          </div>
+          <div class="task-result" aria-live="polite">
+            <div class="prompt-head">
+              <h3 id="fix-output-title">Too vague</h3>
+              <button class="button small copy" data-copy-target="fix-prompt" type="button">Copy</button>
+            </div>
+            <div class="result-copy">
+              <p id="fix-next"><strong>Use when:</strong> Claude sounds reasonable but you still cannot act on the answer.</p>
+            </div>
+            <textarea id="fix-prompt" aria-label="Recovery prompt for Claude's answer" readonly rows="12"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="section trust-section" id="trust-check" aria-labelledby="trust-check-title">
+        <div class="section-head">
+          <p class="eyebrow">Trust check</p>
+          <h2 id="trust-check-title">Before you rely on an answer</h2>
+          <p>Use this when accuracy matters. Claude is strongest when you make it show what is known, what is inferred, and what still needs review.</p>
+        </div>
+        <div class="loop-grid">
+          <div><h3>Ground it</h3><p>Name the file, note, webpage, or message Claude should treat as the source of truth.</p></div>
+          <div><h3>Separate claims</h3><p>Ask Claude to label confirmed facts, reasonable inferences, and items that need checking.</p></div>
+          <div><h3>Check specifics</h3><p>Review names, dates, numbers, formulas, quotes, links, and anything that could affect a decision.</p></div>
+          <div><h3>Ask what changes it</h3><p>Make Claude say what new information would change the answer or recommendation.</p></div>
+        </div>
+        <article class="prompt-card trust-prompt">
+          <div class="prompt-head"><h3>Reliability check prompt</h3><button class="button small copy" data-copy-target="trust-template" type="button">Copy</button></div>
+          <textarea id="trust-template" aria-label="Reliability check prompt" readonly rows="14">Review your last answer before I rely on it.
+
+Source of truth:
+[PASTE OR NAME THE FILE, NOTE, WEBPAGE, OR MESSAGE]
+
+For each important claim, label it as:
+- Confirmed from the source of truth.
+- Reasonable inference.
+- Needs checking.
+
+Then:
+1. Check names, dates, numbers, links, formulas, and quotes.
+2. List any missing context that could change the answer.
+3. Correct the answer if needed.
+4. Give me a short checklist of what I should review before using it.</textarea>
+        </article>
       </section>
 
       <section class="section prompts" id="prompts" aria-labelledby="prompts-title">
@@ -324,7 +447,7 @@ For each change, tell me:
 4. One safe test task I can use to learn it.
 5. One prompt I should save if it works.
 
-Do not discuss account tiers or billing. Focus only on practical use.</textarea></article>
+Focus only on practical use.</textarea></article>
         </div>
       </section>
 
@@ -332,7 +455,7 @@ Do not discuss account tiers or billing. Focus only on practical use.</textarea>
         <div class="section-head">
           <p class="eyebrow">Office mastery</p>
           <h2 id="office-title">Use Claude in Word, PowerPoint, and Excel</h2>
-          <p>Use the Office add-ins where your account or workspace provides them. Keep files open, ask Claude to explain first, and review every change before sharing.</p>
+          <p>Use the Office add-ins where they appear in your Office apps. Keep files open, ask Claude to explain first, and review every change before sharing.</p>
         </div>
         <div class="split">
           <div><h3>Word</h3><ol><li>Ask for a plain-English summary.</li><li>Ask Claude to find unclear sections.</li><li>Edit selected text instead of the whole document.</li><li>Use tracked changes when the edit matters.</li><li>Ask for a final review checklist.</li></ol></div>
@@ -376,7 +499,7 @@ Do not discuss account tiers or billing. Focus only on practical use.</textarea>
         <div class="section-head">
           <p class="eyebrow">Sources</p>
           <h2 id="sources-title">Official documentation used for this page</h2>
-          <p>Verified on 2026-05-06. Product labels and availability can change, so recheck these official docs when a button or menu looks different.</p>
+          <p>Verified on 2026-05-07. Product labels and availability can change, so recheck these official docs when a button or menu looks different.</p>
         </div>
         <ul class="source-list">
           <li><a href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features">Personalization and Instructions</a></li>
