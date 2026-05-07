@@ -4,7 +4,8 @@
   const pathDescriptions = {
     starter: "<strong>First step:</strong> ask Claude to interview you, save your preferences, create one Project, and run one useful task.",
     office: "<strong>Office path:</strong> use Claude to read first, suggest changes second, and edit Word, PowerPoint, or Excel only after you approve.",
-    creative: "<strong>Design path:</strong> turn a rough idea into an Artifact, then ask Claude to improve layout, clarity, and usefulness.",
+    creative: "<strong>Design path:</strong> turn a rough idea into Claude Design or an Artifact, then ask Claude to improve layout, clarity, and usefulness.",
+    cowork: "<strong>Cowork path:</strong> choose a low-risk desktop task, give Claude the files or folder, review its approach, and monitor the handoff.",
     builder: "<strong>Code path:</strong> describe the change in plain English, ask Claude Code to inspect first, then make the smallest useful edit.",
     agent: "<strong>Agent path:</strong> define the repeatable job, the allowed actions, the safety checks, and the handoff before building anything."
   };
@@ -15,6 +16,7 @@
     artifact: "an Artifact",
     office: "Word, PowerPoint, or Excel",
     chrome: "Claude in Chrome",
+    cowork: "Claude Cowork",
     mobile: "Claude on iOS",
     code: "Claude Code"
   };
@@ -25,7 +27,7 @@
     document: "a structured document with headings, bullets, and a review checklist",
     slides: "a slide-by-slide outline with title, key point, and speaker note for each slide",
     spreadsheet: "a spreadsheet-friendly table, formula explanation, or analysis checklist",
-    design: "a design brief or Artifact with layout, audience, and usability checks",
+    design: "a Claude Design or Artifact brief with layout, audience, and usability checks",
     decision: "a decision memo with options, tradeoffs, recommendation, and risks",
     code: "a small code change path with files to inspect, edit steps, and tests to run",
     agent: "an agent workflow brief with trigger, context, steps, allowed actions, checks, and handoff"
@@ -180,6 +182,26 @@ Rules:
 - Keep me in control of the final decision.
 
 Start by giving me the safest next step.`
+    },
+    cowork: {
+      title: "Cowork task",
+      surface: "Claude Cowork when the work needs selected files, folders, desktop apps, or a longer task session.",
+      next: "Start with a low-risk review and ask Claude to explain its approach before acting.",
+      prompt: `Help me run this Claude Cowork task safely.
+
+Goal:
+[WHAT I WANT DONE]
+
+Material Claude may use:
+[FILES, FOLDERS, APPS, OR CONNECTORS]
+
+Rules:
+- Explain your approach before acting.
+- Ask before changing, sending, deleting, posting, sharing, or opening sensitive material.
+- Keep a short progress log.
+- Stop if access, uncertainty, or risk is unclear.
+
+Start by telling me the safest first action and what you need from me.`
     },
     meeting: {
       title: "Meeting prep",

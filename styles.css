@@ -302,6 +302,11 @@ input:focus-visible {
   font-size: 20px;
 }
 
+.svg-node-small text,
+.svg-node-small text:first-of-type {
+  font-size: 14px;
+}
+
 .svg-center circle {
   fill: var(--gold-soft);
   stroke: var(--accent);
@@ -623,7 +628,7 @@ input:focus-visible {
 
 .decision-strip {
   display: grid;
-  grid-template-columns: 0.8fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: 1rem;
   margin-top: 0.85rem;
   padding: 1rem;
