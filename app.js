@@ -24,6 +24,12 @@
     agent: "an agent workflow brief with trigger, context, steps, allowed actions, checks, and handoff"
   };
 
+  const officeAppsByOutput = {
+    document: "Word",
+    slides: "PowerPoint",
+    spreadsheet: "Excel"
+  };
+
   const missionData = {
     email: {
       title: "Email or message",
@@ -442,15 +448,25 @@ Give me one polished version and one shorter version.`
   function buildOptimizedPrompt() {
     if (!optimizedPrompt) return;
     const task = (roughPrompt && roughPrompt.value.trim()) || "Help me complete this task clearly and well.";
-    const surface = surfaceHints[selectedSurface] || surfaceHints.chat;
+    const surface = selectedSurface === "office"
+      ? (officeAppsByOutput[selectedOutput] || surfaceHints.office)
+      : (surfaceHints[selectedSurface] || surfaceHints.chat);
     const outputType = outputHints[selectedOutput] || outputHints.useful;
+    const surfaceRules = selectedSurface === "office" ? `
+
+Office rules:
+- Work in ${surface}.
+- First explain what you see in plain language.
+- Ask before making major changes.
+- Preserve formatting and structure where possible.
+- End with what I should review before sharing.` : "";
     optimizedPrompt.value = `You are helping me use ${surface} effectively.
 
 Task:
 ${task}
 
 Preferred output:
-${outputType}
+${outputType}${surfaceRules}
 
 Before answering:
 1. Restate the goal in one sentence.
