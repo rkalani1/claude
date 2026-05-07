@@ -326,7 +326,7 @@ Return:
   const fixData = {
     vague: {
       title: "Too vague",
-      next: "Use when Claude sounds reasonable but you still cannot act on the answer.",
+      next: "Claude sounds reasonable but you still cannot act on the answer.",
       prompt: `Make your last answer specific enough that I can act on it today.
 
 Revise it with:
@@ -340,7 +340,7 @@ Keep the language simple.`
     },
     wrong: {
       title: "Possibly wrong",
-      next: "Use when a fact, assumption, calculation, or interpretation may be incorrect.",
+      next: "a fact, assumption, calculation, or interpretation may be incorrect.",
       prompt: `Review your last answer for possible errors.
 
 Do not defend the answer.
@@ -354,7 +354,7 @@ Return:
     },
     long: {
       title: "Too long",
-      next: "Use when the answer is useful but too hard to scan.",
+      next: "the answer is useful but too hard to scan.",
       prompt: `Shorten your last answer.
 
 Give me:
@@ -366,7 +366,7 @@ Remove repetition and background that does not change what I should do.`
     },
     technical: {
       title: "Too technical",
-      next: "Use when the answer assumes too much background knowledge.",
+      next: "the answer assumes too much background knowledge.",
       prompt: `Rewrite your last answer for a beginner.
 
 Rules:
@@ -380,7 +380,7 @@ Do not talk down to me. Make it clear and usable.`
     },
     format: {
       title: "Wrong format",
-      next: "Use when the content is good but the shape is not useful.",
+      next: "the content is good but the shape is not useful.",
       prompt: `Reformat your last answer into this structure:
 
 [PASTE THE FORMAT YOU WANT: table, checklist, email, memo, slides, steps, or bullets]
@@ -391,7 +391,7 @@ Make it easy to copy, review, and reuse.`
     },
     stuck: {
       title: "Needs questions",
-      next: "Use when Claude needs more context but did not ask for it.",
+      next: "Claude needs more context but did not ask for it.",
       prompt: `Pause and ask me the questions that would most improve your answer.
 
 Ask no more than three questions.
@@ -400,7 +400,7 @@ After I answer, produce the improved version without restarting from scratch.`
     },
     evidence: {
       title: "Weak evidence",
-      next: "Use when facts matter and you need to know what the answer rests on.",
+      next: "facts matter and you need to know what the answer rests on.",
       prompt: `Strengthen the evidence in your last answer.
 
 Separate:
@@ -413,7 +413,7 @@ If you cannot verify something from the provided material, say so plainly.`
     },
     action: {
       title: "Not actionable",
-      next: "Use when the answer explains the topic but does not help you move.",
+      next: "the answer explains the topic but does not help you move.",
       prompt: `Turn your last answer into an action checklist.
 
 For each item, include:
@@ -426,7 +426,7 @@ Put the first action at the top.`
     },
     tone: {
       title: "Tone is off",
-      next: "Use when the answer is too stiff, too casual, too forceful, or not right for the audience.",
+      next: "the answer is too stiff, too casual, too forceful, or not right for the audience.",
       prompt: `Rewrite your last answer for this audience:
 [AUDIENCE]
 
@@ -456,6 +456,9 @@ Give me one polished version and one shorter version.`
   const toast = document.getElementById("toast");
   const exportPromptsButton = document.getElementById("export-prompts");
   const openClaudeButton = document.getElementById("open-claude-with-prompt");
+  const taskShortcutButtons = Array.from(document.querySelectorAll("[data-shortcut-mission]"));
+  const surfaceFilterButtons = Array.from(document.querySelectorAll("[data-surface-filter]"));
+  const surfaceCards = Array.from(document.querySelectorAll("[data-surface-group]"));
   const urlParams = new URLSearchParams(window.location.search);
   const storagePrefix = "learnClaude:";
   const stateKeys = {
@@ -543,6 +546,21 @@ Give me one polished version and one shorter version.`
       const active = button.getAttribute(attribute) === value;
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
+  function setSurfaceFilter(filter) {
+    const activeFilter = filter || "all";
+    surfaceFilterButtons.forEach((button) => {
+      const active = button.getAttribute("data-surface-filter") === activeFilter;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    surfaceCards.forEach((card) => {
+      const groups = (card.getAttribute("data-surface-group") || "").split(/\s+/);
+      const hidden = activeFilter !== "all" && !groups.includes(activeFilter);
+      card.hidden = hidden;
+      card.classList.toggle("is-hidden", hidden);
     });
   }
 
@@ -721,8 +739,21 @@ After the answer:
     button.addEventListener("click", () => setMission(button.getAttribute("data-mission") || "email"));
   });
 
+  taskShortcutButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const mission = button.getAttribute("data-shortcut-mission") || "email";
+      setMission(mission);
+      const title = (missionData[mission] || missionData.email).title;
+      showToast(`${title} prompt loaded.`);
+    });
+  });
+
   fixButtons.forEach((button) => {
     button.addEventListener("click", () => setFix(button.getAttribute("data-fix") || "vague"));
+  });
+
+  surfaceFilterButtons.forEach((button) => {
+    button.addEventListener("click", () => setSurfaceFilter(button.getAttribute("data-surface-filter") || "all"));
   });
 
   if (roughPrompt) {
@@ -774,5 +805,6 @@ After the answer:
   setActiveChoice(outputButtons, "data-output", selectedOutput);
   setMission(selectedMission, { persist: false });
   setFix(selectedFix, { persist: false });
+  setSurfaceFilter("draft");
   buildOptimizedPrompt();
 })();
