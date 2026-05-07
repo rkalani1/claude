@@ -11,6 +11,7 @@
   --teal-soft: #d8f0ec;
   --gold-soft: #f1df9b;
   --shadow: 0 18px 60px rgba(23, 33, 31, 0.1);
+  --shadow-soft: 0 12px 30px rgba(23, 33, 31, 0.055);
   color-scheme: light;
 }
 
@@ -25,7 +26,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, #fbfdfb 0%, #f3faf7 34%, #f8fbfa 100%);
   color: var(--ink);
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
   line-height: 1.55;
@@ -63,8 +65,8 @@ input {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.8rem max(1rem, calc((100vw - 1180px) / 2));
-  border-bottom: 1px solid var(--line);
-  background: rgba(248, 251, 250, 0.94);
+  border-bottom: 1px solid rgba(203, 217, 213, 0.8);
+  background: rgba(251, 253, 251, 0.92);
   backdrop-filter: blur(14px);
 }
 
@@ -120,7 +122,7 @@ main {
   gap: clamp(1.5rem, 5vw, 4rem);
   align-items: center;
   width: min(1180px, calc(100vw - 2rem));
-  min-height: calc(100vh - 4.5rem);
+  min-height: min(780px, calc(100vh - 4.5rem));
   margin-inline: auto;
   padding: clamp(2rem, 6vw, 5rem) 0;
 }
@@ -329,60 +331,6 @@ input:focus-visible {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.progress {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.8rem;
-  align-items: center;
-  margin-bottom: 1rem;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-.progress-bar {
-  height: 0.82rem;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface);
-}
-
-.progress-bar span {
-  display: block;
-  width: 0;
-  height: 100%;
-  background: var(--teal);
-  transition: width 160ms ease;
-}
-
-.progress p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.roadmap-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-  gap: 0.55rem 1rem;
-  margin: 0 0 1rem;
-  padding: 1rem 1rem 1rem 2.2rem;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel-2);
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-.roadmap-list li {
-  padding-right: 0.4rem;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.roadmap-list strong {
-  color: var(--ink);
-}
-
-.checklist,
 .steps,
 .ladder,
 .loop-grid,
@@ -393,15 +341,13 @@ input:focus-visible {
 .agent-lanes,
 .agent-steps,
 .tip-grid,
-.update-grid,
-.prompt-grid,
-.timeline {
+.feature-grid,
+.prompt-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
   gap: 0.85rem;
 }
 
-.checklist label,
 .step,
 .ladder-step,
 .loop-grid > div,
@@ -413,30 +359,16 @@ input:focus-visible {
 .agent-steps > article,
 .decision-strip,
 .tip-card,
-.update-card,
+.feature-post,
+.feature-maintenance,
 .task-tool,
 .prompt-lab,
 .prompt-card,
-.timeline > article,
 .split > div {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
-}
-
-.checklist label {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.6rem;
-  align-items: start;
-  padding: 0.68rem 0.75rem;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.92rem;
-}
-
-.checklist input {
-  margin-top: 0.18rem;
 }
 
 .step,
@@ -449,8 +381,8 @@ input:focus-visible {
 .agent-card,
 .agent-steps > article,
 .tip-card,
-.update-card,
-.timeline > article,
+.feature-post,
+.feature-maintenance,
 .split > div {
   padding: 1rem;
 }
@@ -479,12 +411,55 @@ input:focus-visible {
 .agent-card p,
 .agent-steps p,
 .tip-card p,
-.update-card p,
-.timeline p,
+.feature-post p,
+.feature-maintenance p,
 .split li {
   color: var(--muted);
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 0.94rem;
+}
+
+.step,
+.ladder-step,
+.loop-grid > div,
+.surface-card,
+.glossary-card,
+.example-card,
+.power-card,
+.agent-card,
+.agent-steps > article,
+.tip-card,
+.feature-post,
+.feature-maintenance,
+.prompt-lab,
+.prompt-card,
+.task-tool,
+.split > div {
+  box-shadow: var(--shadow-soft);
+}
+
+.surface-card,
+.glossary-card,
+.example-card,
+.power-card,
+.agent-card,
+.agent-steps > article,
+.tip-card,
+.feature-post {
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.surface-card:hover,
+.glossary-card:hover,
+.example-card:hover,
+.power-card:hover,
+.agent-card:hover,
+.agent-steps > article:hover,
+.tip-card:hover,
+.feature-post:hover {
+  border-color: rgba(10, 107, 103, 0.38);
+  box-shadow: 0 16px 38px rgba(23, 33, 31, 0.075);
+  transform: translateY(-2px);
 }
 
 .ladder {
@@ -510,8 +485,7 @@ input:focus-visible {
 }
 
 .ladder-step p,
-.tip-card p,
-.update-card p {
+.tip-card p {
   margin: 0.55rem 0 0;
 }
 
@@ -523,20 +497,34 @@ input:focus-visible {
   background: var(--panel);
 }
 
-.update-grid {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+.feature-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 }
 
-.update-card {
+.feature-post {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.94);
 }
 
-.update-card a {
+.feature-post p {
+  margin: 0;
+}
+
+.feature-post a {
   margin-top: auto;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-weight: 800;
+  font-weight: 850;
+}
+
+.feature-maintenance {
+  margin-top: 0.85rem;
+  background: var(--panel);
+}
+
+.feature-maintenance p {
+  margin: 0.55rem 0 0;
 }
 
 .task-tool {
@@ -997,10 +985,6 @@ textarea {
   }
 
   .ladder {
-    grid-template-columns: 1fr;
-  }
-
-  .progress {
     grid-template-columns: 1fr;
   }
 }

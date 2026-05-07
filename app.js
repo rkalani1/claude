@@ -373,13 +373,8 @@ Give me one polished version and one shorter version.`
     }
   };
 
-  const storageKey = "claude-site:mastery-progress:v2";
   const tabs = Array.from(document.querySelectorAll(".path-tab"));
   const output = document.getElementById("path-output");
-  const checks = Array.from(document.querySelectorAll("[data-checklist] input[type='checkbox']"));
-  const progressFill = document.getElementById("progress-fill");
-  const progressText = document.getElementById("progress-text");
-  const resetButton = document.getElementById("reset-progress");
   const roughPrompt = document.getElementById("rough-prompt");
   const optimizedPrompt = document.getElementById("optimized-prompt");
   const surfaceButtons = Array.from(document.querySelectorAll("[data-surface]"));
@@ -410,48 +405,6 @@ Give me one polished version and one shorter version.`
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
-  }
-
-  function readProgress() {
-    try {
-      const parsed = JSON.parse(localStorage.getItem(storageKey) || "{}");
-      return parsed && typeof parsed === "object" ? parsed : {};
-    } catch {
-      return {};
-    }
-  }
-
-  function writeProgress(progress) {
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(progress));
-    } catch {
-      // Storage can fail in private browsing; the page still works for the current session.
-    }
-  }
-
-  function updateProgress() {
-    const total = checks.length;
-    const complete = checks.filter((item) => item.checked).length;
-    const percent = total ? Math.round((complete / total) * 100) : 0;
-    if (progressFill) progressFill.style.width = `${percent}%`;
-    if (progressText) progressText.textContent = `${complete} of ${total} complete`;
-  }
-
-  function loadProgress() {
-    const progress = readProgress();
-    checks.forEach((item) => {
-      item.checked = Boolean(progress[item.value]);
-    });
-    updateProgress();
-  }
-
-  function saveProgress() {
-    const progress = {};
-    checks.forEach((item) => {
-      progress[item.value] = item.checked;
-    });
-    writeProgress(progress);
-    updateProgress();
   }
 
   function copyTemplate(targetId, button) {
@@ -534,20 +487,6 @@ After the answer:
     tab.addEventListener("click", () => setPath(tab.getAttribute("data-path") || "starter"));
   });
 
-  checks.forEach((item) => {
-    item.addEventListener("change", saveProgress);
-  });
-
-  if (resetButton) {
-    resetButton.addEventListener("click", () => {
-      checks.forEach((item) => {
-        item.checked = false;
-      });
-      writeProgress({});
-      updateProgress();
-    });
-  }
-
   surfaceButtons.forEach((button) => {
     button.addEventListener("click", () => {
       selectedSurface = button.getAttribute("data-surface") || "chat";
@@ -578,7 +517,6 @@ After the answer:
     button.addEventListener("click", () => copyTemplate(button.getAttribute("data-copy-target"), button));
   });
 
-  loadProgress();
   setActiveChoice(surfaceButtons, "data-surface", selectedSurface);
   setActiveChoice(outputButtons, "data-output", selectedOutput);
   buildOptimizedPrompt();

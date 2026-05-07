@@ -16,7 +16,7 @@ python3 -m http.server 8129
 
 - Check source links in the Sources section.
 - Run a browser accessibility pass on desktop and mobile.
-- Confirm path picker, task picker, answer fixer, reliability prompt, agent workflow prompts, progress checklist, and prompt copy buttons work.
+- Confirm path picker, task picker, answer fixer, reliability prompt, agent workflow prompts, feature posts, and prompt copy buttons work.
 
 ## License
 

@@ -6,7 +6,8 @@
     <title>Claude - fast practical mastery</title>
     <meta name="description" content="A beginner-first guide for mastering Claude across chat, Projects, Artifacts, Claude Code, Office, Chrome, desktop, and iOS without jargon.">
     <meta name="theme-color" content="#f8fbfa">
-    <link rel="stylesheet" href="styles.css?v=2026-05-07-agents">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=2026-05-07-polish">
   </head>
   <body>
     <header class="site-header">
@@ -21,7 +22,7 @@
         <a href="#prompt-lab">Prompt Lab</a>
         <a href="#fix-answer">Fix</a>
         <a href="#agents">Agents</a>
-        <a href="#updates">Updates</a>
+        <a href="#features">Features</a>
         <a href="#sources">Sources</a>
       </nav>
     </header>
@@ -98,47 +99,6 @@
             <textarea id="mission-prompt" aria-label="Prompt for selected task" readonly rows="13"></textarea>
           </div>
         </div>
-      </section>
-
-      <section class="section checklist-section" id="checklist" aria-labelledby="checklist-title">
-        <div class="section-head">
-          <p class="eyebrow">Progress tracker</p>
-          <h2 id="checklist-title">The 12-step Claude mastery checklist</h2>
-          <p>Check items as you finish them. Progress is saved locally in this browser only.</p>
-        </div>
-        <div class="progress" aria-label="Checklist progress">
-          <div class="progress-bar"><span id="progress-fill"></span></div>
-          <p id="progress-text">0 of 12 complete</p>
-        </div>
-        <ol class="roadmap-list" aria-label="Claude mastery steps">
-          <li><strong>Setup interview:</strong> let Claude learn your work style.</li>
-          <li><strong>Instructions:</strong> save your tone, format, and question preferences.</li>
-          <li><strong>Project:</strong> create one focused workspace for repeated work.</li>
-          <li><strong>Files:</strong> add only the few files Claude actually needs.</li>
-          <li><strong>Artifact:</strong> create one editable output you can revise.</li>
-          <li><strong>Prompt improvement:</strong> make Claude rewrite one rough prompt.</li>
-          <li><strong>Word:</strong> review one document before editing it.</li>
-          <li><strong>PowerPoint:</strong> build or improve one deck outline.</li>
-          <li><strong>Excel:</strong> explain one workbook before changing it.</li>
-          <li><strong>Chrome:</strong> try one low-risk website task.</li>
-          <li><strong>iOS:</strong> dictate one messy thought and clean it up.</li>
-          <li><strong>Claude Code:</strong> inspect first, then make a small code change.</li>
-        </ol>
-        <div class="checklist" data-checklist>
-          <label><input type="checkbox" value="first-prompt"> Run the setup interview prompt.</label>
-          <label><input type="checkbox" value="instructions"> Save short Instructions for Claude.</label>
-          <label><input type="checkbox" value="project"> Create one Project for repeated work.</label>
-          <label><input type="checkbox" value="files"> Add two useful files, not a whole folder.</label>
-          <label><input type="checkbox" value="artifact"> Create one Artifact: document, page, chart, or app.</label>
-          <label><input type="checkbox" value="optimize"> Ask Claude to improve one of your prompts.</label>
-          <label><input type="checkbox" value="word"> Use Claude with one Word document.</label>
-          <label><input type="checkbox" value="powerpoint"> Use Claude with one PowerPoint deck.</label>
-          <label><input type="checkbox" value="excel"> Use Claude with one Excel workbook.</label>
-          <label><input type="checkbox" value="chrome"> Try Claude in Chrome on a low-risk browsing task.</label>
-          <label><input type="checkbox" value="mobile"> Use Claude on iOS for voice or an everyday app.</label>
-          <label><input type="checkbox" value="code"> Use Claude Code only after describing the change plainly.</label>
-        </div>
-        <button type="button" class="button small" id="reset-progress">Reset progress</button>
       </section>
 
       <section class="section" id="level-up" aria-labelledby="level-up-title">
@@ -312,7 +272,6 @@ Before finalizing, tell me what is unclear, what might be missing, and what I sh
           <article class="tip-card"><h3>When you need options</h3><p>"Show me three versions: safe, bold, and balanced."</p></article>
           <article class="tip-card"><h3>When you want a system</h3><p>"Turn this into a reusable prompt, checklist, and Project instruction."</p></article>
           <article class="tip-card"><h3>When facts matter</h3><p>"Separate confirmed facts, reasonable inference, and what needs checking."</p></article>
-          <article class="tip-card"><h3>When sharing matters</h3><p>"Rewrite this for a beginner, an executive, and a skeptical reviewer."</p></article>
         </div>
       </section>
 
@@ -584,7 +543,7 @@ While editing:
 
 After editing, summarize what changed and what I should test.</textarea></article>
 
-          <article class="prompt-card"><div class="prompt-head"><h3>What's new digest</h3><button class="button small copy" data-copy-target="updates-template" type="button">Copy</button></div><textarea id="updates-template" aria-label="What's new digest prompt" readonly rows="15">I want to keep up with Claude without getting overwhelmed.
+          <article class="prompt-card"><div class="prompt-head"><h3>What's new digest</h3><button class="button small copy" data-copy-target="features-template" type="button">Copy</button></div><textarea id="features-template" aria-label="What's new digest prompt" readonly rows="15">I want to keep up with Claude without getting overwhelmed.
 
 I will paste notes from official Claude release notes, documentation, or announcements.
 
@@ -613,34 +572,23 @@ Focus only on practical use.</textarea></article>
         </div>
       </section>
 
-      <section class="section" id="sprint" aria-labelledby="sprint-title">
+      <section class="section feature-section" id="features" aria-labelledby="features-title">
         <div class="section-head">
-          <p class="eyebrow">30-day sprint</p>
-          <h2 id="sprint-title">Master Claude quickly by repeating the right moves</h2>
+          <p class="eyebrow">New features / capabilities</p>
+          <h2 id="features-title">What changed, why it matters, what to try</h2>
+          <p>Short posts translate official Claude updates into plain-language actions. This section is scheduled for refresh every Sunday and Wednesday at 11:00 PM Pacific.</p>
         </div>
-        <div class="timeline">
-          <article><h3>Days 1-3: Chat</h3><p>Use the setup interview, universal task prompt, and prompt improver on real work.</p></article>
-          <article><h3>Days 4-7: Projects</h3><p>Create one Project, add a small context set, and save the prompt that works best.</p></article>
-          <article><h3>Week 2: Artifacts and design</h3><p>Create a document, chart, small page, or interactive tool. Improve it twice.</p></article>
-          <article><h3>Week 3: Office, desktop, and mobile</h3><p>Use Claude inside the apps where work already happens: Word, PowerPoint, Excel, Mac, Chrome, and iOS.</p></article>
-          <article><h3>Week 4: Code and agents</h3><p>Use Claude Code for a small repository task, then turn your best workflow into a clear agent brief with checks and handoff.</p></article>
+        <div class="feature-grid">
+          <article class="feature-post"><span class="surface-badge">Apr 17, 2026</span><h3>Claude Design creates polished visual work</h3><p><strong>What changed:</strong> Claude Design helps create designs, prototypes, slides, one-pagers, and other visual drafts.</p><p><strong>Try it:</strong> ask for a one-page visual summary of a topic you already understand, then ask Claude to improve the layout for clarity.</p><a href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Open Design guide</a></article>
+          <article class="feature-post"><span class="surface-badge">Apr 16, 2026</span><h3>Opus 4.7 improves complex work</h3><p><strong>What changed:</strong> Claude Opus 4.7 improves software engineering, long-running coding tasks, and high-resolution image understanding.</p><p><strong>Try it:</strong> use Claude Code for a careful review of a small change, then ask for the smallest useful fix.</p><a href="https://www.anthropic.com/news/claude-opus-4-7">Read launch note</a></article>
+          <article class="feature-post"><span class="surface-badge">Apr 9, 2026</span><h3>Claude Cowork expands desktop help</h3><p><strong>What changed:</strong> Claude Cowork is available through the desktop app and can help with app-based work on macOS and Windows.</p><p><strong>Try it:</strong> start with a low-risk task where Claude explains what it sees before taking any action.</p><a href="https://support.claude.com/en/articles/12138966-release-notes">Open release notes</a></article>
+          <article class="feature-post"><span class="surface-badge">Mar 25, 2026</span><h3>Interactive apps work on mobile</h3><p><strong>What changed:</strong> Claude mobile can work with interactive apps, including visual assets such as charts and diagrams inside a conversation.</p><p><strong>Try it:</strong> dictate a messy idea on your phone and ask Claude to turn it into a small visual checklist.</p><a href="https://support.claude.com/en/articles/12138966-release-notes">Open release notes</a></article>
+          <article class="feature-post"><span class="surface-badge">Mar 12, 2026</span><h3>Claude can create custom visuals in chat</h3><p><strong>What changed:</strong> Claude can generate custom charts, diagrams, and visualizations directly in chat.</p><p><strong>Try it:</strong> paste a short table and ask Claude to make the clearest chart plus a one-sentence takeaway.</p><a href="https://support.claude.com/en/articles/12138966-release-notes">Open release notes</a></article>
+          <article class="feature-post"><span class="surface-badge">Mar 11, 2026</span><h3>Office work can move across apps</h3><p><strong>What changed:</strong> Claude for Excel, PowerPoint, and Word can coordinate context across Office files for smoother document, slide, and workbook work.</p><p><strong>Try it:</strong> ask Claude to explain an Excel finding, then turn that finding into one PowerPoint slide and one Word paragraph.</p><a href="https://support.claude.com/en/articles/13892150-work-across-excel-powerpoint-and-word">Open Office guide</a></article>
         </div>
-      </section>
-
-      <section class="section" id="updates" aria-labelledby="updates-title">
-        <div class="section-head">
-          <p class="eyebrow">Stay current</p>
-          <h2 id="updates-title">Keep up with new Claude features without chasing noise</h2>
-          <p>Check official sources, translate changes into plain language, and test only what helps your real work.</p>
-        </div>
-        <div class="update-grid">
-          <article class="update-card"><span class="surface-badge">Weekly</span><h3>Claude app release notes</h3><p>Use this for new app features, mobile changes, Office add-ins, Chrome, Projects, Artifacts, and Claude Design.</p><a href="https://support.claude.com/en/articles/12138966-release-notes">Open release notes</a></article>
-          <article class="update-card"><span class="surface-badge">Major launches</span><h3>Anthropic newsroom</h3><p>Use this for model launches, design launches, safety work, and bigger product announcements.</p><a href="https://www.anthropic.com/news">Open newsroom</a></article>
-          <article class="update-card"><span class="surface-badge">Models</span><h3>Model overview</h3><p>Use this to understand which Claude models exist and what each is best at, without memorizing names.</p><a href="https://docs.claude.com/en/docs/about-claude/models/all-models">Open model overview</a></article>
-          <article class="update-card"><span class="surface-badge">Coding</span><h3>Claude Code changelog</h3><p>Use this if you use Claude Code and want to know what changed in the command-line tool.</p><a href="https://code.claude.com/docs/en/changelog">Open Code changelog</a></article>
-          <article class="update-card"><span class="surface-badge">Design</span><h3>Claude Design guide</h3><p>Use this when visual creation, prototypes, presentations, or one-pagers matter.</p><a href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Open Design guide</a></article>
-          <article class="update-card"><span class="surface-badge">Agents</span><h3>Agent SDK docs</h3><p>Use this when you are ready to build hosted agents or automate a workflow outside a normal Claude chat.</p><a href="https://docs.claude.com/en/docs/claude-code/sdk/sdk-overview">Open Agent SDK docs</a></article>
-          <article class="update-card"><span class="surface-badge">Routine</span><h3>Five-minute update habit</h3><p>Read only the headline, ask what it helps you do, test one safe task, save the prompt if useful, and ignore the rest.</p></article>
+        <div class="feature-maintenance">
+          <h3>Refresh rhythm</h3>
+          <p>The site now has a scheduled review every Sunday and Wednesday at 11:00 PM Pacific. Each refresh should check official Claude release notes, Anthropic news, Claude Code changes, model docs, and agent-development docs, then update these posts only when a beginner would benefit from knowing what changed.</p>
         </div>
       </section>
 
@@ -665,11 +613,12 @@ Focus only on practical use.</textarea></article>
           <li><a href="https://support.claude.com/en/articles/14465370-use-claude-for-word">Claude for Word</a></li>
           <li><a href="https://support.claude.com/en/articles/13521390-use-claude-for-powerpoint">Claude for PowerPoint</a></li>
           <li><a href="https://support.claude.com/en/articles/12650343-using-claude-in-excel">Claude for Excel</a></li>
-          <li><a href="https://support.claude.com/en/articles/13892150-work-across-excel-and-powerpoint">Work across Excel, PowerPoint, and Word</a></li>
+          <li><a href="https://support.claude.com/en/articles/13892150-work-across-excel-powerpoint-and-word">Work across Excel, PowerPoint, and Word</a></li>
           <li><a href="https://support.claude.com/en/articles/11869619-using-claude-with-ios-apps">Claude with iOS apps</a></li>
           <li><a href="https://support.claude.com/en/articles/10065434-using-dictation-on-the-claude-mobile-apps">Dictation on Claude Mobile</a></li>
           <li><a href="https://support.claude.com/en/articles/12138966-release-notes">Claude release notes</a></li>
           <li><a href="https://www.anthropic.com/news">Anthropic newsroom</a></li>
+          <li><a href="https://www.anthropic.com/news/claude-opus-4-7">Claude Opus 4.7 launch</a></li>
           <li><a href="https://docs.claude.com/en/docs/about-claude/models/all-models">Claude model overview</a></li>
           <li><a href="https://code.claude.com/docs/en/changelog">Claude Code changelog</a></li>
           <li><a href="https://support.claude.com/en/articles/14604416-get-started-with-claude-design">Claude Design guide</a></li>
@@ -690,6 +639,6 @@ Focus only on practical use.</textarea></article>
       <a href="https://rkalani1.github.io/agent-builder-field-guide/">AI Agent Builder Field Guide</a>
     </footer>
 
-    <script src="app.js?v=2026-05-07-agents"></script>
+    <script src="app.js?v=2026-05-07-polish"></script>
   </body>
 </html>

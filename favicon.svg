@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Claude">
+  <rect width="64" height="64" rx="14" fill="#0a6b67"/>
+  <circle cx="32" cy="32" r="20" fill="#f8fbfa" opacity=".14"/>
+  <path fill="#f8fbfa" d="M42.1 41.4c-2.7 2.1-5.9 3.2-9.7 3.2-7.7 0-13.5-5.3-13.5-12.6s5.8-12.6 13.6-12.6c3.5 0 6.5 1 9.2 3l-3.1 5c-1.8-1.3-3.6-1.9-5.8-1.9-4.1 0-7 2.7-7 6.5s2.9 6.5 7 6.5c2.3 0 4.2-.7 6.1-2.1l3.2 5z"/>
+</svg>
