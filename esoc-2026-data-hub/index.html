@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ESOC 2026 Clinical Evidence Hub</title>
+<meta name="description" content="Curated, source-verified database of every late-breaking trial, large clinical study, and high-impact observational analysis presented at the 12th European Stroke Organisation Conference (ESOC 2026), Maastricht, 6-8 May 2026.">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--bg:#0a0e14;--panel:#11151c;--panel2:#161b24;--border:#2a3140;--text:#e6edf3;--muted:#9aa6b6;--mono:'JetBrains Mono','Fira Code','SF Mono',Consolas,monospace;--accent:#7ab2ff;--accent2:#5fd7a4;--warn:#ffba6b;--red:#ff7a8a;--violet:#c39bff;}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;font-size:14.5px;line-height:1.55}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.mono{font-family:var(--mono);font-size:13px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:10px}
+.card2{background:var(--panel2);border:1px solid var(--border);border-radius:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:2px 8px;border-radius:999px;border:1px solid var(--border);background:var(--panel2);font-size:12px;color:var(--muted)}
+.chip-pc{color:#fff;background:#5fd7a4;border-color:#5fd7a4}
+.chip-near{color:#0a0e14;background:#a5e8c6;border-color:#a5e8c6}
+.chip-hyp{color:#0a0e14;background:#c39bff;border-color:#c39bff}
+.chip-neg{color:#fff;background:#ff7a8a;border-color:#ff7a8a}
+.chip-src{color:#0a0e14;background:#ffba6b;border-color:#ffba6b}
+.chip-conf-h{color:#0a0e14;background:#7ab2ff;border-color:#7ab2ff}
+.chip-conf-m{color:#fff;background:#3a4150;border-color:#3a4150}
+.chip-conf-l{color:#fff;background:#4d2533;border-color:#4d2533}
+.divider{border-top:1px solid var(--border)}
+input,select{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:13.5px;outline:none}
+input:focus,select:focus{border-color:var(--accent)}
+.btn{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer}
+.btn:hover{background:#1c222d}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:left;padding:8px 10px;font-size:13.2px;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:var(--panel2);color:var(--muted);font-weight:600;position:sticky;top:0;z-index:1}
+tr:hover td{background:#0e1219}
+details>summary{cursor:pointer;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+.kbd{font-family:var(--mono);font-size:11px;background:var(--panel2);border:1px solid var(--border);border-radius:4px;padding:1px 5px}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.scroll-x{overflow-x:auto}
+.metric-table{width:100%;font-size:13px}
+.metric-table td{padding:5px 8px;border:none;border-bottom:1px solid var(--border)}
+.metric-table td:first-child{color:var(--muted);width:32%;font-weight:500}
+@media(max-width:760px){body{font-size:13.5px}.hide-mobile{display:none}}
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-20 backdrop-blur bg-[#0a0e14]/85 border-b border-[var(--border)]">
+ <div class="max-w-[1400px] mx-auto px-5 py-3 flex items-center gap-4 flex-wrap">
+  <div class="flex items-center gap-3">
+   <span class="dot" style="background:var(--accent2)"></span>
+   <div class="font-semibold tracking-tight">ESOC 2026 — Clinical Evidence Hub</div>
+   <span class="chip mono">Maastricht • 6–8 May 2026</span>
+  </div>
+  <nav class="flex items-center gap-4 text-sm text-[color:var(--muted)] ml-auto">
+   <a href="#summary">Summary</a>
+   <a href="#studies">Studies</a>
+   <a href="#skipped">Skipped</a>
+   <a href="#sources">Sources</a>
+   <a href="research_report.md">Report</a>
+   <a href="esoc_data.json" class="mono">JSON</a>
+  </nav>
+ </div>
+</header>
+
+<main class="max-w-[1400px] mx-auto px-5 py-7">
+
+ <section id="summary" class="mb-8">
+  <h1 class="text-2xl font-semibold tracking-tight mb-1">Verified late-breaking and large-trial evidence from ESOC 2026</h1>
+  <p class="text-[color:var(--muted)] max-w-3xl mb-5">Source-anchored database of every late-breaking trial, large clinical study, and high-impact observational analysis with publicly available numerical primary-endpoint data from the 12th European Stroke Organisation Conference. Numerical results extracted verbatim from the official ESO press releases and concurrent publications.  Every "N/A" reflects an actual gap in the public source surface as of the extraction date.</p>
+  <div id="counters" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3"></div>
+ </section>
+
+ <section id="filters" class="card p-4 mb-6">
+  <div class="flex flex-wrap items-center gap-3">
+   <input id="search" placeholder="Search by acronym, abstract #, author, intervention, endpoint…" class="flex-1 min-w-[260px]">
+   <select id="f-subtype"><option value="">All subtypes</option></select>
+   <select id="f-domain"><option value="">All interventions</option></select>
+   <select id="f-impact">
+    <option value="">All practice impacts</option>
+    <option value="practice-changing">Practice-changing</option>
+    <option value="near-practice-changing">Near practice-changing</option>
+    <option value="hypothesis-generating">Hypothesis-generating</option>
+    <option value="neutral-negative">Neutral / negative</option>
+    <option value="source-limited">Source-limited</option>
+   </select>
+   <select id="f-conf">
+    <option value="">All confidence</option>
+    <option value="high">High confidence</option>
+    <option value="moderate">Moderate</option>
+    <option value="low">Low</option>
+   </select>
+   <select id="f-presentation"><option value="">All presentation categories</option></select>
+   <button id="reset" class="btn">Reset</button>
+  </div>
+ </section>
+
+ <section id="studies" class="mb-12">
+  <div class="flex items-baseline justify-between mb-3">
+   <h2 class="text-lg font-semibold">Included studies</h2>
+   <div id="study-count" class="text-xs text-[color:var(--muted)] mono"></div>
+  </div>
+  <div id="cards" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+ </section>
+
+ <section id="skipped" class="mb-12">
+  <div class="flex items-baseline justify-between mb-3">
+   <h2 class="text-lg font-semibold">Skipped / source-limited / duplicate ledger</h2>
+   <div id="skip-count" class="text-xs text-[color:var(--muted)] mono"></div>
+  </div>
+  <div class="card scroll-x">
+   <table id="skip-table" class="min-w-[860px]">
+    <thead><tr><th class="mono">candidate_id</th><th>abstract_number</th><th>title</th><th>skip_category</th><th>reason</th></tr></thead>
+    <tbody></tbody>
+   </table>
+  </div>
+ </section>
+
+ <section id="sources" class="mb-12">
+  <div class="flex items-baseline justify-between mb-3">
+   <h2 class="text-lg font-semibold">Source manifest</h2>
+   <div id="src-count" class="text-xs text-[color:var(--muted)] mono"></div>
+  </div>
+  <div class="card scroll-x">
+   <table id="src-table" class="min-w-[800px]">
+    <thead><tr><th class="mono">id</th><th>type</th><th>title</th><th>limitations</th></tr></thead>
+    <tbody></tbody>
+   </table>
+  </div>
+ </section>
+
+ <section id="audit" class="mb-12 card p-4">
+  <h2 class="text-lg font-semibold mb-3">Coverage audit</h2>
+  <div id="audit-body" class="text-sm leading-6"></div>
+ </section>
+
+ <footer class="text-xs text-[color:var(--muted)] py-6 border-t border-[var(--border)]">
+  Data extracted 2026-05-09 from official ESO press releases (Day 1, Day 2), the European Stroke Journal Vol 11 Suppl_1 (Oxford Academic), TCTMD, NEJM, ClinicalTrials.gov, Neuro News International, Endovascular Today, BusinessWire. Every value labelled <span class="mono">N/A</span> reflects an unfetchable source or a press summary that omits the field, never a placeholder. Built for vascular neurologists; not intended as patient-care advice.
+ </footer>
+
+</main>
+<script src="app.js"></script>
+</body>
+</html>
