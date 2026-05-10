@@ -1,79 +1,253 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ESOC 2026 Clinical Evidence Hub</title>
 <meta name="description" content="Curated, source-verified database of every late-breaking trial, large clinical study, and high-impact observational analysis presented at the 12th European Stroke Organisation Conference (ESOC 2026), Maastricht, 6-8 May 2026.">
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0e14;--panel:#11151c;--panel2:#161b24;--border:#2a3140;--text:#e6edf3;--muted:#9aa6b6;--mono:'JetBrains Mono','Fira Code','SF Mono',Consolas,monospace;--accent:#7ab2ff;--accent2:#5fd7a4;--warn:#ffba6b;--red:#ff7a8a;--violet:#c39bff;}
-*{box-sizing:border-box}
-html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;font-size:14.5px;line-height:1.55}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-.mono{font-family:var(--mono);font-size:13px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:10px}
-.card2{background:var(--panel2);border:1px solid var(--border);border-radius:8px}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:2px 8px;border-radius:999px;border:1px solid var(--border);background:var(--panel2);font-size:12px;color:var(--muted)}
-.chip-pc{color:#fff;background:#5fd7a4;border-color:#5fd7a4}
-.chip-near{color:#0a0e14;background:#a5e8c6;border-color:#a5e8c6}
-.chip-hyp{color:#0a0e14;background:#c39bff;border-color:#c39bff}
-.chip-neg{color:#fff;background:#ff7a8a;border-color:#ff7a8a}
-.chip-src{color:#0a0e14;background:#ffba6b;border-color:#ffba6b}
-.chip-conf-h{color:#0a0e14;background:#7ab2ff;border-color:#7ab2ff}
-.chip-conf-m{color:#fff;background:#3a4150;border-color:#3a4150}
-.chip-conf-l{color:#fff;background:#4d2533;border-color:#4d2533}
-.divider{border-top:1px solid var(--border)}
-input,select{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:13.5px;outline:none}
-input:focus,select:focus{border-color:var(--accent)}
-.btn{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer}
-.btn:hover{background:#1c222d}
-table{border-collapse:collapse;width:100%}
-th,td{text-align:left;padding:8px 10px;font-size:13.2px;border-bottom:1px solid var(--border);vertical-align:top}
-th{background:var(--panel2);color:var(--muted);font-weight:600;position:sticky;top:0;z-index:1}
-tr:hover td{background:#0e1219}
-details>summary{cursor:pointer;list-style:none}
-details>summary::-webkit-details-marker{display:none}
-.kbd{font-family:var(--mono);font-size:11px;background:var(--panel2);border:1px solid var(--border);border-radius:4px;padding:1px 5px}
-.dot{width:6px;height:6px;border-radius:50%;display:inline-block}
-.scroll-x{overflow-x:auto}
-.metric-table{width:100%;font-size:13px}
-.metric-table td{padding:5px 8px;border:none;border-bottom:1px solid var(--border)}
-.metric-table td:first-child{color:var(--muted);width:32%;font-weight:500}
-@media(max-width:760px){body{font-size:13.5px}.hide-mobile{display:none}}
+:root {
+  --bg: #090a0f;
+  --panel: rgba(22, 25, 37, 0.65);
+  --panel2: rgba(30, 34, 48, 0.8);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --mono: 'JetBrains Mono', Consolas, monospace;
+  --accent: #818cf8;
+  --accent-glow: rgba(129, 140, 248, 0.4);
+  --accent2: #34d399;
+}
+* { box-sizing: border-box; }
+html, body {
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(52, 211, 153, 0.04) 0%, transparent 50%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, .font-heading {
+  font-family: 'Outfit', sans-serif;
+}
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+a:hover {
+  color: #a5b4fc;
+  text-decoration: none;
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+.mono {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: -0.02em;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+details.card {
+  cursor: pointer;
+}
+details.card[open] {
+  background: var(--panel2);
+  border-color: var(--border-hover);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+}
+details.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: 0 12px 24px -8px rgba(0,0,0,0.4);
+}
+.card2 {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: all 0.2s ease;
+}
+.chip:hover {
+  background: rgba(255,255,255,0.06);
+}
+.chip-pc { color: #34d399; background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); }
+.chip-near { color: #38bdf8; background: rgba(14, 165, 233, 0.15); border-color: rgba(14, 165, 233, 0.3); }
+.chip-hyp { color: #c084fc; background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.3); }
+.chip-neg { color: #fb7185; background: rgba(244, 63, 94, 0.15); border-color: rgba(244, 63, 94, 0.3); }
+.chip-src { color: #fbbf24; background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.3); }
+.chip-conf-h { color: #60a5fa; background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); }
+.chip-conf-m { color: #9ca3af; background: rgba(107, 114, 128, 0.15); border-color: rgba(107, 114, 128, 0.3); }
+.chip-conf-l { color: #f43f5e; background: rgba(225, 29, 72, 0.15); border-color: rgba(225, 29, 72, 0.3); }
+
+.divider { border-top: 1px solid var(--border); }
+input, select {
+  background: rgba(15, 20, 30, 0.6);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13.5px;
+  outline: none;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+input:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+  background: rgba(20, 25, 35, 0.8);
+}
+.btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+.btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+table { border-collapse: separate; border-spacing: 0; width: 100%; }
+th, td {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 13.2px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  transition: background-color 0.2s;
+}
+th {
+  background: rgba(20, 25, 35, 0.85);
+  color: var(--muted);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(10px);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.02); }
+details > summary { cursor: pointer; list-style: none; outline: none; }
+details > summary::-webkit-details-marker { display: none; }
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px var(--accent2);
+}
+.scroll-x { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.scroll-x::-webkit-scrollbar { height: 6px; }
+.scroll-x::-webkit-scrollbar-track { background: transparent; }
+.scroll-x::-webkit-scrollbar-thumb { background-color: var(--border); border-radius: 20px; }
+
+.metric-table { width: 100%; font-size: 13px; }
+.metric-table td { padding: 8px 12px; border: none; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.metric-table td:first-child { color: var(--muted); width: 35%; font-weight: 500; }
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media(max-width: 760px) {
+  body { font-size: 13.5px; }
+  .hide-mobile { display: none; }
+  .card { border-radius: 8px; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in { opacity: 0; animation: fadeIn 0.5s ease-out forwards; }
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
 </style>
 </head>
 <body>
-<header class="sticky top-0 z-20 backdrop-blur bg-[#0a0e14]/85 border-b border-[var(--border)]">
- <div class="max-w-[1400px] mx-auto px-5 py-3 flex items-center gap-4 flex-wrap">
+<header class="sticky top-0 z-20 backdrop-blur-md bg-[#090a0f]/80 border-b border-[var(--border)] transition-all">
+ <div class="max-w-[1400px] mx-auto px-5 py-4 flex items-center gap-4 flex-wrap">
   <div class="flex items-center gap-3">
    <span class="dot" style="background:var(--accent2)"></span>
-   <div class="font-semibold tracking-tight">ESOC 2026 — Clinical Evidence Hub</div>
-   <span class="chip mono">Maastricht • 6–8 May 2026</span>
+   <div class="font-heading font-semibold tracking-tight text-lg">ESOC 2026 <span class="text-[color:var(--muted)] font-normal">| Clinical Evidence Hub</span></div>
+   <span class="chip mono ml-2 hidden sm:inline-flex">Maastricht • 6–8 May 2026</span>
   </div>
-  <nav class="flex items-center gap-4 text-sm text-[color:var(--muted)] ml-auto">
-   <a href="#summary">Summary</a>
-   <a href="#studies">Studies</a>
-   <a href="#skipped">Skipped</a>
-   <a href="#sources">Sources</a>
-   <a href="research_report.md">Report</a>
-   <a href="esoc_data.json" class="mono">JSON</a>
+  <nav class="flex items-center gap-5 text-sm font-medium text-[color:var(--muted)] ml-auto">
+   <a href="#summary" class="hover:text-white transition-colors">Summary</a>
+   <a href="#studies" class="hover:text-white transition-colors">Studies</a>
+   <a href="#skipped" class="hover:text-white transition-colors hidden md:block">Skipped</a>
+   <a href="#sources" class="hover:text-white transition-colors hidden md:block">Sources</a>
+   <a href="research_report.md" class="hover:text-white transition-colors flex items-center gap-1">
+     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+     Report
+   </a>
+   <a href="esoc_data.json" class="mono hover:text-white transition-colors flex items-center gap-1">
+     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+     JSON
+   </a>
   </nav>
  </div>
 </header>
 
-<main class="max-w-[1400px] mx-auto px-5 py-7">
+<main class="max-w-[1400px] mx-auto px-5 py-10">
 
- <section id="summary" class="mb-8">
-  <h1 class="text-2xl font-semibold tracking-tight mb-1">Verified late-breaking and large-trial evidence from ESOC 2026</h1>
-  <p class="text-[color:var(--muted)] max-w-3xl mb-5">Source-anchored database of every late-breaking trial, large clinical study, and high-impact observational analysis with publicly available numerical primary-endpoint data from the 12th European Stroke Organisation Conference. Numerical results extracted verbatim from the official ESO press releases and concurrent publications.  Every "N/A" reflects an actual gap in the public source surface as of the extraction date.</p>
-  <div id="counters" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3"></div>
+ <section id="summary" class="mb-10 animate-in">
+  <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-gradient font-heading">Verified late-breaking and large-trial evidence from ESOC 2026</h1>
+  <p class="text-[color:var(--muted)] max-w-4xl mb-8 text-base leading-relaxed">Source-anchored database of every late-breaking trial, large clinical study, and high-impact observational analysis with publicly available numerical primary-endpoint data from the 12th European Stroke Organisation Conference. Numerical results extracted verbatim from the official ESO press releases and concurrent publications.  Every <span class="mono px-1 py-0.5 rounded bg-[rgba(255,255,255,0.05)] text-sm">N/A</span> reflects an actual gap in the public source surface as of the extraction date.</p>
+  <div id="counters" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4"></div>
  </section>
 
- <section id="filters" class="card p-4 mb-6">
-  <div class="flex flex-wrap items-center gap-3">
-   <input id="search" placeholder="Search by acronym, abstract #, author, intervention, endpoint…" class="flex-1 min-w-[260px]">
+ <section id="filters" class="card p-5 mb-10 animate-in stagger-1">
+  <div class="flex flex-wrap items-center gap-4">
+   <div class="relative flex-1 min-w-[280px]">
+     <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-[color:var(--muted)]" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+     <input id="search" placeholder="Search by acronym, abstract #, author, intervention, endpoint…" class="w-full pl-9">
+   </div>
    <select id="f-subtype"><option value="">All subtypes</option></select>
    <select id="f-domain"><option value="">All interventions</option></select>
    <select id="f-impact">
@@ -91,51 +265,74 @@ details>summary::-webkit-details-marker{display:none}
     <option value="low">Low</option>
    </select>
    <select id="f-presentation"><option value="">All presentation categories</option></select>
-   <button id="reset" class="btn">Reset</button>
+   <button id="reset" class="btn flex items-center gap-2">
+     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+     Reset
+   </button>
   </div>
  </section>
 
- <section id="studies" class="mb-12">
-  <div class="flex items-baseline justify-between mb-3">
-   <h2 class="text-lg font-semibold">Included studies</h2>
-   <div id="study-count" class="text-xs text-[color:var(--muted)] mono"></div>
+ <section id="studies" class="mb-14 animate-in stagger-2">
+  <div class="flex items-center justify-between mb-5">
+   <h2 class="text-xl font-semibold font-heading flex items-center gap-2">
+     <svg class="text-[color:var(--accent)]" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+     Included studies
+   </h2>
+   <div id="study-count" class="text-sm font-medium px-3 py-1 bg-[rgba(255,255,255,0.05)] rounded-full text-[color:var(--muted)]"></div>
   </div>
-  <div id="cards" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+  <div id="cards" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
  </section>
 
- <section id="skipped" class="mb-12">
-  <div class="flex items-baseline justify-between mb-3">
-   <h2 class="text-lg font-semibold">Skipped / source-limited / duplicate ledger</h2>
-   <div id="skip-count" class="text-xs text-[color:var(--muted)] mono"></div>
+ <section id="skipped" class="mb-14 animate-in stagger-3">
+  <div class="flex items-center justify-between mb-5">
+   <h2 class="text-xl font-semibold font-heading flex items-center gap-2">
+     <svg class="text-[color:var(--muted)]" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+     Skipped / source-limited / duplicate ledger
+   </h2>
+   <div id="skip-count" class="text-sm font-medium px-3 py-1 bg-[rgba(255,255,255,0.05)] rounded-full text-[color:var(--muted)]"></div>
   </div>
-  <div class="card scroll-x">
-   <table id="skip-table" class="min-w-[860px]">
+  <div class="card scroll-x border border-[var(--border)] overflow-hidden">
+   <table id="skip-table" class="min-w-[860px] w-full">
     <thead><tr><th class="mono">candidate_id</th><th>abstract_number</th><th>title</th><th>skip_category</th><th>reason</th></tr></thead>
     <tbody></tbody>
    </table>
   </div>
  </section>
 
- <section id="sources" class="mb-12">
-  <div class="flex items-baseline justify-between mb-3">
-   <h2 class="text-lg font-semibold">Source manifest</h2>
-   <div id="src-count" class="text-xs text-[color:var(--muted)] mono"></div>
+ <section id="sources" class="mb-14 animate-in stagger-3">
+  <div class="flex items-center justify-between mb-5">
+   <h2 class="text-xl font-semibold font-heading flex items-center gap-2">
+     <svg class="text-[color:var(--accent2)]" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 12H16c-.7 2-2 3-4 3s-3.3-1-4-3H2.5"></path><path d="M5.5 5.1L2 12v6c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2v-6l-3.4-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.8 1.1z"></path></svg>
+     Source manifest
+   </h2>
+   <div id="src-count" class="text-sm font-medium px-3 py-1 bg-[rgba(255,255,255,0.05)] rounded-full text-[color:var(--muted)]"></div>
   </div>
-  <div class="card scroll-x">
-   <table id="src-table" class="min-w-[800px]">
+  <div class="card scroll-x border border-[var(--border)] overflow-hidden">
+   <table id="src-table" class="min-w-[800px] w-full">
     <thead><tr><th class="mono">id</th><th>type</th><th>title</th><th>limitations</th></tr></thead>
     <tbody></tbody>
    </table>
   </div>
  </section>
 
- <section id="audit" class="mb-12 card p-4">
-  <h2 class="text-lg font-semibold mb-3">Coverage audit</h2>
+ <section id="audit" class="mb-14 card p-6 animate-in stagger-3">
+  <h2 class="text-xl font-semibold font-heading mb-5 flex items-center gap-2">
+    <svg class="text-[color:var(--accent)]" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+    Coverage audit
+  </h2>
   <div id="audit-body" class="text-sm leading-6"></div>
  </section>
 
- <footer class="text-xs text-[color:var(--muted)] py-6 border-t border-[var(--border)]">
-  Data extracted 2026-05-09 from official ESO press releases (Day 1, Day 2), the European Stroke Journal Vol 11 Suppl_1 (Oxford Academic), TCTMD, NEJM, ClinicalTrials.gov, Neuro News International, Endovascular Today, BusinessWire. Every value labelled <span class="mono">N/A</span> reflects an unfetchable source or a press summary that omits the field, never a placeholder. Built for vascular neurologists; not intended as patient-care advice.
+ <footer class="text-sm text-[color:var(--muted)] py-8 border-t border-[var(--border)] mt-10">
+  <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="max-w-3xl leading-relaxed">
+      Data extracted 2026-05-09 from official ESO press releases (Day 1, Day 2), the European Stroke Journal Vol 11 Suppl_1 (Oxford Academic), TCTMD, NEJM, ClinicalTrials.gov, Neuro News International, Endovascular Today, BusinessWire. Every value labelled <span class="mono px-1 py-0.5 rounded bg-[rgba(255,255,255,0.05)] text-xs">N/A</span> reflects an unfetchable source or a press summary that omits the field, never a placeholder. 
+      <br><span class="text-white opacity-80 mt-2 block">Built for vascular neurologists; not intended as patient-care advice.</span>
+    </div>
+    <div class="text-right whitespace-nowrap opacity-60">
+      &copy; 2026
+    </div>
+  </div>
  </footer>
 
 </main>

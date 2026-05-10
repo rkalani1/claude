@@ -104,24 +104,29 @@
     if(cp.doi && cp.doi !== 'N/A') links.push(`<a href="https://doi.org/${escape(cp.doi)}" target="_blank" rel="noopener" class="mono">DOI: ${escape(cp.doi)} ↗</a>`);
     if(tr.url && tr.url !== 'N/A') links.push(`<a href="${escape(tr.url)}" target="_blank" rel="noopener" class="mono">${escape(tr.identifier||tr.registry||'Registry')} ↗</a>`);
     return `
-    <details class="card p-0">
-      <summary class="p-4 flex flex-col gap-2">
-        <div class="flex items-start gap-3 flex-wrap">
+    <details class="card p-0 group">
+      <summary class="p-5 flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-4">
           <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2 flex-wrap mb-1">
-              <span class="chip mono">${escape(s.abstract_number||'no abstract #')}</span>
-              <span class="chip ${impactClass(s.practice_impact_category)}">${escape(s.practice_impact_category||'unclassified')}</span>
+            <div class="flex items-center gap-2 flex-wrap mb-2">
+              <span class="chip mono bg-[rgba(255,255,255,0.08)] border-transparent text-white">${escape(s.abstract_number||'no abstract #')}</span>
+              <span class="chip ${impactClass(s.practice_impact_category)}">${escape(s.practice_impact_category||'unclassified').replace(/-/g, ' ')}</span>
               <span class="chip ${confClass(s.confidence?.overall)}">conf: ${escape(s.confidence?.overall||'unknown')}</span>
             </div>
-            <div class="font-semibold leading-snug">${escape(s.study_acronym||'(no acronym)')}</div>
-            <div class="text-[12.5px] text-[color:var(--muted)] mt-1">${escape(s.full_title||'')}</div>
+            <h3 class="font-heading font-bold text-xl text-white leading-tight mb-1 group-hover:text-[color:var(--accent)] transition-colors">${escape(s.study_acronym||'(no acronym)')}</h3>
+            <div class="text-[13.5px] text-[color:var(--muted)] leading-relaxed">${escape(s.full_title||'')}</div>
+          </div>
+          <div class="flex-shrink-0 text-[color:var(--muted)] group-hover:text-white transition-colors mt-2">
+            <svg class="w-5 h-5 transition-transform group-open:-rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 mt-2 text-[13px]">
-          <div><span class="text-[color:var(--muted)]">Subtype:</span> ${escape(s.stroke_subtype||'—')}</div>
-          <div><span class="text-[color:var(--muted)]">Intervention:</span> ${escape(s.intervention_domain||'—')}</div>
-          <div><span class="text-[color:var(--muted)]">Primary endpoint:</span> ${escape(pe.definition||'—')}</div>
-          <div class="mono"><span class="text-[color:var(--muted)] font-sans">Effect / p:</span> ${escape(pm.relative_effect_size||pm.p_value||'N/A')}</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mt-2 pt-3 border-t border-[rgba(255,255,255,0.05)] text-[13.5px]">
+          <div class="flex items-baseline gap-2"><span class="text-[color:var(--muted)] w-24 flex-shrink-0">Subtype</span> <span class="font-medium text-white">${escape(s.stroke_subtype||'—')}</span></div>
+          <div class="flex items-baseline gap-2"><span class="text-[color:var(--muted)] w-24 flex-shrink-0">Intervention</span> <span class="font-medium text-white">${escape(s.intervention_domain||'—')}</span></div>
+          <div class="flex items-baseline gap-2"><span class="text-[color:var(--muted)] w-24 flex-shrink-0">Endpoint</span> <span class="font-medium text-white truncate" title="${escape(pe.definition||'—')}">${escape(pe.definition||'—')}</span></div>
+          <div class="flex items-baseline gap-2"><span class="text-[color:var(--muted)] w-24 flex-shrink-0">Effect / p</span> <span class="mono text-white bg-[rgba(255,255,255,0.05)] px-1.5 rounded">${escape(pm.relative_effect_size||pm.p_value||'N/A')}</span></div>
         </div>
       </summary>
       <div class="px-4 pb-4 divider pt-3">
