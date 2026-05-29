@@ -2,7 +2,7 @@
 
 Learn Claude - a beginner-first guide for using Claude across chat, uploads, Research, Projects, Artifacts, Design, Cowork, Code, Office, Chrome, connectors, skills, plugins, and model fit without jargon.
 
-Live site: https://example.github.io/claude/
+Live site: https://rkalani1.github.io/claude/
 
 ## Data Boundary
 
