@@ -21,6 +21,7 @@ python3 -m http.server 8129
 - Check source links in the Sources section.
 - Run a browser accessibility pass on desktop and mobile.
 - Confirm task picker, prompt lab, model fit, answer fixer, reusable templates, prompt export, agent workflow prompt, feature posts, disclosure panels, and prompt copy buttons work.
+- Use `docs/automedbench-lite.md` when teaching Claude users how to validate multi-step medical, research, evidence, or regulated-domain workflows.
 
 ## License
 
