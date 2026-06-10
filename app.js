@@ -15,19 +15,27 @@
     code: "Claude Code"
   };
 
+  // Model guidance stays version-free on purpose. Current model names live in
+  // one place: the "Models in one place" block (#models) in index.html.
+  const modelTier = {
+    fast: "the fastest model",
+    everyday: "the everyday default model",
+    deep: "the most capable model"
+  };
+
   const modelFitHints = {
-    default: "Use Sonnet 4.6 for most everyday work. Use Haiku 4.5 for quick, simple, repeated drafts. Use Opus 4.7 for complex reasoning, code, dense images, or high-stakes review.",
-    chat: "Use Sonnet 4.6 for everyday chat. Use Haiku 4.5 for quick rewrites or simple summaries. Use Opus 4.7 when the answer affects a serious decision.",
-    project: "Use Sonnet 4.6 for most Project work. Use Opus 4.7 when the Project has many files, conflicting context, or a high-stakes review.",
-    artifact: "Use Sonnet 4.6 for most Artifacts. Use Opus 4.7 for complex dashboards, dense visual inputs, or multi-step revisions.",
-    research: "Use Sonnet 4.6 for ordinary synthesis. Use Opus 4.7 when the question has many sources, dense documents, or a decision you will publish.",
-    office: "Use Sonnet 4.6 for most Word, PowerPoint, and Excel work. Use Opus 4.7 for dense decks, complex workbooks, or source-heavy document review.",
-    chrome: "Use Sonnet 4.6 for most browser help. Use Haiku 4.5 for quick page summaries and Opus 4.7 for careful comparisons or risky workflows.",
-    cowork: "Use Sonnet 4.6 for routine Cowork sessions. Use Opus 4.7 for longer desktop jobs, many files, or work that needs careful handoff.",
-    connectors: "Use Sonnet 4.6 for connected-app work. Use Opus 4.7 when Claude must reconcile several sources or produce a decision-ready answer.",
-    plugins: "Use Sonnet 4.6 while testing a plugin. Use Opus 4.7 when the workflow spans several tools, files, or review steps.",
-    mobile: "Use Haiku 4.5 or Sonnet 4.6 for quick mobile capture and drafts. Use Opus 4.7 later if the task needs deeper review.",
-    code: "Use Sonnet 4.6 for routine repo work. Use Opus 4.7 for architecture, difficult bugs, long-running code work, or vision-heavy debugging."
+    default: `Use ${modelTier.everyday} for most work. Use ${modelTier.fast} for quick, simple, repeated drafts. Use ${modelTier.deep} for complex reasoning, code, dense documents, or high-stakes review.`,
+    chat: `Use ${modelTier.everyday} for everyday chat. Use ${modelTier.fast} for quick rewrites or simple summaries. Use ${modelTier.deep} when the answer affects a serious decision.`,
+    project: `Use ${modelTier.everyday} for most Project work. Use ${modelTier.deep} when the Project has many files, conflicting context, or a high-stakes review.`,
+    artifact: `Use ${modelTier.everyday} for most Artifacts. Use ${modelTier.deep} for complex dashboards, dense visual inputs, or multi-step revisions.`,
+    research: `Use ${modelTier.everyday} for ordinary synthesis. Use ${modelTier.deep} when the question has many sources, dense documents, or a decision you will publish.`,
+    office: `Use ${modelTier.everyday} for most Word, PowerPoint, and Excel work. Use ${modelTier.deep} for dense decks, complex workbooks, or source-heavy document review.`,
+    chrome: `Use ${modelTier.everyday} for most browser help. Use ${modelTier.fast} for quick page summaries and ${modelTier.deep} for careful comparisons or risky workflows.`,
+    cowork: `Use ${modelTier.everyday} for routine Cowork sessions. Use ${modelTier.deep} for longer desktop jobs, many files, or work that needs careful handoff.`,
+    connectors: `Use ${modelTier.everyday} for connected-app work. Use ${modelTier.deep} when Claude must reconcile several sources or produce a decision-ready answer.`,
+    plugins: `Use ${modelTier.everyday} while testing a plugin. Use ${modelTier.deep} when the workflow spans several tools, files, or review steps.`,
+    mobile: `Use ${modelTier.fast} or ${modelTier.everyday} for quick mobile capture and drafts. Use ${modelTier.deep} later if the task needs deeper review.`,
+    code: `Use ${modelTier.everyday} for routine repo work. Use ${modelTier.deep} for architecture, difficult bugs, long-running code work, or vision-heavy debugging.`
   };
 
   const outputHints = {
@@ -455,8 +463,7 @@ Give me one polished version and one shorter version.`
   const promptStatus = document.getElementById("prompt-status");
   const toast = document.getElementById("toast");
   const exportPromptsButton = document.getElementById("export-prompts");
-  const openClaudeButton = document.getElementById("open-claude-with-prompt");
-  const taskShortcutButtons = Array.from(document.querySelectorAll("[data-shortcut-mission]"));
+  const copyOpenButtons = Array.from(document.querySelectorAll("[data-copy-open]"));
   const surfaceFilterButtons = Array.from(document.querySelectorAll("[data-surface-filter]"));
   const surfaceCards = Array.from(document.querySelectorAll("[data-surface-group]"));
   const urlParams = new URLSearchParams(window.location.search);
@@ -467,6 +474,12 @@ Give me one polished version and one shorter version.`
     output: "output",
     fix: "fix",
     rough: "roughPrompt"
+  };
+  const stateDefaults = {
+    mission: "email",
+    surface: "chat",
+    output: "useful",
+    fix: "vague"
   };
   const storage = {
     get(key) {
@@ -485,10 +498,10 @@ Give me one polished version and one shorter version.`
     }
   };
 
-  let selectedSurface = readChoice(stateKeys.surface, surfaceButtons, "data-surface", "chat");
-  let selectedOutput = readChoice(stateKeys.output, outputButtons, "data-output", "useful");
-  let selectedMission = readChoice(stateKeys.mission, missionButtons, "data-mission", "email");
-  let selectedFix = readChoice(stateKeys.fix, fixButtons, "data-fix", "vague");
+  let selectedSurface = readChoice(stateKeys.surface, surfaceButtons, "data-surface", stateDefaults.surface);
+  let selectedOutput = readChoice(stateKeys.output, outputButtons, "data-output", stateDefaults.output);
+  let selectedMission = readChoice(stateKeys.mission, missionButtons, "data-mission", stateDefaults.mission);
+  let selectedFix = readChoice(stateKeys.fix, fixButtons, "data-fix", stateDefaults.fix);
 
   if (roughPrompt) {
     const savedRoughPrompt = storage.get(stateKeys.rough);
@@ -510,10 +523,21 @@ Give me one polished version and one shorter version.`
   function updateStateUrl() {
     if (!window.history || !window.history.replaceState) return;
     const params = new URLSearchParams(window.location.search);
-    params.set(stateKeys.mission, selectedMission);
-    params.set(stateKeys.surface, selectedSurface);
-    params.set(stateKeys.output, selectedOutput);
-    params.set(stateKeys.fix, selectedFix);
+    const state = {
+      mission: selectedMission,
+      surface: selectedSurface,
+      output: selectedOutput,
+      fix: selectedFix
+    };
+    // Keep deep links shareable without turning every visit into a noisy URL:
+    // only non-default selections appear as query parameters.
+    Object.keys(state).forEach((key) => {
+      if (state[key] === stateDefaults[key]) {
+        params.delete(key);
+      } else {
+        params.set(key, state[key]);
+      }
+    });
     const query = params.toString();
     const nextUrl = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
     try {
@@ -538,7 +562,7 @@ Give me one polished version and one shorter version.`
     toast.classList.add("is-visible");
     showToast.timeoutId = window.setTimeout(() => {
       toast.classList.remove("is-visible");
-    }, 1800);
+    }, 2200);
   }
 
   function setActiveChoice(buttons, attribute, value) {
@@ -546,6 +570,18 @@ Give me one polished version and one shorter version.`
       const active = button.getAttribute(attribute) === value;
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
+  // If a selection restored from a deep link or a previous visit lives inside a
+  // collapsed "more options" disclosure, open it so the active chip is visible.
+  function revealActiveChoices() {
+    Array.from(document.querySelectorAll(".choice.is-active")).forEach((button) => {
+      let details = button.closest("details");
+      while (details) {
+        details.open = true;
+        details = details.parentElement ? details.parentElement.closest("details") : null;
+      }
     });
   }
 
@@ -590,26 +626,30 @@ Give me one polished version and one shorter version.`
   }
 
   async function copyTemplate(targetId, button, successMessage) {
-    if (!targetId) return;
+    if (!targetId) return false;
     const target = document.getElementById(targetId);
-    if (!target) return;
+    if (!target) return false;
     const original = button.textContent;
     const text = target.value || target.textContent || "";
+    let copied = false;
 
     try {
-      const copied = await copyText(text, target);
+      copied = await copyText(text, target);
       button.textContent = copied ? "Copied" : "Selected";
-      showToast(copied ? (successMessage || "Copied.") : "Copy blocked. Text selected.");
+      showToast(copied ? (successMessage || "Copied.") : "Copy blocked. Text selected — press Ctrl+C or Cmd+C.");
     } catch {
-      target.focus();
-      target.select();
+      if (typeof target.select === "function") {
+        target.focus();
+        target.select();
+      }
       button.textContent = "Selected";
-      showToast("Copy blocked. Text selected.");
+      showToast("Copy blocked. Text selected — press Ctrl+C or Cmd+C.");
     }
 
     window.setTimeout(() => {
       button.textContent = original;
-    }, 1400);
+    }, 1600);
+    return copied;
   }
 
   function getModelFit() {
@@ -626,7 +666,6 @@ Give me one polished version and one shorter version.`
       ? (officeAppsByOutput[selectedOutput] || surfaceHints.office)
       : (surfaceHints[selectedSurface] || surfaceHints.chat);
     const outputType = outputHints[selectedOutput] || outputHints.useful;
-    const modelFit = getModelFit();
     const officeRules = selectedSurface === "office" ? `
 
 Office rules:
@@ -666,12 +705,9 @@ Mobile rules:
 - Make the first step voice-friendly.
 - If this involves another app, tell me what to review before sending or saving.` : "";
     const surfaceRules = officeRules || researchRules || connectorRules || pluginRules || mobileRules;
-    if (modelFitCopy) modelFitCopy.textContent = modelFit;
+    if (modelFitCopy) modelFitCopy.textContent = getModelFit();
     if (promptStatus) promptStatus.textContent = `Optimized prompt updated for ${surface} and ${outputType}.`;
     optimizedPrompt.value = `You are helping me use ${surface} effectively.
-
-Model note for me before sending:
-${modelFit}
 
 Task:
 ${task}
@@ -699,7 +735,7 @@ After the answer:
   function setMission(mission, options = {}) {
     const detail = missionData[mission] || missionData.email;
     selectedMission = missionData[mission] ? mission : "email";
-    setActiveChoice(missionButtons, "data-mission", mission);
+    setActiveChoice(missionButtons, "data-mission", selectedMission);
     if (missionTitle) missionTitle.textContent = detail.title;
     if (missionSurface) missionSurface.innerHTML = `<strong>Best Claude surface:</strong> ${detail.surface}`;
     if (missionNext) missionNext.innerHTML = `<strong>Next move:</strong> ${detail.next}`;
@@ -710,7 +746,7 @@ After the answer:
   function setFix(fix, options = {}) {
     const detail = fixData[fix] || fixData.vague;
     selectedFix = fixData[fix] ? fix : "vague";
-    setActiveChoice(fixButtons, "data-fix", fix);
+    setActiveChoice(fixButtons, "data-fix", selectedFix);
     if (fixTitle) fixTitle.textContent = detail.title;
     if (fixNext) fixNext.innerHTML = `<strong>Use when:</strong> ${detail.next}`;
     if (fixPrompt) fixPrompt.value = detail.prompt;
@@ -739,15 +775,6 @@ After the answer:
     button.addEventListener("click", () => setMission(button.getAttribute("data-mission") || "email"));
   });
 
-  taskShortcutButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const mission = button.getAttribute("data-shortcut-mission") || "email";
-      setMission(mission);
-      const title = (missionData[mission] || missionData.email).title;
-      showToast(`${title} prompt loaded.`);
-    });
-  });
-
   fixButtons.forEach((button) => {
     button.addEventListener("click", () => setFix(button.getAttribute("data-fix") || "vague"));
   });
@@ -767,13 +794,19 @@ After the answer:
     button.addEventListener("click", () => copyTemplate(button.getAttribute("data-copy-target"), button));
   });
 
-  if (openClaudeButton) {
-    openClaudeButton.addEventListener("click", async () => {
-      await copyTemplate("optimized-prompt", openClaudeButton, "Prompt copied. Opening Claude.");
+  // "Copy and open Claude": copy first, then open. If the popup is blocked,
+  // the prompt is still on the clipboard and the toast explains what to do.
+  copyOpenButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const copied = await copyTemplate(button.getAttribute("data-copy-open"), button, "Prompt copied. Opening Claude…");
       const opened = window.open("https://claude.ai/", "_blank", "noopener");
-      if (!opened) showToast("Prompt copied. Open Claude from the top button.");
+      if (!opened) {
+        showToast(copied
+          ? "Prompt copied. Popup blocked — use the Open Claude button at the top."
+          : "Popup blocked. Copy the prompt, then use the Open Claude button at the top.");
+      }
     });
-  }
+  });
 
   if (exportPromptsButton) {
     exportPromptsButton.addEventListener("click", exportPrompts);
@@ -781,15 +814,20 @@ After the answer:
 
   function exportPrompts() {
     const excludedIds = new Set(["mission-prompt", "optimized-prompt", "fix-prompt"]);
+    const seen = new Set();
     const templates = Array.from(document.querySelectorAll("textarea[readonly]"))
-      .filter((textarea) => textarea.id && !excludedIds.has(textarea.id) && textarea.value.trim());
+      .filter((textarea) => {
+        if (!textarea.id || excludedIds.has(textarea.id) || seen.has(textarea.id) || !textarea.value.trim()) return false;
+        seen.add(textarea.id);
+        return true;
+      });
     const sections = templates.map((textarea) => {
       const card = textarea.closest("article, li");
-      const heading = card ? card.querySelector("h3") : null;
+      const heading = card ? card.querySelector("h2, h3, h4") : null;
       const title = heading ? heading.textContent.trim() : textarea.getAttribute("aria-label") || textarea.id;
       return `## ${title}\n\n\`\`\`text\n${textarea.value.trim()}\n\`\`\``;
     });
-    const markdown = `# Learn Claude Prompt Pack\n\nGenerated from the Learn Claude site.\n\n${sections.join("\n\n")}\n`;
+    const markdown = `# Learn Claude Prompt Pack\n\nGenerated from the Learn Claude site.\n\nKeep private data out: never paste PHI or patient identifiers, learner or personnel records, credentials, or confidential / restricted research data into prompts.\n\n${sections.join("\n\n")}\n`;
     const blob = new Blob([markdown], { type: "text/markdown" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
@@ -798,6 +836,11 @@ After the answer:
     link.click();
     document.body.removeChild(link);
     window.setTimeout(() => URL.revokeObjectURL(link.href), 0);
+    const original = exportPromptsButton.textContent;
+    exportPromptsButton.textContent = "Exported";
+    window.setTimeout(() => {
+      exportPromptsButton.textContent = original;
+    }, 1600);
     showToast("Prompt pack exported.");
   }
 
@@ -807,4 +850,5 @@ After the answer:
   setFix(selectedFix, { persist: false });
   setSurfaceFilter("draft");
   buildOptimizedPrompt();
+  revealActiveChoices();
 })();
