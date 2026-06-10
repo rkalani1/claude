@@ -19,8 +19,9 @@ python3 -m http.server 8129
 ## Verify
 
 - Check source links in the Sources section.
-- Run a browser accessibility pass on desktop and mobile.
-- Confirm task picker, prompt lab, model fit, answer fixer, reusable templates, prompt export, agent workflow prompt, feature posts, disclosure panels, and prompt copy buttons work.
+- Run a browser accessibility pass on desktop and mobile (one H1, single footer landmark, keyboard-usable disclosures, visible focus states).
+- Confirm the start path, starter prompt, task picker, prompt builder, answer fixer, surface filter, reusable templates, Markdown export, and copy / copy-and-open buttons work.
+- Model names are centralized in the "Models in one place" block (`#models`) and the matching tier wording in `app.js`; update both together against the official models overview.
 
 ## License
 
