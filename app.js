@@ -801,6 +801,42 @@ After the answer:
     showToast("Prompt pack exported.");
   }
 
+  // Light/dark theme toggle. The inline script in <head> sets the initial
+  // data-theme before paint; here we wire the button, persistence, and labels.
+  function setupThemeToggle() {
+    const toggle = document.getElementById("theme-toggle");
+    const root = document.documentElement;
+    const themeColorMeta = document.getElementById("theme-color-meta");
+    const themeColors = { light: "#fafafe", dark: "#15141c" };
+
+    function currentTheme() {
+      const attr = root.getAttribute("data-theme");
+      if (attr === "light" || attr === "dark") return attr;
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    function applyTheme(theme) {
+      root.setAttribute("data-theme", theme);
+      if (themeColorMeta) themeColorMeta.setAttribute("content", themeColors[theme] || themeColors.light);
+      if (toggle) {
+        const next = theme === "dark" ? "light" : "dark";
+        toggle.setAttribute("aria-label", `Switch to ${next} theme`);
+        toggle.setAttribute("title", `Switch to ${next} theme`);
+        toggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+      }
+    }
+
+    applyTheme(currentTheme());
+    if (toggle) {
+      toggle.addEventListener("click", () => {
+        const next = currentTheme() === "dark" ? "light" : "dark";
+        applyTheme(next);
+        storage.set("theme", next);
+        showToast(next === "dark" ? "Dark theme on." : "Light theme on.");
+      });
+    }
+  }
+
   // Highlight the primary-nav link for the section currently in view.
   function setupNavHighlight() {
     const navLinks = Array.from(document.querySelectorAll(".top-nav a[href^='#']"));
@@ -836,5 +872,6 @@ After the answer:
   setFix(selectedFix, { persist: false });
   setSurfaceFilter("draft");
   buildOptimizedPrompt();
+  setupThemeToggle();
   setupNavHighlight();
 })();

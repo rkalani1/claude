@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("learnClaude:theme");
+          var theme = stored === "light" || stored === "dark"
+            ? stored
+            : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <title>Page not found — Learn Claude</title>
+    <meta name="description" content="That page could not be found. Return to the Learn Claude guide.">
+    <meta name="robots" content="noindex, follow">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fafafe">
+    <link rel="icon" href="/claude/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="/claude/styles.css?v=2026-06-20">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/claude/" aria-label="Learn Claude home">
+        <span class="brand-mark" aria-hidden="true">LC</span>
+        <span>Learn Claude</span>
+      </a>
+    </header>
+    <main>
+      <section class="section error-section" aria-labelledby="error-title">
+        <p class="error-code" aria-hidden="true">404</p>
+        <h1 id="error-title">This page wandered off.</h1>
+        <p class="error-lede">The link may be broken or the page may have moved. Let's get you back to the guide.</p>
+        <div class="official-links">
+          <a class="button primary" href="/claude/">Back to Learn Claude</a>
+          <a class="button" href="/claude/#prompt-lab">Open the Prompt Lab</a>
+          <a class="button" href="/claude/#surfaces">Browse surfaces</a>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <p class="footer-meta">Independent educational site, not affiliated with or endorsed by Anthropic.</p>
+    </footer>
+  </body>
+</html>

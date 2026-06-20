@@ -21,14 +21,16 @@ python3 -m http.server 8129
 - Check source links in the Sources section.
 - Run a browser accessibility pass on desktop and mobile.
 - Confirm task picker, prompt lab, model fit, answer fixer, reusable templates, prompt export, agent workflow prompt, feature posts, disclosure panels, and prompt copy buttons work.
-- Toggle your OS between light and dark appearance and confirm the page follows it.
+- Use the header theme toggle and confirm the choice persists across reloads; with no choice stored, confirm the page follows the OS light/dark setting.
 - Scroll the page and confirm the active section is highlighted in the top navigation.
+- Visit a non-existent path (e.g. `/claude/missing`) and confirm the styled 404 page renders.
 
 ## Structure
 
 - `index.html` — markup, metadata (Open Graph, Twitter, JSON-LD), and content.
 - `styles.css` — editorial design system with light/dark palettes (CSS custom properties).
-- `app.js` — task picker, prompt builder, answer fixer, prompt export, and active-nav highlighting.
+- `app.js` — task picker, prompt builder, answer fixer, prompt export, theme toggle, and active-nav highlighting.
+- `404.html` — styled not-found page (served by GitHub Pages for unknown URLs).
 - `site.webmanifest`, `robots.txt`, `sitemap.xml`, `og-image.svg`, `favicon.svg` — PWA, SEO, and social assets.
 
 ## License
