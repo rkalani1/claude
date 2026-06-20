@@ -16,18 +16,18 @@
   };
 
   const modelFitHints = {
-    default: "Use Sonnet 4.6 for most everyday work. Use Haiku 4.5 for quick, simple, repeated drafts. Use Opus 4.7 for complex reasoning, code, dense images, or high-stakes review.",
-    chat: "Use Sonnet 4.6 for everyday chat. Use Haiku 4.5 for quick rewrites or simple summaries. Use Opus 4.7 when the answer affects a serious decision.",
-    project: "Use Sonnet 4.6 for most Project work. Use Opus 4.7 when the Project has many files, conflicting context, or a high-stakes review.",
-    artifact: "Use Sonnet 4.6 for most Artifacts. Use Opus 4.7 for complex dashboards, dense visual inputs, or multi-step revisions.",
-    research: "Use Sonnet 4.6 for ordinary synthesis. Use Opus 4.7 when the question has many sources, dense documents, or a decision you will publish.",
-    office: "Use Sonnet 4.6 for most Word, PowerPoint, and Excel work. Use Opus 4.7 for dense decks, complex workbooks, or source-heavy document review.",
-    chrome: "Use Sonnet 4.6 for most browser help. Use Haiku 4.5 for quick page summaries and Opus 4.7 for careful comparisons or risky workflows.",
-    cowork: "Use Sonnet 4.6 for routine Cowork sessions. Use Opus 4.7 for longer desktop jobs, many files, or work that needs careful handoff.",
-    connectors: "Use Sonnet 4.6 for connected-app work. Use Opus 4.7 when Claude must reconcile several sources or produce a decision-ready answer.",
-    plugins: "Use Sonnet 4.6 while testing a plugin. Use Opus 4.7 when the workflow spans several tools, files, or review steps.",
-    mobile: "Use Haiku 4.5 or Sonnet 4.6 for quick mobile capture and drafts. Use Opus 4.7 later if the task needs deeper review.",
-    code: "Use Sonnet 4.6 for routine repo work. Use Opus 4.7 for architecture, difficult bugs, long-running code work, or vision-heavy debugging."
+    default: "Use Sonnet 4.6 for most everyday work. Use Haiku 4.5 for quick, simple, repeated drafts. Use Opus 4.8 for complex reasoning, code, dense images, or high-stakes review. Reach for Fable 5 only on the hardest, highest-stakes tasks.",
+    chat: "Use Sonnet 4.6 for everyday chat. Use Haiku 4.5 for quick rewrites or simple summaries. Use Opus 4.8 when the answer affects a serious decision.",
+    project: "Use Sonnet 4.6 for most Project work. Use Opus 4.8 when the Project has many files, conflicting context, or a high-stakes review.",
+    artifact: "Use Sonnet 4.6 for most Artifacts. Use Opus 4.8 for complex dashboards, dense visual inputs, or multi-step revisions.",
+    research: "Use Sonnet 4.6 for ordinary synthesis. Use Opus 4.8 when the question has many sources, dense documents, or a decision you will publish.",
+    office: "Use Sonnet 4.6 for most Word, PowerPoint, and Excel work. Use Opus 4.8 for dense decks, complex workbooks, or source-heavy document review.",
+    chrome: "Use Sonnet 4.6 for most browser help. Use Haiku 4.5 for quick page summaries and Opus 4.8 for careful comparisons or risky workflows.",
+    cowork: "Use Sonnet 4.6 for routine Cowork sessions. Use Opus 4.8 for longer desktop jobs, many files, or work that needs careful handoff.",
+    connectors: "Use Sonnet 4.6 for connected-app work. Use Opus 4.8 when Claude must reconcile several sources or produce a decision-ready answer.",
+    plugins: "Use Sonnet 4.6 while testing a plugin. Use Opus 4.8 when the workflow spans several tools, files, or review steps.",
+    mobile: "Use Haiku 4.5 or Sonnet 4.6 for quick mobile capture and drafts. Use Opus 4.8 later if the task needs deeper review.",
+    code: "Use Sonnet 4.6 for routine repo work. Use Opus 4.8 for architecture, difficult bugs, long-running code work, or vision-heavy debugging. Consider Fable 5 for the most demanding engineering tasks."
   };
 
   const outputHints = {
@@ -801,10 +801,77 @@ After the answer:
     showToast("Prompt pack exported.");
   }
 
+  // Light/dark theme toggle. The inline script in <head> sets the initial
+  // data-theme before paint; here we wire the button, persistence, and labels.
+  function setupThemeToggle() {
+    const toggle = document.getElementById("theme-toggle");
+    const root = document.documentElement;
+    const themeColorMeta = document.getElementById("theme-color-meta");
+    const themeColors = { light: "#fafafe", dark: "#15141c" };
+
+    function currentTheme() {
+      const attr = root.getAttribute("data-theme");
+      if (attr === "light" || attr === "dark") return attr;
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    function applyTheme(theme) {
+      root.setAttribute("data-theme", theme);
+      if (themeColorMeta) themeColorMeta.setAttribute("content", themeColors[theme] || themeColors.light);
+      if (toggle) {
+        const next = theme === "dark" ? "light" : "dark";
+        toggle.setAttribute("aria-label", `Switch to ${next} theme`);
+        toggle.setAttribute("title", `Switch to ${next} theme`);
+        toggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+      }
+    }
+
+    applyTheme(currentTheme());
+    if (toggle) {
+      toggle.addEventListener("click", () => {
+        const next = currentTheme() === "dark" ? "light" : "dark";
+        applyTheme(next);
+        storage.set("theme", next);
+        showToast(next === "dark" ? "Dark theme on." : "Light theme on.");
+      });
+    }
+  }
+
+  // Highlight the primary-nav link for the section currently in view.
+  function setupNavHighlight() {
+    const navLinks = Array.from(document.querySelectorAll(".top-nav a[href^='#']"));
+    if (!navLinks.length || !("IntersectionObserver" in window)) return;
+    const sections = navLinks
+      .map((link) => document.getElementById(link.getAttribute("href").slice(1)))
+      .filter(Boolean);
+    if (!sections.length) return;
+
+    let activeId = null;
+    function setActive(id) {
+      if (id === activeId) return;
+      activeId = id;
+      navLinks.forEach((link) => {
+        if (link.getAttribute("href") === `#${id}`) link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting);
+      if (!visible.length) return;
+      visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      setActive(visible[0].target.id);
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
   setActiveChoice(surfaceButtons, "data-surface", selectedSurface);
   setActiveChoice(outputButtons, "data-output", selectedOutput);
   setMission(selectedMission, { persist: false });
   setFix(selectedFix, { persist: false });
   setSurfaceFilter("draft");
   buildOptimizedPrompt();
+  setupThemeToggle();
+  setupNavHighlight();
 })();

@@ -3,11 +3,61 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Learn Claude</title>
+    <script>
+      /* Set the theme before first paint to avoid a flash of the wrong theme. */
+      (function () {
+        try {
+          var stored = localStorage.getItem("learnClaude:theme");
+          var theme = stored === "light" || stored === "dark"
+            ? stored
+            : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <title>Learn Claude — a beginner-first guide to using Claude</title>
     <meta name="description" content="A beginner-first guide for using Claude across chat, uploads, Research, Projects, Artifacts, Design, Cowork, Code, Office, Chrome, connectors, skills, plugins, and model fit without jargon.">
-    <meta name="theme-color" content="#fafafe">
+    <meta name="author" content="Learn Claude">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fafafe" id="theme-color-meta">
+    <link rel="canonical" href="https://rkalani1.github.io/claude/">
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Learn Claude">
+    <meta property="og:title" content="Learn Claude — a beginner-first guide to using Claude">
+    <meta property="og:description" content="Start with one real task. Copy a strong prompt, choose the right Claude surface, and improve the result.">
+    <meta property="og:url" content="https://rkalani1.github.io/claude/">
+    <meta property="og:image" content="https://rkalani1.github.io/claude/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Learn Claude — a beginner-first guide to using Claude">
+    <meta name="twitter:description" content="Start with one real task. Copy a strong prompt, choose the right Claude surface, and improve the result.">
+    <meta name="twitter:image" content="https://rkalani1.github.io/claude/og-image.svg">
+
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=2026-05-09-cool">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Fonts: preconnect + non-blocking stylesheet (moved out of CSS @import) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="styles.css?v=2026-06-20">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Learn Claude",
+      "url": "https://rkalani1.github.io/claude/",
+      "description": "A beginner-first guide for using Claude across chat, uploads, Research, Projects, Artifacts, Design, Cowork, Code, Office, Chrome, connectors, skills, plugins, and model fit without jargon.",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "about": "Practical, jargon-free guidance for using Anthropic's Claude.",
+      "creator": { "@type": "Organization", "name": "Learn Claude (independent, not affiliated with Anthropic)" }
+    }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#top">Skip to content</a>
@@ -16,16 +66,22 @@
         <span class="brand-mark" aria-hidden="true">LC</span>
         <span>Learn Claude</span>
       </a>
-      <nav class="top-nav" aria-label="Primary navigation">
-        <a href="#start">Start</a>
-        <a href="#setup">Setup</a>
-        <a href="#prompt-lab">Prompt</a>
-        <a href="#surfaces">Surfaces</a>
-        <a href="#fix-answer">Fix</a>
-        <a href="#agents">Agents</a>
-        <a href="#features">Updates</a>
-        <a href="#sources">Sources</a>
-      </nav>
+      <div class="header-actions">
+        <nav class="top-nav" aria-label="Primary navigation">
+          <a href="#start">Start</a>
+          <a href="#setup">Setup</a>
+          <a href="#prompt-lab">Prompt</a>
+          <a href="#surfaces">Surfaces</a>
+          <a href="#fix-answer">Fix</a>
+          <a href="#agents">Agents</a>
+          <a href="#features">Updates</a>
+          <a href="#sources">Sources</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+          <svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </div>
     </header>
 
     <main id="top">
@@ -33,7 +89,7 @@
         <div class="hero-copy">
           <h1 id="hero-title">Learn Claude</h1>
           <p class="lede">Start with one real task. Copy a strong prompt, choose the right Claude surface, and improve the result.</p>
-          <p style="margin:0 0 1rem;color:#6b617c;font-size:0.95rem;line-height:1.5;">Use non-sensitive examples here. Do not paste PHI, patient identifiers, learner records, credentials, confidential data, or restricted research data into public demos or exported prompt packs.</p>
+          <p class="hero-note">Use non-sensitive examples here. Do not paste PHI, identifiers, learner records, credentials, confidential data, or restricted research data into public demos or exported prompt packs.</p>
           <div class="official-links" aria-label="Official Claude links">
             <a class="button primary" href="https://claude.ai/">Open Claude</a>
             <a class="button" href="https://claude.ai/downloads">Download Claude</a>
@@ -241,7 +297,8 @@ After editing:
             <div class="model-links" aria-label="Official model sources">
               <a href="https://www.anthropic.com/news/claude-haiku-4-5">Haiku 4.5</a>
               <a href="https://www.anthropic.com/news/claude-sonnet-4-6">Sonnet 4.6</a>
-              <a href="https://www.anthropic.com/news/claude-opus-4-7">Opus 4.7</a>
+              <a href="https://www.anthropic.com/news/claude-opus-4-8">Opus 4.8</a>
+              <a href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Fable 5</a>
             </div>
           </details>
           <textarea id="optimized-prompt" aria-label="Optimized prompt" readonly rows="15"></textarea>
@@ -544,23 +601,25 @@ Focus only on practical use.</textarea></article>
       <section class="section feature-section" id="features" aria-labelledby="features-title">
         <div class="section-head">
           <h2 id="features-title">What changed and what to try</h2>
-          <p>Updated Sunday and Wednesday at 11:00 PM Pacific from official sources.</p>
+          <p>Recent changes worth knowing, each with one safe way to try it. Reviewed against official Claude and Anthropic sources.</p>
         </div>
         <div class="feature-grid">
+          <article class="feature-post"><span class="surface-badge">Jun 9, 2026</span><h3>Claude Fable 5 is the most capable public model</h3><p><strong>What changed:</strong> Fable 5, Anthropic's first publicly available Mythos-class model, brings large gains in coding, knowledge work, vision, and research for paid and enterprise users. New safeguards block high-risk requests and fall back to Opus 4.8 for a safe answer.</p><p><strong>Try it:</strong> reserve Fable 5 for your hardest, highest-stakes work, and keep Sonnet 4.6 for everyday tasks to save time and cost.</p><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Read announcement</a></article>
+          <article class="feature-post"><span class="surface-badge">May 28, 2026</span><h3>Opus 4.8 adds dynamic workflows and effort control</h3><p><strong>What changed:</strong> Opus 4.8 improves agentic coding, reasoning, and computer use, and is more likely to flag uncertainty. It adds a "dynamic workflow" that runs multiple subagents at once and an effort control to dial how hard Claude works on a response.</p><p><strong>Try it:</strong> pick Opus 4.8 for a complex, multi-step task and turn the effort control up for careful work or down for quick drafts.</p><a href="https://www.anthropic.com/news/claude-opus-4-8">Read announcement</a></article>
           <article class="feature-post"><span class="surface-badge">May 6, 2026</span><h3>Claude Code feels smoother in real terminals</h3><p><strong>What changed:</strong> Claude Code shipped a batch of reliability and terminal UX fixes—better pasting, less flaky resume/scroll behavior, and safer shutdown when sessions are interrupted.</p><p><strong>Try it:</strong> update Claude Code, paste a screenshot, and run a short task; then use <code>--resume</code> to pick up where you left off.</p><a href="https://code.claude.com/docs/en/changelog">Read Claude Code changelog</a></article>
           <article class="feature-post"><span class="surface-badge">May 5, 2026</span><h3>Ready-to-run finance agents arrive as plugins</h3><p><strong>What changed:</strong> Anthropic released ten agent templates for common financial-services workflows (for example: pitchbooks, KYC screening, and month-end close). They ship as plugins for Claude Cowork and Claude Code, with accompanying cookbooks for managed agents.</p><p><strong>Try it:</strong> pick one template, run it on a non-sensitive sample document, then save your best prompt + checklist as a reusable workflow.</p><a href="https://www.anthropic.com/news/finance-agents">Read announcement</a></article>
-          <article class="feature-post"><span class="surface-badge">Apr 28, 2026</span><h3>Creative work connects to more tools</h3><p><strong>What changed:</strong> connectors for Adobe Creative Cloud, Blender, Ableton, Autodesk Fusion, SketchUp, Splice, Affinity, and Resolume help Claude support design, 3D, audio, and production tasks.</p><p><strong>Try it:</strong> ask Claude to walk you through one feature you have been avoiding in a creative tool, then turn it into a repeatable workflow.</p><a href="https://www.anthropic.com/news/claude-for-creative-work">Read announcement</a></article>
-          <article class="feature-post"><span class="surface-badge">Apr 17, 2026</span><h3>Claude Design creates polished visual work</h3><p><strong>What changed:</strong> Claude Design helps create designs, prototypes, slides, one-pagers, and other visual drafts.</p><p><strong>Try it:</strong> ask for a one-page visual summary, then ask Claude to improve clarity before polish.</p><a href="https://support.claude.com/en/articles/12138966-release-notes">Read release notes</a></article>
         </div>
         <details class="section-details older-updates">
           <summary>Older updates</summary>
           <div class="feature-grid">
+            <article class="feature-post"><span class="surface-badge">Apr 28, 2026</span><h3>Creative work connects to more tools</h3><p><strong>What changed:</strong> connectors for Adobe Creative Cloud, Blender, Ableton, Autodesk Fusion, SketchUp, Splice, Affinity, and Resolume help Claude support design, 3D, audio, and production tasks.</p><p><strong>Try it:</strong> ask Claude to walk you through one feature you have been avoiding in a creative tool, then turn it into a repeatable workflow.</p><a href="https://www.anthropic.com/news/claude-for-creative-work">Read announcement</a></article>
+            <article class="feature-post"><span class="surface-badge">Apr 17, 2026</span><h3>Claude Design creates polished visual work</h3><p><strong>What changed:</strong> Claude Design helps create designs, prototypes, slides, one-pagers, and other visual drafts.</p><p><strong>Try it:</strong> ask for a one-page visual summary, then ask Claude to improve clarity before polish.</p><a href="https://support.claude.com/en/articles/12138966-release-notes">Read release notes</a></article>
             <article class="feature-post"><span class="surface-badge">Apr 16, 2026</span><h3>Opus 4.7 improves complex work</h3><p><strong>What changed:</strong> Opus 4.7 improves software engineering, long-running coding, and vision with images up to about 2,576 pixels on the long edge.</p><p><strong>Try it:</strong> paste a dense screenshot of a chart, table, or dashboard and ask Claude to extract the data into a clean table.</p><a href="https://www.anthropic.com/news/claude-opus-4-7">Read launch note</a></article>
             <article class="feature-post"><span class="surface-badge">Apr 9, 2026</span><h3>Claude Cowork expands desktop help</h3><p><strong>What changed:</strong> Cowork became generally available on macOS and Windows through the Claude Desktop app.</p><p><strong>Try it:</strong> start with a read-only folder review and approve changes only after Claude explains them.</p><a href="https://support.claude.com/en/articles/12138966-release-notes">Read release notes</a></article>
             <article class="feature-post"><span class="surface-badge">Mar 25, 2026</span><h3>Connectors can show interactive apps</h3><p><strong>What changed:</strong> some connectors now show live app cards and fullscreen interfaces inside Claude.</p><p><strong>Try it:</strong> connect one trusted app, ask a real question, then use the interactive card before asking Claude to summarize the result.</p><a href="https://support.claude.com/en/articles/13454812-use-interactive-connectors-in-claude">Read guide</a></article>
           </div>
         </details>
-        <p class="review-note">Last reviewed against official Claude and Anthropic sources on May 7, 2026.</p>
+        <p class="review-note">Last reviewed against official Claude and Anthropic sources on June 20, 2026.</p>
       </section>
 
       <section class="section" id="sources" aria-labelledby="sources-title">
@@ -611,6 +670,8 @@ Focus only on practical use.</textarea></article>
             <li><a href="https://support.claude.com/en/articles/10065434-using-dictation-on-claude-mobile">Dictation on Claude Mobile</a></li>
             <li><a href="https://www.anthropic.com/news/claude-haiku-4-5">Claude Haiku 4.5 launch</a></li>
             <li><a href="https://www.anthropic.com/news/claude-sonnet-4-6">Claude Sonnet 4.6 launch</a></li>
+            <li><a href="https://www.anthropic.com/news/claude-opus-4-8">Claude Opus 4.8 launch</a></li>
+            <li><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Claude Fable 5 and Mythos 5 launch</a></li>
             <li><a href="https://support.claude.com/en/articles/12138966-release-notes">Claude release notes</a></li>
             <li><a href="https://www.anthropic.com/news">Anthropic newsroom</a></li>
             <li><a href="https://www.anthropic.com/news/claude-for-creative-work">Claude for Creative Work</a></li>
@@ -632,18 +693,21 @@ Focus only on practical use.</textarea></article>
     </main>
 
     <footer class="site-footer">
-      <p>Independent educational site, not affiliated with or endorsed by Anthropic.</p>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#start">Start</a>
+        <a href="#prompt-lab">Prompt Lab</a>
+        <a href="#surfaces">Surfaces</a>
+        <a href="#agents">Agents</a>
+        <a href="#features">Updates</a>
+        <a href="#sources">Sources</a>
+        <a href="#top">Back to top ↑</a>
+      </nav>
+      <p class="footer-boundary">Educational demo only. Use non-sensitive examples — do not paste PHI, identifiers, credentials, confidential data, or restricted research data into prompts or exported prompt packs.</p>
+      <p class="footer-meta">Independent educational site, not affiliated with or endorsed by Anthropic. Verify everything against the official sources linked above.</p>
     </footer>
 
     <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
-    <script src="app.js?v=2026-05-07-deep-qa"></script>
-<footer style="margin-top: 40px; padding: 20px; text-align: center; font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb;">
-  <p>This is a synthetic public demo site for educational and reference purposes only. Not for clinical decision-making or real patient care.</p>
-  <p style="margin-top: 8px;">
-    <a href="https://www.washington.edu/online/terms/" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline; margin-right: 15px;">University Website Terms</a>
-    <a href="https://www.washington.edu/online/privacy/" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline;">University Online Privacy Policy</a>
-  </p>
-</footer>
+    <script src="app.js?v=2026-06-20"></script>
 </body>
 </html>
