@@ -1,0 +1,14 @@
+{
+  "name": "Learn Claude",
+  "short_name": "Learn Claude",
+  "description": "A beginner-first guide for using Claude across chat, Research, Projects, Artifacts, Code, Office, and more — without jargon.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fafafe",
+  "theme_color": "#fafafe",
+  "lang": "en",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

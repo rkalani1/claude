@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Learn Claude — a beginner-first guide to using Claude">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f2fb"/>
+      <stop offset="1" stop-color="#eae6f7"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5b40d6"/>
+      <stop offset="1" stop-color="#3a23a8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1080" cy="-40" r="320" fill="#cdbff6" opacity="0.55"/>
+  <circle cx="60" cy="660" r="280" fill="#bfe9df" opacity="0.45"/>
+  <g transform="translate(96,150)">
+    <rect width="88" height="88" rx="20" fill="#1a1726"/>
+    <text x="44" y="60" font-family="Georgia, serif" font-style="italic" font-size="40" fill="#f4f2fb" text-anchor="middle">LC</text>
+  </g>
+  <text x="96" y="360" font-family="Georgia, 'Times New Roman', serif" font-size="132" fill="#1a1726" letter-spacing="-3">Learn Claude</text>
+  <text x="100" y="430" font-family="Georgia, serif" font-style="italic" font-size="44" fill="url(#ink)">A beginner-first guide to using Claude</text>
+  <text x="100" y="520" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#5a5470">Pick a task · copy a strong prompt · choose the right surface · improve the result</text>
+  <text x="100" y="582" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="22" fill="#8a8499" letter-spacing="2">INDEPENDENT · NOT AFFILIATED WITH ANTHROPIC</text>
+</svg>

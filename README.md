@@ -21,6 +21,15 @@ python3 -m http.server 8129
 - Check source links in the Sources section.
 - Run a browser accessibility pass on desktop and mobile.
 - Confirm task picker, prompt lab, model fit, answer fixer, reusable templates, prompt export, agent workflow prompt, feature posts, disclosure panels, and prompt copy buttons work.
+- Toggle your OS between light and dark appearance and confirm the page follows it.
+- Scroll the page and confirm the active section is highlighted in the top navigation.
+
+## Structure
+
+- `index.html` — markup, metadata (Open Graph, Twitter, JSON-LD), and content.
+- `styles.css` — editorial design system with light/dark palettes (CSS custom properties).
+- `app.js` — task picker, prompt builder, answer fixer, prompt export, and active-nav highlighting.
+- `site.webmanifest`, `robots.txt`, `sitemap.xml`, `og-image.svg`, `favicon.svg` — PWA, SEO, and social assets.
 
 ## License
 
