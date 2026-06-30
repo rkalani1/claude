@@ -874,4 +874,13 @@ After the answer:
   buildOptimizedPrompt();
   setupThemeToggle();
   setupNavHighlight();
+
+  // Export for testing
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+      readChoice,
+      hasChoice,
+      stateKeys
+    };
+  }
 })();
