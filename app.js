@@ -874,4 +874,8 @@ After the answer:
   buildOptimizedPrompt();
   setupThemeToggle();
   setupNavHighlight();
+
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = { hasChoice };
+  }
 })();
