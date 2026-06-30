@@ -1,4 +1,4 @@
-(function () {
+(function (global) {
   "use strict";
 
   const surfaceHints = {
@@ -874,4 +874,24 @@ After the answer:
   buildOptimizedPrompt();
   setupThemeToggle();
   setupNavHighlight();
-})();
+
+  // --- TEST EXPORTS ---
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+      modelFitHints,
+      outputHints,
+      surfaceHints,
+      hasChoice,
+      readChoice,
+      getModelFit,
+      buildOptimizedPrompt,
+      setMission,
+      setFix,
+      setSurfaceFilter,
+      copyTextFallback,
+      copyText,
+      copyTemplate,
+      exportPrompts
+    };
+  }
+})(typeof window !== "undefined" ? window : this);
