@@ -583,8 +583,13 @@ Give me one polished version and one shorter version.`
 
   async function copyText(text, target) {
     if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-      return true;
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {
+        console.error("Clipboard API failed, trying fallback", err);
+        return copyTextFallback(text, target);
+      }
     }
     return copyTextFallback(text, target);
   }
@@ -874,4 +879,14 @@ After the answer:
   buildOptimizedPrompt();
   setupThemeToggle();
   setupNavHighlight();
+
+  // Expose functions for testing if in a CommonJS environment (like Jest)
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+      copyText,
+      copyTextFallback,
+      copyTemplate,
+      showToast,
+    };
+  }
 })();
