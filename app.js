@@ -1,4 +1,4 @@
-(function () {
+(function (global) {
   "use strict";
 
   const surfaceHints = {
@@ -572,8 +572,14 @@ Give me one polished version and one shorter version.`
     textarea.style.left = "-9999px";
     document.body.appendChild(textarea);
     textarea.select();
-    const copied = document.execCommand("copy");
-    document.body.removeChild(textarea);
+    let copied = false;
+    try {
+      copied = document.execCommand("copy");
+    } catch (err) {
+      console.error("Fallback copy failed", err);
+    } finally {
+      document.body.removeChild(textarea);
+    }
     if (!copied && target && typeof target.select === "function") {
       target.focus();
       target.select();
@@ -583,8 +589,13 @@ Give me one polished version and one shorter version.`
 
   async function copyText(text, target) {
     if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-      return true;
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {
+        console.error("Clipboard API failed, trying fallback", err);
+        return copyTextFallback(text, target);
+      }
     }
     return copyTextFallback(text, target);
   }
@@ -891,4 +902,25 @@ After the answer:
   buildOptimizedPrompt();
   setupThemeToggle();
   setupNavHighlight();
-})();
+
+  // --- TEST EXPORTS ---
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+      modelFitHints,
+      outputHints,
+      surfaceHints,
+      hasChoice,
+      readChoice,
+      getModelFit,
+      buildOptimizedPrompt,
+      setMission,
+      setFix,
+      setSurfaceFilter,
+      copyTextFallback,
+      copyText,
+      copyTemplate,
+      exportPrompts,
+      stateKeys
+    };
+  }
+})(typeof window !== "undefined" ? window : this);
