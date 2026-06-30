@@ -701,8 +701,14 @@ After the answer:
     selectedMission = missionData[mission] ? mission : "email";
     setActiveChoice(missionButtons, "data-mission", mission);
     if (missionTitle) missionTitle.textContent = detail.title;
-    if (missionSurface) missionSurface.innerHTML = `<strong>Best Claude surface:</strong> ${detail.surface}`;
-    if (missionNext) missionNext.innerHTML = `<strong>Next move:</strong> ${detail.next}`;
+    if (missionSurface) {
+      missionSurface.innerHTML = "<strong>Best Claude surface:</strong> ";
+      missionSurface.appendChild(document.createTextNode(detail.surface));
+    }
+    if (missionNext) {
+      missionNext.innerHTML = "<strong>Next move:</strong> ";
+      missionNext.appendChild(document.createTextNode(detail.next));
+    }
     if (missionPrompt) missionPrompt.value = detail.prompt;
     if (options.persist !== false) persistState();
   }
@@ -712,7 +718,10 @@ After the answer:
     selectedFix = fixData[fix] ? fix : "vague";
     setActiveChoice(fixButtons, "data-fix", fix);
     if (fixTitle) fixTitle.textContent = detail.title;
-    if (fixNext) fixNext.innerHTML = `<strong>Use when:</strong> ${detail.next}`;
+    if (fixNext) {
+      fixNext.innerHTML = "<strong>Use when:</strong> ";
+      fixNext.appendChild(document.createTextNode(detail.next));
+    }
     if (fixPrompt) fixPrompt.value = detail.prompt;
     if (options.persist !== false) persistState();
   }
