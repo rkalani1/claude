@@ -572,8 +572,14 @@ Give me one polished version and one shorter version.`
     textarea.style.left = "-9999px";
     document.body.appendChild(textarea);
     textarea.select();
-    const copied = document.execCommand("copy");
-    document.body.removeChild(textarea);
+    let copied = false;
+    try {
+      copied = document.execCommand("copy");
+    } catch (err) {
+      console.error("Fallback copy failed", err);
+    } finally {
+      document.body.removeChild(textarea);
+    }
     if (!copied && target && typeof target.select === "function") {
       target.focus();
       target.select();
@@ -874,4 +880,10 @@ After the answer:
   buildOptimizedPrompt();
   setupThemeToggle();
   setupNavHighlight();
+
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+      copyTextFallback
+    };
+  }
 })();
