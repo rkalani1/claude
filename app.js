@@ -765,11 +765,19 @@ After the answer:
     button.addEventListener("click", () => setSurfaceFilter(button.getAttribute("data-surface-filter") || "all"));
   });
 
+  function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+
   if (roughPrompt) {
-    roughPrompt.addEventListener("input", () => {
+    roughPrompt.addEventListener("input", debounce(() => {
       storage.set(stateKeys.rough, roughPrompt.value);
       buildOptimizedPrompt();
-    });
+    }, 300));
   }
 
   Array.from(document.querySelectorAll(".copy")).forEach((button) => {
