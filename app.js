@@ -712,34 +712,58 @@ After the answer:
 - Suggest the best Claude surface for repeating this workflow.`;
   }
 
+  function updateSection({
+    choice, dataMap, defaultKey, buttons, dataAttribute,
+    titleElement, surfaceElement, surfacePrefix,
+    nextElement, nextPrefix, promptElement, persistOpt
+  }) {
+    const detail = dataMap[choice] || dataMap[defaultKey];
+    const selectedChoice = dataMap[choice] ? choice : defaultKey;
+    setActiveChoice(buttons, dataAttribute, choice);
+    if (titleElement) titleElement.textContent = detail.title;
+    if (surfaceElement && surfacePrefix && detail.surface) {
+      surfaceElement.innerHTML = `<strong>${surfacePrefix}</strong> `;
+      surfaceElement.appendChild(document.createTextNode(detail.surface));
+    }
+    if (nextElement && nextPrefix && detail.next) {
+      nextElement.innerHTML = `<strong>${nextPrefix}</strong> `;
+      nextElement.appendChild(document.createTextNode(detail.next));
+    }
+    if (promptElement) promptElement.value = detail.prompt;
+    if (persistOpt !== false) persistState();
+    return selectedChoice;
+  }
+
   function setMission(mission, options = {}) {
-    const detail = missionData[mission] || missionData.email;
-    selectedMission = missionData[mission] ? mission : "email";
-    setActiveChoice(missionButtons, "data-mission", mission);
-    if (missionTitle) missionTitle.textContent = detail.title;
-    if (missionSurface) {
-      missionSurface.innerHTML = '<strong>Best Claude surface:</strong> ';
-      missionSurface.appendChild(document.createTextNode(detail.surface));
-    }
-    if (missionNext) {
-      missionNext.innerHTML = '<strong>Next move:</strong> ';
-      missionNext.appendChild(document.createTextNode(detail.next));
-    }
-    if (missionPrompt) missionPrompt.value = detail.prompt;
-    if (options.persist !== false) persistState();
+    selectedMission = updateSection({
+      choice: mission,
+      dataMap: missionData,
+      defaultKey: "email",
+      buttons: missionButtons,
+      dataAttribute: "data-mission",
+      titleElement: missionTitle,
+      surfaceElement: missionSurface,
+      surfacePrefix: "Best Claude surface:",
+      nextElement: missionNext,
+      nextPrefix: "Next move:",
+      promptElement: missionPrompt,
+      persistOpt: options.persist
+    });
   }
 
   function setFix(fix, options = {}) {
-    const detail = fixData[fix] || fixData.vague;
-    selectedFix = fixData[fix] ? fix : "vague";
-    setActiveChoice(fixButtons, "data-fix", fix);
-    if (fixTitle) fixTitle.textContent = detail.title;
-    if (fixNext) {
-      fixNext.innerHTML = '<strong>Use when:</strong> ';
-      fixNext.appendChild(document.createTextNode(detail.next));
-    }
-    if (fixPrompt) fixPrompt.value = detail.prompt;
-    if (options.persist !== false) persistState();
+    selectedFix = updateSection({
+      choice: fix,
+      dataMap: fixData,
+      defaultKey: "vague",
+      buttons: fixButtons,
+      dataAttribute: "data-fix",
+      titleElement: fixTitle,
+      nextElement: fixNext,
+      nextPrefix: "Use when:",
+      promptElement: fixPrompt,
+      persistOpt: options.persist
+    });
   }
 
   surfaceButtons.forEach((button) => {
