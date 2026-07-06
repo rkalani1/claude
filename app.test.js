@@ -306,3 +306,42 @@ describe('copyTemplate', () => {
     expect(button.textContent).toBe('Copied');
   });
 });
+
+describe('storage', () => {
+  let app;
+
+  beforeEach(() => {
+    jest.resetModules();
+    app = require('./app');
+    window.localStorage.clear();
+    jest.restoreAllMocks();
+  });
+
+  test('get returns item from localStorage', () => {
+    window.localStorage.setItem('learnClaude:testKey', 'testValue');
+    expect(app.storage.get('testKey')).toBe('testValue');
+  });
+
+  test('get returns null and catches error when localStorage throws', () => {
+    jest.spyOn(window.localStorage.__proto__, 'getItem').mockImplementation(() => {
+      throw new Error('localStorage denied');
+    });
+
+    expect(app.storage.get('testKey')).toBeNull();
+  });
+
+  test('set saves item to localStorage', () => {
+    app.storage.set('testKey', 'testValue');
+    expect(window.localStorage.getItem('learnClaude:testKey')).toBe('testValue');
+  });
+
+  test('set catches error when localStorage throws', () => {
+    jest.spyOn(window.localStorage.__proto__, 'setItem').mockImplementation(() => {
+      throw new Error('localStorage denied');
+    });
+
+    expect(() => {
+      app.storage.set('testKey', 'testValue');
+    }).not.toThrow();
+  });
+});

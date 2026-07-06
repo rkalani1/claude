@@ -920,7 +920,8 @@ After the answer:
       copyText,
       copyTemplate,
       exportPrompts,
-      stateKeys
+      stateKeys,
+      storage
     };
   }
 })(typeof window !== "undefined" ? window : this);
