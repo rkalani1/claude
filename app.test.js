@@ -175,6 +175,65 @@ describe('App', () => {
     });
   });
 
+  describe('showToast', () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    test('adds is-visible class and sets text content', () => {
+      const toast = document.getElementById('toast');
+      app.showToast('Test Message');
+
+      expect(toast.textContent).toBe('Test Message');
+      expect(toast.classList.contains('is-visible')).toBe(true);
+    });
+
+    test('removes is-visible class after 1800ms', () => {
+      const toast = document.getElementById('toast');
+      app.showToast('Test Message');
+
+      expect(toast.classList.contains('is-visible')).toBe(true);
+
+      jest.advanceTimersByTime(1799);
+      expect(toast.classList.contains('is-visible')).toBe(true);
+
+      jest.advanceTimersByTime(1);
+      expect(toast.classList.contains('is-visible')).toBe(false);
+    });
+
+    test('clears previous timeout if called again before timeout completes', () => {
+      const toast = document.getElementById('toast');
+      app.showToast('First Message');
+
+      jest.advanceTimersByTime(1000);
+
+      app.showToast('Second Message');
+      expect(toast.textContent).toBe('Second Message');
+
+      // Advance by 800ms more. If the first timeout wasn't cleared, it would hide now.
+      jest.advanceTimersByTime(800);
+      expect(toast.classList.contains('is-visible')).toBe(true);
+
+      // Advance by another 1000ms to complete the second timeout
+      jest.advanceTimersByTime(1000);
+      expect(toast.classList.contains('is-visible')).toBe(false);
+    });
+
+    test('does nothing if toast element does not exist', () => {
+      const originalToast = document.getElementById('toast');
+      originalToast.parentNode.removeChild(originalToast);
+
+      // Should not throw
+      expect(() => {
+        app.showToast('Test Message');
+      }).not.toThrow();
+    });
+  });
+
   describe('copyText', () => {
     test('uses navigator.clipboard when available', async () => {
       window.isSecureContext = true;
