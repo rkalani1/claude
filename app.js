@@ -916,6 +916,7 @@ After the answer:
       setMission,
       setFix,
       setSurfaceFilter,
+      setActiveChoice,
       copyTextFallback,
       copyText,
       copyTemplate,
