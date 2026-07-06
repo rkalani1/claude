@@ -626,6 +626,53 @@ Give me one polished version and one shorter version.`
     return modelFitHints[selectedSurface] || modelFitHints.default;
   }
 
+  function getSurfaceRules(surfaceName) {
+    if (selectedSurface === "office") return `
+
+Office rules:
+- Work in ${surfaceName}.
+- First explain what you see in plain language.
+- Ask before making major changes.
+- Preserve formatting and structure where possible.
+- End with what I should review before sharing.`;
+
+    if (selectedSurface === "research") return `
+
+Research rules:
+- Use Research when the question needs multiple sources or citations.
+- Prioritize the sources I name.
+- Separate confirmed facts from reasonable inferences.
+- Cite sources I can check.
+- Say what still needs verification.`;
+
+    if (selectedSurface === "connectors") return `
+
+Connector rules:
+- Use only connected services relevant to the task.
+- Tell me which source you used.
+- Ask before changing, sending, deleting, or creating anything.
+- Respect my existing access in each service.
+- Say when a connector is unavailable or not connected.`;
+
+    if (selectedSurface === "plugins") return `
+
+Plugin rules:
+- Recommend a plugin only if it saves repeated setup.
+- Explain the skills, connectors, or subagents it would add in plain language.
+- Start with a safe test task before real work.
+- Ask before adding or changing access.`;
+
+    if (selectedSurface === "mobile") return `
+
+Mobile rules:
+- Assume I may be on iOS or Android.
+- Keep the output short enough to review on a phone.
+- Make the first step voice-friendly.
+- If this involves another app, tell me what to review before sending or saving.`;
+
+    return "";
+  }
+
   function buildOptimizedPrompt() {
     if (!optimizedPrompt) return;
     const task = (roughPrompt && roughPrompt.value.trim()) || "Help me complete this task clearly and well.";
@@ -634,45 +681,7 @@ Give me one polished version and one shorter version.`
       : (surfaceHints[selectedSurface] || surfaceHints.chat);
     const outputType = outputHints[selectedOutput] || outputHints.useful;
     const modelFit = getModelFit();
-    const officeRules = selectedSurface === "office" ? `
-
-Office rules:
-- Work in ${surface}.
-- First explain what you see in plain language.
-- Ask before making major changes.
-- Preserve formatting and structure where possible.
-- End with what I should review before sharing.` : "";
-    const researchRules = selectedSurface === "research" ? `
-
-Research rules:
-- Use Research when the question needs multiple sources or citations.
-- Prioritize the sources I name.
-- Separate confirmed facts from reasonable inferences.
-- Cite sources I can check.
-- Say what still needs verification.` : "";
-    const connectorRules = selectedSurface === "connectors" ? `
-
-Connector rules:
-- Use only connected services relevant to the task.
-- Tell me which source you used.
-- Ask before changing, sending, deleting, or creating anything.
-- Respect my existing access in each service.
-- Say when a connector is unavailable or not connected.` : "";
-    const pluginRules = selectedSurface === "plugins" ? `
-
-Plugin rules:
-- Recommend a plugin only if it saves repeated setup.
-- Explain the skills, connectors, or subagents it would add in plain language.
-- Start with a safe test task before real work.
-- Ask before adding or changing access.` : "";
-    const mobileRules = selectedSurface === "mobile" ? `
-
-Mobile rules:
-- Assume I may be on iOS or Android.
-- Keep the output short enough to review on a phone.
-- Make the first step voice-friendly.
-- If this involves another app, tell me what to review before sending or saving.` : "";
-    const surfaceRules = officeRules || researchRules || connectorRules || pluginRules || mobileRules;
+    const surfaceRules = getSurfaceRules(surface);
     if (modelFitCopy) modelFitCopy.textContent = modelFit;
     if (promptStatus) promptStatus.textContent = `Optimized prompt updated for ${surface} and ${outputType}.`;
     optimizedPrompt.value = `You are helping me use ${surface} effectively.
