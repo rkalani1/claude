@@ -912,14 +912,24 @@ After the answer:
       .filter(Boolean);
     if (!sections.length) return;
 
+    const linkMap = {};
+    navLinks.forEach((link) => {
+      linkMap[link.getAttribute("href").slice(1)] = link;
+    });
+
     let activeId = null;
     function setActive(id) {
       if (id === activeId) return;
+
+      if (activeId && linkMap[activeId]) {
+        linkMap[activeId].removeAttribute("aria-current");
+      }
+
       activeId = id;
-      navLinks.forEach((link) => {
-        if (link.getAttribute("href") === `#${id}`) link.setAttribute("aria-current", "true");
-        else link.removeAttribute("aria-current");
-      });
+
+      if (activeId && linkMap[activeId]) {
+        linkMap[activeId].setAttribute("aria-current", "true");
+      }
     }
 
     const observer = new IntersectionObserver((entries) => {
