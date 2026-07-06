@@ -57,6 +57,36 @@ describe('App', () => {
     });
   });
 
+  describe('setActiveChoice', () => {
+    test('toggles is-active class and aria-pressed attribute correctly', () => {
+      const button1 = document.createElement('button');
+      button1.setAttribute('data-choice', 'choiceA');
+      button1.setAttribute('aria-pressed', 'false');
+
+      const button2 = document.createElement('button');
+      button2.setAttribute('data-choice', 'choiceB');
+      button2.setAttribute('aria-pressed', 'false');
+
+      const button3 = document.createElement('button');
+      button3.setAttribute('data-choice', 'choiceC');
+      button3.classList.add('is-active');
+      button3.setAttribute('aria-pressed', 'true');
+
+      const buttons = [button1, button2, button3];
+
+      app.setActiveChoice(buttons, 'data-choice', 'choiceB');
+
+      expect(button1.classList.contains('is-active')).toBe(false);
+      expect(button1.getAttribute('aria-pressed')).toBe('false');
+
+      expect(button2.classList.contains('is-active')).toBe(true);
+      expect(button2.getAttribute('aria-pressed')).toBe('true');
+
+      expect(button3.classList.contains('is-active')).toBe(false);
+      expect(button3.getAttribute('aria-pressed')).toBe('false');
+    });
+  });
+
   describe('setSurfaceFilter', () => {
     test('updates button and card visibility correctly', () => {
       const filterButton = document.querySelector('[data-surface-filter="office"]');
