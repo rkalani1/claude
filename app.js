@@ -840,9 +840,18 @@ After the answer:
     const excludedIds = new Set(["mission-prompt", "optimized-prompt", "fix-prompt"]);
     const templates = Array.from(document.querySelectorAll("textarea[readonly]"))
       .filter((textarea) => textarea.id && !excludedIds.has(textarea.id) && textarea.value.trim());
+    const headingsCache = new Map();
     const sections = templates.map((textarea) => {
       const card = textarea.closest("article, li");
-      const heading = card ? card.querySelector("h3") : null;
+      let heading = null;
+      if (card) {
+        if (headingsCache.has(card)) {
+          heading = headingsCache.get(card);
+        } else {
+          heading = card.getElementsByTagName("h3")[0];
+          headingsCache.set(card, heading);
+        }
+      }
       const title = heading ? heading.textContent.trim() : textarea.getAttribute("aria-label") || textarea.id;
       return `## ${title}\n\n\`\`\`text\n${textarea.value.trim()}\n\`\`\``;
     });
