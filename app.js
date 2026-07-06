@@ -551,11 +551,7 @@ Give me one polished version and one shorter version.`
 
   function setSurfaceFilter(filter) {
     const activeFilter = filter || "all";
-    surfaceFilterButtons.forEach((button) => {
-      const active = button.getAttribute("data-surface-filter") === activeFilter;
-      button.classList.toggle("is-active", active);
-      button.setAttribute("aria-pressed", active ? "true" : "false");
-    });
+    setActiveChoice(surfaceFilterButtons, "data-surface-filter", activeFilter);
     surfaceCards.forEach((card) => {
       const groups = (card.getAttribute("data-surface-group") || "").split(/\s+/);
       const hidden = activeFilter !== "all" && !groups.includes(activeFilter);
