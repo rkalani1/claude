@@ -77,6 +77,28 @@ describe('App', () => {
     });
   });
 
+  describe('persistState', () => {
+    test('writes current state to localStorage and updates URL', () => {
+      const replaceStateSpy = jest.spyOn(window.history, 'replaceState');
+
+      app.persistState();
+
+      expect(window.localStorage.getItem('learnClaude:mission')).toBe('email');
+      expect(window.localStorage.getItem('learnClaude:surface')).toBe('chat');
+      expect(window.localStorage.getItem('learnClaude:output')).toBe('useful');
+      expect(window.localStorage.getItem('learnClaude:fix')).toBe('vague');
+
+      expect(replaceStateSpy).toHaveBeenCalled();
+      const calledUrl = replaceStateSpy.mock.calls[replaceStateSpy.mock.calls.length - 1][2];
+      expect(calledUrl).toContain('mission=email');
+      expect(calledUrl).toContain('surface=chat');
+      expect(calledUrl).toContain('output=useful');
+      expect(calledUrl).toContain('fix=vague');
+
+      replaceStateSpy.mockRestore();
+    });
+  });
+
   describe('readChoice', () => {
     test('returns fallback if neither URL nor storage has valid choice', () => {
       const button = document.createElement('button');
