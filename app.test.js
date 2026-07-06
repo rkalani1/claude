@@ -163,6 +163,42 @@ describe('App', () => {
     });
   });
 
+  describe('setMission', () => {
+    test('updates DOM and state with valid mission', () => {
+      const missionTitle = document.getElementById('mission-output-title');
+      const missionPrompt = document.getElementById('mission-prompt');
+
+      app.setMission('document');
+
+      expect(missionTitle.textContent).toBe('Document');
+      expect(missionPrompt.value).toContain('Help me improve this document.');
+
+      const activeButton = document.querySelector('button[data-mission="document"]');
+      expect(activeButton.classList.contains('is-active')).toBe(true);
+
+      expect(window.localStorage.getItem('learnClaude:mission')).toBe('document');
+    });
+
+    test('falls back to email when invalid mission is provided', () => {
+      const missionTitle = document.getElementById('mission-output-title');
+      const missionPrompt = document.getElementById('mission-prompt');
+
+      app.setMission('invalid-mission');
+
+      expect(missionTitle.textContent).toBe('Email or message');
+      expect(missionPrompt.value).toContain('I need to write an email or message.');
+
+      expect(window.localStorage.getItem('learnClaude:mission')).toBe('email');
+    });
+
+    test('does not persist state when persist is false', () => {
+      window.localStorage.clear();
+      app.setMission('document', { persist: false });
+
+      expect(window.localStorage.getItem('learnClaude:mission')).toBeNull();
+    });
+  });
+
   describe('copyTextFallback', () => {
     test('creates textarea and executes copy command', () => {
       document.execCommand = jest.fn().mockReturnValue(true);
