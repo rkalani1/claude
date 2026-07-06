@@ -116,6 +116,50 @@ describe('App', () => {
     });
   });
 
+
+  describe('getModelFit', () => {
+    test('returns code hint when output is code', () => {
+      document.querySelector('button[data-output="code"]').click();
+      expect(app.getModelFit()).toBe(app.modelFitHints.code);
+    });
+
+    test('returns code hint when output is agent', () => {
+      document.querySelector('button[data-output="agent"]').click();
+      expect(app.getModelFit()).toBe(app.modelFitHints.code);
+    });
+
+    test('returns artifact hint when output is design', () => {
+      document.querySelector('button[data-output="design"]').click();
+      expect(app.getModelFit()).toBe(app.modelFitHints.artifact);
+    });
+
+    test('returns office hint when surface is office and output is spreadsheet', () => {
+      document.querySelector('button[data-surface="office"]').click();
+      document.querySelector('button[data-output="spreadsheet"]').click();
+      expect(app.getModelFit()).toBe(app.modelFitHints.office);
+    });
+
+    test('returns matching surface hint for valid surface and non-special output', () => {
+      document.querySelector('button[data-surface="project"]').click();
+      document.querySelector('button[data-output="document"]').click();
+      expect(app.getModelFit()).toBe(app.modelFitHints.project);
+    });
+
+    test('returns default hint when surface has no specific hint and no output condition matches', () => {
+      const originalChatHint = app.modelFitHints.chat;
+      try {
+        delete app.modelFitHints.chat;
+
+        document.querySelector('button[data-surface="chat"]').click();
+        document.querySelector('button[data-output="document"]').click();
+
+        expect(app.getModelFit()).toBe(app.modelFitHints.default);
+      } finally {
+        app.modelFitHints.chat = originalChatHint;
+      }
+    });
+  });
+
   describe('buildOptimizedPrompt', () => {
     test('updates output textarea based on selected values', () => {
       const roughPrompt = document.getElementById('rough-prompt');
