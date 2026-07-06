@@ -730,7 +730,6 @@ After the answer:
       nextElement.appendChild(document.createTextNode(detail.next));
     }
     if (promptElement) promptElement.value = detail.prompt;
-    if (persistOpt !== false) persistState();
     return selectedChoice;
   }
 
@@ -749,6 +748,7 @@ After the answer:
       promptElement: missionPrompt,
       persistOpt: options.persist
     });
+    if (options.persist !== false) persistState();
   }
 
   function setFix(fix, options = {}) {
@@ -764,6 +764,7 @@ After the answer:
       promptElement: fixPrompt,
       persistOpt: options.persist
     });
+    if (options.persist !== false) persistState();
   }
 
   surfaceButtons.forEach((button) => {
@@ -970,7 +971,10 @@ After the answer:
       copyTemplate,
       exportPrompts,
       stateKeys,
-      showToast
+      showToast,
+      storage,
+      persistState,
+      updateStateUrl
     };
   }
 })(typeof window !== "undefined" ? window : this);

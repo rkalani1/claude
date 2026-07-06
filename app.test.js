@@ -107,6 +107,86 @@ describe('App', () => {
     });
   });
 
+  describe('persistState', () => {
+    test('writes current state to localStorage and updates URL', () => {
+      const replaceStateSpy = jest.spyOn(window.history, 'replaceState');
+
+      app.persistState();
+
+      expect(window.localStorage.getItem('learnClaude:mission')).toBe('email');
+      expect(window.localStorage.getItem('learnClaude:surface')).toBe('chat');
+      expect(window.localStorage.getItem('learnClaude:output')).toBe('useful');
+      expect(window.localStorage.getItem('learnClaude:fix')).toBe('vague');
+
+      expect(replaceStateSpy).toHaveBeenCalled();
+      const calledUrl = replaceStateSpy.mock.calls[replaceStateSpy.mock.calls.length - 1][2];
+      expect(calledUrl).toContain('mission=email');
+      expect(calledUrl).toContain('surface=chat');
+      expect(calledUrl).toContain('output=useful');
+      expect(calledUrl).toContain('fix=vague');
+    });
+  });
+
+  describe('updateStateUrl', () => {
+    let originalHistory;
+
+    beforeEach(() => {
+      originalHistory = window.history;
+    });
+
+    afterEach(() => {
+      Object.defineProperty(window, 'history', {
+        value: originalHistory,
+        writable: true,
+        configurable: true
+      });
+      jest.restoreAllMocks();
+    });
+
+    test('does nothing if window.history is not available', () => {
+      Object.defineProperty(window, 'history', {
+        value: undefined,
+        writable: true,
+        configurable: true
+      });
+
+      expect(() => app.updateStateUrl()).not.toThrow();
+    });
+
+    test('does nothing if window.history.replaceState is not available', () => {
+      Object.defineProperty(window, 'history', {
+        value: {},
+        writable: true,
+        configurable: true
+      });
+
+      expect(() => app.updateStateUrl()).not.toThrow();
+    });
+
+    test('updates URL with selected state parameters', () => {
+      const replaceStateSpy = jest.spyOn(window.history, 'replaceState');
+
+      app.setMission('code');
+      replaceStateSpy.mockClear();
+      app.updateStateUrl();
+
+      expect(replaceStateSpy).toHaveBeenCalledTimes(1);
+      const nextUrl = replaceStateSpy.mock.calls[0][2];
+      expect(nextUrl).toContain('mission=code');
+      expect(nextUrl).toContain('surface=chat');
+      expect(nextUrl).toContain('output=useful');
+      expect(nextUrl).toContain('fix=vague');
+    });
+
+    test('gracefully handles replaceState errors', () => {
+      jest.spyOn(window.history, 'replaceState').mockImplementation(() => {
+        throw new Error('SecurityError: Blocked');
+      });
+
+      expect(() => app.updateStateUrl()).not.toThrow();
+    });
+  });
+
   describe('readChoice', () => {
     test('returns fallback if neither URL nor storage has valid choice', () => {
       const button = document.createElement('button');
@@ -473,5 +553,44 @@ describe('copyTemplate', () => {
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith('Template Text');
     expect(button.textContent).toBe('Copied');
+  });
+});
+
+describe('storage', () => {
+  let app;
+
+  beforeEach(() => {
+    jest.resetModules();
+    app = require('./app');
+    window.localStorage.clear();
+    jest.restoreAllMocks();
+  });
+
+  test('get returns item from localStorage', () => {
+    window.localStorage.setItem('learnClaude:testKey', 'testValue');
+    expect(app.storage.get('testKey')).toBe('testValue');
+  });
+
+  test('get returns null and catches error when localStorage throws', () => {
+    jest.spyOn(window.localStorage.__proto__, 'getItem').mockImplementation(() => {
+      throw new Error('localStorage denied');
+    });
+
+    expect(app.storage.get('testKey')).toBeNull();
+  });
+
+  test('set saves item to localStorage', () => {
+    app.storage.set('testKey', 'testValue');
+    expect(window.localStorage.getItem('learnClaude:testKey')).toBe('testValue');
+  });
+
+  test('set catches error when localStorage throws', () => {
+    jest.spyOn(window.localStorage.__proto__, 'setItem').mockImplementation(() => {
+      throw new Error('localStorage denied');
+    });
+
+    expect(() => {
+      app.storage.set('testKey', 'testValue');
+    }).not.toThrow();
   });
 });
