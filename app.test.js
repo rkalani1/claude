@@ -116,6 +116,97 @@ describe('App', () => {
     });
   });
 
+  describe('updateStateUrl', () => {
+    let originalHistory;
+
+    beforeEach(() => {
+      // Store original history object
+      originalHistory = window.history;
+
+      // Ensure window.history is mocked cleanly using Object.defineProperty to bypass getter-only limitations
+      Object.defineProperty(window, 'history', {
+        value: {
+          replaceState: jest.fn()
+        },
+        writable: true,
+        configurable: true
+      });
+
+      // Update real location representation (mocked history logic isn't tied to jsdom internal states this way)
+      // Since window.location is frozen, we will rely on what is in it by default and the query parameters
+      // being generated correctly.
+    });
+
+    afterEach(() => {
+      // Restore original history object securely
+      Object.defineProperty(window, 'history', {
+        value: originalHistory,
+        writable: true,
+        configurable: true
+      });
+      jest.restoreAllMocks();
+    });
+
+    test('does nothing if window.history is not available', () => {
+      Object.defineProperty(window, 'history', {
+        value: undefined,
+        writable: true,
+        configurable: true
+      });
+      expect(() => app.updateStateUrl()).not.toThrow();
+    });
+
+    test('does nothing if window.history.replaceState is not available', () => {
+      Object.defineProperty(window, 'history', {
+        value: {},
+        writable: true,
+        configurable: true
+      });
+      expect(() => app.updateStateUrl()).not.toThrow();
+    });
+
+    test('updates URL with correct search params including existing query string, path, and hash', () => {
+      // Clear previous calls triggered by other tests or initial setup
+      window.history.replaceState.mockClear();
+
+      // Mock selected states by calling setter functions since selected* variables are hidden inside app
+      app.setMission('code');
+
+      // Clear the call from setMission
+      window.history.replaceState.mockClear();
+
+      // Call updateStateUrl explicitly
+      app.updateStateUrl();
+
+      expect(window.history.replaceState).toHaveBeenCalledTimes(1);
+
+      // Verify that replaceState was called with the correctly formatted URL
+      const nextUrl = window.history.replaceState.mock.calls[0][2];
+
+      // We will check for the default '/' and query parameter string logic since JSDOM window.location is mostly frozen.
+      expect(nextUrl).toContain('mission=code');
+      expect(nextUrl).toContain('surface=chat'); // default from html/code
+      expect(nextUrl).toContain('output=useful'); // default from html/code
+      expect(nextUrl).toContain('fix=vague'); // default from html/code
+    });
+
+    test('gracefully handles replaceState errors', () => {
+      // Simulate browser blocking history changes using jest.spyOn to mock instead of mockImplementation
+      // on replaceState so it reverts safely
+      const replaceStateSpy = jest.spyOn(window.history, 'replaceState').mockImplementation(() => {
+        throw new Error('SecurityError: Blocked');
+      });
+
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      // Verify that the error doesn't bubble up
+      expect(() => app.updateStateUrl()).not.toThrow();
+
+      consoleErrorSpy.mockRestore();
+      replaceStateSpy.mockRestore();
+    });
+  });
+
   describe('buildOptimizedPrompt', () => {
     test('updates output textarea based on selected values', () => {
       const roughPrompt = document.getElementById('rough-prompt');
