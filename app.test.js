@@ -255,6 +255,13 @@ describe('App', () => {
       expect(app.getModelFit()).toBe(app.modelFitHints.project);
     });
 
+    test('model fit hints name the current everyday default and no retired default', () => {
+      expect(app.modelFitHints.default).toContain('Sonnet 5');
+      Object.values(app.modelFitHints).forEach((hint) => {
+        expect(hint).not.toContain('Sonnet 4.6');
+      });
+    });
+
     test('returns default hint when surface has no specific hint and no output condition matches', () => {
       const originalChatHint = app.modelFitHints.chat;
       try {
@@ -283,7 +290,7 @@ describe('App', () => {
 
       const optimizedPrompt = document.getElementById('optimized-prompt');
       expect(optimizedPrompt.value).toContain('Help me write an email.');
-      expect(optimizedPrompt.value).toContain('Use Sonnet 4.6 for everyday chat.');
+      expect(optimizedPrompt.value).toContain('Use Sonnet 5 for everyday chat.');
     });
   });
 

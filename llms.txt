@@ -1,0 +1,16 @@
+# Learn Claude
+
+> A beginner-first educational guide to using Claude across chat, uploads, Research, Projects, Artifacts, Design, Cowork, Code, Office, Chrome, connectors, skills, plugins, and model fit. Independent site — not affiliated with or endorsed by Anthropic. Verify product claims against the official sources linked in the Sources section.
+
+Data boundary: educational examples only. Do not paste PHI, patient or learner identifiers, credentials, or confidential/restricted data into prompts or exported prompt packs.
+
+## Sections
+
+- [Start and task picker](https://rkalani1.github.io/claude/#start): pick a task and copy a ready-to-use prompt
+- [Set up once](https://rkalani1.github.io/claude/#setup): account, personal instructions, memory, connectors, first Project
+- [Prompt Lab](https://rkalani1.github.io/claude/#prompt-lab): turn a rough request into a structured prompt with model-fit guidance
+- [Surfaces](https://rkalani1.github.io/claude/#surfaces): which Claude surface fits which task, with official setup links
+- [Fix an answer](https://rkalani1.github.io/claude/#fix-answer): recovery prompts for weak answers and a verify-before-relying rubric
+- [Agentic workflows](https://rkalani1.github.io/claude/#agents): safe, human-approved workflow design from Projects to the Agent SDK
+- [Updates](https://rkalani1.github.io/claude/#features): dated feature notes reviewed against official Claude and Anthropic sources
+- [Sources](https://rkalani1.github.io/claude/#sources): official courses and documentation links

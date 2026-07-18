@@ -16,18 +16,18 @@
   };
 
   const modelFitHints = {
-    default: "Use Sonnet 4.6 for most everyday work. Use Haiku 4.5 for quick, simple, repeated drafts. Use Opus 4.8 for complex reasoning, code, dense images, or high-stakes review. Reach for Fable 5 only on the hardest, highest-stakes tasks.",
-    chat: "Use Sonnet 4.6 for everyday chat. Use Haiku 4.5 for quick rewrites or simple summaries. Use Opus 4.8 when the answer affects a serious decision.",
-    project: "Use Sonnet 4.6 for most Project work. Use Opus 4.8 when the Project has many files, conflicting context, or a high-stakes review.",
-    artifact: "Use Sonnet 4.6 for most Artifacts. Use Opus 4.8 for complex dashboards, dense visual inputs, or multi-step revisions.",
-    research: "Use Sonnet 4.6 for ordinary synthesis. Use Opus 4.8 when the question has many sources, dense documents, or a decision you will publish.",
-    office: "Use Sonnet 4.6 for most Word, PowerPoint, and Excel work. Use Opus 4.8 for dense decks, complex workbooks, or source-heavy document review.",
-    chrome: "Use Sonnet 4.6 for most browser help. Use Haiku 4.5 for quick page summaries and Opus 4.8 for careful comparisons or risky workflows.",
-    cowork: "Use Sonnet 4.6 for routine Cowork sessions. Use Opus 4.8 for longer desktop jobs, many files, or work that needs careful handoff.",
-    connectors: "Use Sonnet 4.6 for connected-app work. Use Opus 4.8 when Claude must reconcile several sources or produce a decision-ready answer.",
-    plugins: "Use Sonnet 4.6 while testing a plugin. Use Opus 4.8 when the workflow spans several tools, files, or review steps.",
-    mobile: "Use Haiku 4.5 or Sonnet 4.6 for quick mobile capture and drafts. Use Opus 4.8 later if the task needs deeper review.",
-    code: "Use Sonnet 4.6 for routine repo work. Use Opus 4.8 for architecture, difficult bugs, long-running code work, or vision-heavy debugging. Consider Fable 5 for the most demanding engineering tasks."
+    default: "Use Sonnet 5 for most everyday work. Use Haiku 4.5 for quick, simple, repeated drafts. Use Opus 4.8 for complex reasoning, code, dense images, or high-stakes review. Reach for Fable 5 only on the hardest, highest-stakes tasks.",
+    chat: "Use Sonnet 5 for everyday chat. Use Haiku 4.5 for quick rewrites or simple summaries. Use Opus 4.8 when the answer affects a serious decision.",
+    project: "Use Sonnet 5 for most Project work. Use Opus 4.8 when the Project has many files, conflicting context, or a high-stakes review.",
+    artifact: "Use Sonnet 5 for most Artifacts. Use Opus 4.8 for complex dashboards, dense visual inputs, or multi-step revisions.",
+    research: "Use Sonnet 5 for ordinary synthesis. Use Opus 4.8 when the question has many sources, dense documents, or a decision you will publish.",
+    office: "Use Sonnet 5 for most Word, PowerPoint, and Excel work. Use Opus 4.8 for dense decks, complex workbooks, or source-heavy document review.",
+    chrome: "Use Sonnet 5 for most browser help. Use Haiku 4.5 for quick page summaries and Opus 4.8 for careful comparisons or risky workflows.",
+    cowork: "Use Sonnet 5 for routine Cowork sessions. Use Opus 4.8 for longer desktop jobs, many files, or work that needs careful handoff.",
+    connectors: "Use Sonnet 5 for connected-app work. Use Opus 4.8 when Claude must reconcile several sources or produce a decision-ready answer.",
+    plugins: "Use Sonnet 5 while testing a plugin. Use Opus 4.8 when the workflow spans several tools, files, or review steps.",
+    mobile: "Use Haiku 4.5 or Sonnet 5 for quick mobile capture and drafts. Use Opus 4.8 later if the task needs deeper review.",
+    code: "Use Sonnet 5 for routine repo work. Use Opus 4.8 for architecture, difficult bugs, long-running code work, or vision-heavy debugging. Consider Fable 5 for the most demanding engineering tasks."
   };
 
   const outputHints = {
