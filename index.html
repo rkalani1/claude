@@ -43,7 +43,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap">
 
-    <link rel="stylesheet" href="styles.css?v=2026-07-18">
+    <link rel="stylesheet" href="styles.css?v=2026-07-25">
 
     <script type="application/ld+json">
     {
@@ -67,7 +67,10 @@
         <span>Learn Claude</span>
       </a>
       <div class="header-actions">
-        <nav class="top-nav" aria-label="Primary navigation">
+        <button class="sections-toggle" id="sections-toggle" type="button" aria-expanded="false" aria-controls="top-nav">
+          <span>Sections</span><span aria-hidden="true">⌄</span>
+        </button>
+        <nav class="top-nav" id="top-nav" aria-label="Primary navigation">
           <a href="#start">Start</a>
           <a href="#setup">Setup</a>
           <a href="#prompt-lab">Prompt</a>
@@ -83,6 +86,15 @@
         </button>
       </div>
     </header>
+
+    <nav class="section-progress" aria-label="Reading progress">
+      <p><span class="section-progress-label">Current</span><strong id="current-section-name" aria-live="polite">Start</strong></p>
+      <button id="next-section" type="button">
+        <span>Next section</span>
+        <strong id="next-section-name">Set up once</strong>
+        <span aria-hidden="true">→</span>
+      </button>
+    </nav>
 
     <main id="top">
       <section class="hero hero-workbench" id="start" aria-labelledby="hero-title">
@@ -710,6 +722,6 @@ Focus only on practical use.</textarea></article>
 
     <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
-    <script src="app.js?v=2026-07-18"></script>
+    <script src="app.js?v=2026-07-25"></script>
 </body>
 </html>
