@@ -904,32 +904,89 @@ After the answer:
     }
   }
 
-  // Highlight the primary-nav link for the section currently in view.
-  function setupNavHighlight() {
+  function setupSectionsMenu() {
+    const toggle = document.getElementById("sections-toggle");
+    const nav = document.getElementById("top-nav");
+    if (!toggle || !nav || toggle.dataset.sectionsReady === "true") return;
+    toggle.dataset.sectionsReady = "true";
+
+    const setOpen = (open, restoreFocus = false) => {
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      if (restoreFocus) toggle.focus();
+    };
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+    toggle.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        setOpen(true);
+        nav.querySelector("a")?.focus();
+      } else if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        event.preventDefault();
+        setOpen(false, true);
+      }
+    });
+    nav.addEventListener("click", (event) => {
+      if (event.target.closest("a")) setOpen(false);
+    });
+    nav.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      setOpen(false, true);
+    });
+    document.addEventListener("click", (event) => {
+      if (toggle.getAttribute("aria-expanded") !== "true") return;
+      if (toggle.contains(event.target) || nav.contains(event.target)) return;
+      setOpen(false);
+    });
+  }
+
+  // Keep the visible current/next control and primary nav in sync.
+  function setupSectionProgress() {
     const navLinks = Array.from(document.querySelectorAll(".top-nav a[href^='#']"));
-    if (!navLinks.length || !("IntersectionObserver" in window)) return;
-    const sections = navLinks
-      .map((link) => document.getElementById(link.getAttribute("href").slice(1)))
-      .filter(Boolean);
+    const sections = Array.from(document.querySelectorAll("main section[id]"));
     if (!sections.length) return;
+    const currentName = document.getElementById("current-section-name");
+    const nextButton = document.getElementById("next-section");
+    const nextName = document.getElementById("next-section-name");
 
     const linkMap = {};
     navLinks.forEach((link) => {
       linkMap[link.getAttribute("href").slice(1)] = link;
     });
 
-    let activeId = null;
-    function setActive(id) {
-      if (id === activeId) return;
+    const headings = sections.map((section) => {
+      const heading = section.querySelector("h1, h2");
+      if (heading && !heading.hasAttribute("tabindex")) heading.setAttribute("tabindex", "-1");
+      return heading;
+    });
+    let activeIndex = -1;
 
-      if (activeId && linkMap[activeId]) {
-        linkMap[activeId].removeAttribute("aria-current");
+    function setActive(index) {
+      if (index < 0 || index >= sections.length || index === activeIndex) return;
+      navLinks.forEach((link) => link.removeAttribute("aria-current"));
+      activeIndex = index;
+      const activeSection = sections[activeIndex];
+      const activeHeading = headings[activeIndex];
+      const activeLabel = activeHeading?.textContent.trim() || activeSection.id;
+      const nextIndex = activeIndex === sections.length - 1 ? 0 : activeIndex + 1;
+      const nextHeading = headings[nextIndex];
+      const nextLabel = nextHeading?.textContent.trim() || sections[nextIndex].id;
+
+      if (currentName) currentName.textContent = activeLabel;
+      if (nextName) nextName.textContent = activeIndex === sections.length - 1 ? `Back to ${nextLabel}` : nextLabel;
+      if (nextButton) {
+        nextButton.dataset.nextSection = sections[nextIndex].id;
+        nextButton.setAttribute(
+          "aria-label",
+          activeIndex === sections.length - 1 ? `Back to ${nextLabel}` : `Next section: ${nextLabel}`
+        );
       }
 
-      activeId = id;
-
-      if (activeId && linkMap[activeId]) {
-        const activeLink = linkMap[activeId];
+      const activeLink = linkMap[activeSection.id];
+      if (activeLink) {
         activeLink.setAttribute("aria-current", "true");
         if (
           window.matchMedia &&
@@ -946,12 +1003,30 @@ After the answer:
       }
     }
 
+    if (nextButton && nextButton.dataset.progressReady !== "true") {
+      nextButton.dataset.progressReady = "true";
+      nextButton.addEventListener("click", () => {
+        const target = document.getElementById(nextButton.dataset.nextSection || "");
+        const heading = target?.querySelector("h1, h2");
+        if (!target || !heading) return;
+        if (typeof target.scrollIntoView === "function") {
+          const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+          target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+        }
+        heading.focus({ preventScroll: true });
+      });
+    }
+
+    setActive(0);
+    if (!("IntersectionObserver" in window)) return;
+
     const observer = new IntersectionObserver((entries) => {
       const visible = entries.filter((entry) => entry.isIntersecting);
       if (!visible.length) return;
       visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-      setActive(visible[0].target.id);
-    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+      const index = sections.indexOf(visible[0].target);
+      setActive(index);
+    }, { rootMargin: "-30% 0px -62% 0px", threshold: 0 });
 
     sections.forEach((section) => observer.observe(section));
   }
@@ -963,7 +1038,8 @@ After the answer:
   setSurfaceFilter("draft");
   buildOptimizedPrompt();
   setupThemeToggle();
-  setupNavHighlight();
+  setupSectionsMenu();
+  setupSectionProgress();
 
   // --- TEST EXPORTS ---
   if (typeof module !== "undefined" && module.exports) {
@@ -987,7 +1063,9 @@ After the answer:
       showToast,
       storage,
       persistState,
-      updateStateUrl
+      updateStateUrl,
+      setupSectionsMenu,
+      setupSectionProgress
     };
   }
 })(typeof window !== "undefined" ? window : this);

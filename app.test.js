@@ -4,8 +4,14 @@ const path = require('path');
 
 const html = fs.readFileSync(path.resolve(__dirname, './index.html'), 'utf8');
 
+let intersectionCallbacks = [];
+
 const mockIntersectionObserver = () => {
+  intersectionCallbacks = [];
   class IntersectionObserver {
+    constructor(callback) {
+      intersectionCallbacks.push(callback);
+    }
     observe() {}
     unobserve() {}
     disconnect() {}
@@ -54,6 +60,50 @@ describe('App', () => {
 
       expect(app.hasChoice(buttons, 'data-surface', 'chat')).toBe(true);
       expect(app.hasChoice(buttons, 'data-surface', 'office')).toBe(false);
+    });
+  });
+
+  describe('section navigation behavior', () => {
+    test('menu keyboard and outside-click behavior keep ARIA and focus synchronized', () => {
+      const toggle = document.getElementById('sections-toggle');
+      const nav = document.getElementById('top-nav');
+      const firstLink = nav.querySelector('a');
+
+      toggle.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+      expect(toggle.getAttribute('aria-expanded')).toBe('true');
+      expect(document.activeElement).toBe(firstLink);
+
+      nav.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      expect(toggle.getAttribute('aria-expanded')).toBe('false');
+      expect(document.activeElement).toBe(toggle);
+
+      toggle.click();
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      expect(toggle.getAttribute('aria-expanded')).toBe('false');
+    });
+
+    test('observer updates current, next, wraparound, aria-current, and next-button focus', () => {
+      const sections = Array.from(document.querySelectorAll('main section[id]'));
+      const setup = document.getElementById('setup');
+      const sources = document.getElementById('sources');
+      const callback = intersectionCallbacks.at(-1);
+      expect(callback).toBeDefined();
+
+      callback([{ target: setup, isIntersecting: true, boundingClientRect: { top: 10 } }]);
+      expect(document.getElementById('current-section-name').textContent).toBe(
+        setup.querySelector('h1, h2').textContent.trim()
+      );
+      expect(document.querySelectorAll('.top-nav [aria-current="true"]')).toHaveLength(1);
+      expect(document.querySelector('.top-nav [aria-current="true"]').getAttribute('href')).toBe('#setup');
+      expect(document.getElementById('next-section').dataset.nextSection).toBe(sections[2].id);
+
+      document.getElementById('next-section').click();
+      expect(document.activeElement).toBe(sections[2].querySelector('h1, h2'));
+
+      callback([{ target: sources, isIntersecting: true, boundingClientRect: { top: 10 } }]);
+      expect(document.getElementById('next-section').dataset.nextSection).toBe('start');
+      expect(document.getElementById('next-section-name').textContent).toMatch(/^Back to /);
+      expect(document.getElementById('next-section').getAttribute('aria-label')).toMatch(/^Back to /);
     });
   });
 
@@ -599,5 +649,53 @@ describe('storage', () => {
     expect(() => {
       app.storage.set('testKey', 'testValue');
     }).not.toThrow();
+  });
+});
+
+describe('responsive orientation controls', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+    loadApp('');
+  });
+
+  test('Sections menu exposes accurate expanded state and closes on selection', () => {
+    const toggle = document.getElementById('sections-toggle');
+    const setupLink = document.querySelector('#top-nav a[href="#setup"]');
+
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+    toggle.click();
+    expect(toggle.getAttribute('aria-expanded')).toBe('true');
+    setupLink.click();
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  test('Sections menu closes with Escape while focus remains on its toggle', () => {
+    const toggle = document.getElementById('sections-toggle');
+
+    toggle.focus();
+    toggle.click();
+    toggle.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+    expect(document.activeElement).toBe(toggle);
+  });
+
+  test('Next section names and focuses the next heading', () => {
+    const current = document.getElementById('current-section-name');
+    const nextName = document.getElementById('next-section-name');
+    const next = document.getElementById('next-section');
+    const setupHeading = document.getElementById('setup-title');
+
+    expect(current.textContent).toBe('Learn Claude');
+    expect(nextName.textContent).toBe('Set up once');
+    next.click();
+    expect(document.activeElement).toBe(setupHeading);
+  });
+
+  test('compact navigation and common controls expose minimum-size classes', () => {
+    const css = fs.readFileSync(path.resolve(__dirname, './styles.css'), 'utf8');
+    expect(css).toContain('.sections-toggle');
+    expect(css).toContain('min-height: 44px');
+    expect(css).toContain('.section-progress');
   });
 });
