@@ -929,7 +929,20 @@ After the answer:
       activeId = id;
 
       if (activeId && linkMap[activeId]) {
-        linkMap[activeId].setAttribute("aria-current", "true");
+        const activeLink = linkMap[activeId];
+        activeLink.setAttribute("aria-current", "true");
+        if (
+          window.matchMedia &&
+          window.matchMedia("(max-width: 840px)").matches &&
+          typeof activeLink.scrollIntoView === "function"
+        ) {
+          const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          activeLink.scrollIntoView({
+            behavior: reducedMotion ? "auto" : "smooth",
+            block: "nearest",
+            inline: "center"
+          });
+        }
       }
     }
 
