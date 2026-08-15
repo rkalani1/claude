@@ -293,18 +293,18 @@ main {
   color: var(--muted-2);
   pointer-events: none;
 }
-#setup::before          { content: "01 — Setup"; }
-#method::before         { content: "02 — The Loop"; }
-#examples::before       { content: "03 — Worked Examples"; }
-#prompt-lab::before     { content: "04 — Prompt Lab"; }
-#surfaces::before       { content: "05 — Surfaces"; }
-#features-trio::before  { content: "06 — Foundations"; }
-#fix-answer::before     { content: "07 — Repair"; }
-#power-moves::before    { content: "08 — Power Moves"; }
-#agents::before         { content: "09 — Agents"; }
-#prompts::before        { content: "10 — Prompts"; }
-#features::before       { content: "11 — Updates"; }
-#sources::before        { content: "12 — Sources"; }
+#setup::before          { content: "02 — Setup"; }
+#method::before         { content: "03 — The Loop"; }
+#examples::before       { content: "04 — Worked Examples"; }
+#prompt-lab::before     { content: "05 — Prompt Lab"; }
+#surfaces::before       { content: "06 — Surfaces"; }
+#features-trio::before  { content: "07 — Foundations"; }
+#fix-answer::before     { content: "08 — Repair"; }
+#power-moves::before    { content: "09 — Power Moves"; }
+#agents::before         { content: "10 — Agents"; }
+#prompts::before        { content: "11 — Prompts"; }
+#features::before       { content: "12 — Updates"; }
+#sources::before        { content: "13 — Sources"; }
 
 .section-head { margin: 0 0 2rem; max-width: 56ch; }
 .section-head-action {
@@ -600,7 +600,7 @@ input[type="text"]:focus {
 }
 
 .method-grid    { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-.setup-grid     { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.setup-grid     { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 .power-grid     { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .surface-grid   { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .example-grid   { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -687,6 +687,13 @@ input[type="text"]:focus {
   color: transparent;
   margin: 0 0 0.2rem;
 }
+
+/* Balanced rows — no empty hairline cells when a row is short.
+   Setup: 5 cards on a 6-track grid become a 3 + 2 layout.
+   Feature grids: an odd final post spans both columns. */
+.setup-card { grid-column: span 2; }
+.setup-card:nth-child(n+4) { grid-column: span 3; }
+.feature-grid > .feature-post:last-child:nth-child(odd) { grid-column: 1 / -1; }
 
 /* Surface badge */
 .surface-badge {
@@ -1134,6 +1141,9 @@ code {
   .task-options, .task-result { width: 100%; }
   .setup-grid,
   .feature-grid   { grid-template-columns: 1fr; }
+  .setup-card,
+  .setup-card:nth-child(n+4),
+  .feature-grid > .feature-post:last-child:nth-child(odd) { grid-column: auto; }
 }
 
 @media (max-width: 720px) {
