@@ -305,10 +305,12 @@ describe('App', () => {
       expect(app.getModelFit()).toBe(app.modelFitHints.project);
     });
 
-    test('model fit hints name the current everyday default and no retired default', () => {
+    test('model fit hints name the current everyday default and no retired models', () => {
       expect(app.modelFitHints.default).toContain('Sonnet 5');
+      expect(app.modelFitHints.default).toContain('Opus 5');
       Object.values(app.modelFitHints).forEach((hint) => {
         expect(hint).not.toContain('Sonnet 4.6');
+        expect(hint).not.toContain('Opus 4.8');
       });
     });
 
